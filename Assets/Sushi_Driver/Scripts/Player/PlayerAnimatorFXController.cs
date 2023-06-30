@@ -56,6 +56,9 @@ namespace Player
         private void StartClimbesAnim ()
         {
             animator.SetTrigger(AnimParameters.Climbes);
+
+            // костыль?
+            PlayerMovementControl.onPlayerStopped.Invoke(0.1f);
         }
 
         private void StartDivesAnim()

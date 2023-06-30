@@ -9,6 +9,9 @@ namespace Player
     {
         [SerializeField] private float speed = 5f;
         private Rigidbody rb;
+        private bool isReadyToMove = true;
+
+        public static System.Action<float> onPlayerStopped;
 
         private void Start()
         {
@@ -17,21 +20,26 @@ namespace Player
 
         private void OnEnable()
         {
+            onPlayerStopped += EnableStopPlayer;
+
             UI.JoyStickInput.isHasInputDirection += PlayerMove;
             UI.JoyStickInput.isNotHasInputDirection += PlayerStop;
         }
 
         private void OnDisable()
         {
+            onPlayerStopped -= EnableStopPlayer;
+
             UI.JoyStickInput.isHasInputDirection -= PlayerMove;
             UI.JoyStickInput.isNotHasInputDirection -= PlayerStop;
         }
 
         private void PlayerMove(Vector3 _inputDirection)
         {
+            if (!isReadyToMove) return;
+
             Vector3 playerDirection = new Vector3(_inputDirection.x, 0f, _inputDirection.y);
             rb.velocity = playerDirection * speed;
-
             PlayerLookForward(playerDirection);
         }
 
@@ -45,6 +53,28 @@ namespace Player
         {
             rb.velocity = Vector3.zero;
         }
+
+        private void EnableStopPlayer(float time)
+        {
+            StartCoroutine(StopPlayer(time));
+        }
+
+        private IEnumerator StopPlayer(float _time)
+        {
+            isReadyToMove = false;
+            rb.velocity = Vector3.zero;
+            yield return new WaitForSeconds(_time);
+            isReadyToMove = true;
+        }
+
+        //private void Update()
+        //{
+        //    // Debug
+        //    if (Input.GetKeyDown(KeyCode.Space))
+        //    {
+        //        EnableStopPlayer(1.0f);
+        //    }
+        //}
     }
 }
 
