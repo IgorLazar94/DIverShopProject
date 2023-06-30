@@ -17,6 +17,9 @@ namespace Player
         {
             UI.JoyStickInput.isHasInputDirection += StartRunAnimation;
             UI.JoyStickInput.isNotHasInputDirection += StopRunAnimation;
+
+            Player.PlayerTrigger.onTriggerGround += StartClimbesAnim;
+            Player.PlayerTrigger.onTriggerWater += StartDivesAnim;
         }
 
         private void OnDisable()
@@ -24,36 +27,38 @@ namespace Player
             UI.JoyStickInput.isHasInputDirection -= StartRunAnimation;
             UI.JoyStickInput.isNotHasInputDirection -= StopRunAnimation;
 
+            Player.PlayerTrigger.onTriggerGround -= StartClimbesAnim;
+            Player.PlayerTrigger.onTriggerWater -= StartDivesAnim;
         }
 
         private void StartRunAnimation(Vector3 direction)
         {
-            // particles in direction
+            // start particles in direction
             animator.SetBool(AnimParameters.isRun, true);
         }
 
         private void StopRunAnimation()
         {
-            // stop particles in direction
+            // stop particles
             animator.SetBool(AnimParameters.isRun, false);
         }
 
-        private void StartBusyHands()
+        private void EnableBusyHands()
         {
             animator.SetBool(AnimParameters.isBusyHands, true);
         }
 
-        private void StopBusyHands()
+        private void DisableBusyHands()
         {
             animator.SetBool(AnimParameters.isBusyHands, false);
         }
 
-        private void Climbes ()
+        private void StartClimbesAnim ()
         {
             animator.SetTrigger(AnimParameters.Climbes);
         }
 
-        private void Dives()
+        private void StartDivesAnim()
         {
             animator.SetTrigger(AnimParameters.Dives);
         }
