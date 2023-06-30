@@ -9,24 +9,30 @@ namespace Player
     {
         public static Action onTriggerGround;
         public static Action onTriggerWater;
+        public static Action onPlayClimbAnim;
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag(TagList.Water))
             {
-                Debug.Log("Find Water");
                 onTriggerWater.Invoke();
             }
-        }
 
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.CompareTag(TagList.Water))
+            if (other.CompareTag(TagList.GroundTriggerZone))
             {
+                Debug.LogWarning("!");
+                onPlayClimbAnim.Invoke();
                 onTriggerGround.Invoke();
             }
-        }
 
+        }
+        //private void OnTriggerExit(Collider other)
+        //{
+        //    if (other.CompareTag(TagList.Water))
+        //    {
+        //        onTriggerGround.Invoke();
+        //    }
+        //}
 
 
     }

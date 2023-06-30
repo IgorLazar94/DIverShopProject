@@ -9,8 +9,17 @@ namespace Player
     public class PlayerStateController : MonoBehaviour
     {
 
-        private PlayerStateMachine _SM;
+        private PlayerStateMachine playerSM;
         private OnTheGroundState onTheGroundState;
+        private OnTheWaterState onTheWaterState;
+
+        private void Start()
+        {
+            playerSM = new PlayerStateMachine();
+            onTheGroundState = new OnTheGroundState(this);
+            onTheWaterState = new OnTheWaterState(this);
+            playerSM.Initialize(new OnTheGroundState(this));
+        }
 
         private void OnEnable()
         {
@@ -24,28 +33,25 @@ namespace Player
             PlayerTrigger.onTriggerWater -= ChangeStateToWater;
         }
 
-        private void Start()
-        {
-            _SM = new PlayerStateMachine();
-            _SM.Initialize(new OnTheGroundState());
-        }
-
         private void Update()
         {
-            _SM.CurrentState.Update();
+            playerSM.CurrentState.Update();
         }
 
         private void ChangeStateToGround()
         {
-            _SM.ChangeState(new OnTheGroundState());
+            playerSM.ChangeState(onTheGroundState);
         }
 
         private void ChangeStateToWater()
         {
-            _SM.ChangeState(new OnTheWaterState());
+            playerSM.ChangeState(onTheWaterState);
         }
 
-
+        //public bool GetIsInWaterState()
+        //{
+        //    return onTheWaterState.isInWater;
+        //}
     }
 }
 

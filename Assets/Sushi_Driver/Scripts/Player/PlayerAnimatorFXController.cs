@@ -4,13 +4,16 @@ using UnityEngine;
 
 namespace Player
 {
+    [RequireComponent(typeof(PlayerStateController))]
     public class PlayerAnimatorFXController : MonoBehaviour
     {
         private Animator animator;
+        private PlayerStateController playerStateController;
 
         private void Start()
         {
             animator = GetComponent<Animator>();
+            playerStateController = GetComponent<PlayerStateController>();
         }
 
         private void OnEnable()
@@ -18,7 +21,7 @@ namespace Player
             UI.JoyStickInput.isHasInputDirection += StartRunAnimation;
             UI.JoyStickInput.isNotHasInputDirection += StopRunAnimation;
 
-            Player.PlayerTrigger.onTriggerGround += StartClimbesAnim;
+            Player.PlayerTrigger.onPlayClimbAnim += StartClimbesAnim;
             Player.PlayerTrigger.onTriggerWater += StartDivesAnim;
         }
 
@@ -27,7 +30,7 @@ namespace Player
             UI.JoyStickInput.isHasInputDirection -= StartRunAnimation;
             UI.JoyStickInput.isNotHasInputDirection -= StopRunAnimation;
 
-            Player.PlayerTrigger.onTriggerGround -= StartClimbesAnim;
+            Player.PlayerTrigger.onPlayClimbAnim -= StartClimbesAnim;
             Player.PlayerTrigger.onTriggerWater -= StartDivesAnim;
         }
 
@@ -53,12 +56,17 @@ namespace Player
             animator.SetBool(AnimParameters.isBusyHands, false);
         }
 
-        private void StartClimbesAnim ()
+        private void StartClimbesAnim()
         {
-            animator.SetTrigger(AnimParameters.Climbes);
+            //Debug.Log(playerStateController.GetIsInWaterState() + " Is in Water");
+            Debug.Log(OnTheWaterState.isInWater + "is in water");
+            if (OnTheWaterState.isInWater) // баг с выныриванием, проследить состояние??
+            {
+                animator.SetTrigger(AnimParameters.Climbes);
+            }
 
             // костыль?
-            PlayerMovementControl.onPlayerStopped.Invoke(0.1f);
+            //PlayerMovementControl.onPlayerStopped.Invoke(0.1f);
         }
 
         private void StartDivesAnim()

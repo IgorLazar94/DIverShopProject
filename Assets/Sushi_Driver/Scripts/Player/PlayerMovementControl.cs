@@ -23,7 +23,7 @@ namespace Player
             onPlayerStopped += EnableStopPlayer;
 
             UI.JoyStickInput.isHasInputDirection += PlayerMove;
-            UI.JoyStickInput.isNotHasInputDirection += PlayerStop;
+            UI.JoyStickInput.isNotHasInputDirection += ResetSpeed;
         }
 
         private void OnDisable()
@@ -31,7 +31,7 @@ namespace Player
             onPlayerStopped -= EnableStopPlayer;
 
             UI.JoyStickInput.isHasInputDirection -= PlayerMove;
-            UI.JoyStickInput.isNotHasInputDirection -= PlayerStop;
+            UI.JoyStickInput.isNotHasInputDirection -= ResetSpeed;
         }
 
         private void PlayerMove(Vector3 _inputDirection)
@@ -49,20 +49,20 @@ namespace Player
             transform.LookAt(lookAtPosition);
         }
 
-        private void PlayerStop()
+        private void ResetSpeed()
         {
             rb.velocity = Vector3.zero;
         }
 
         private void EnableStopPlayer(float time)
         {
-            StartCoroutine(StopPlayer(time));
+            //StartCoroutine(StopPlayer(time));
         }
 
         private IEnumerator StopPlayer(float _time)
         {
             isReadyToMove = false;
-            rb.velocity = Vector3.zero;
+            ResetSpeed();
             yield return new WaitForSeconds(_time);
             isReadyToMove = true;
         }
