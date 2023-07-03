@@ -37,9 +37,12 @@ Material:
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
+    - _Distance: 0.3
+    - _Freq: 3
     - _LineCount: 7.39
     - _RainbowOffset: 10.72
     - _RainbowRange: 5.32
+    - _Speed: 1
     - _TwirlStrength: 14.42
     m_Colors:
     - _Color1Dark: {r: 0.8867924, g: 0.054787885, b: 0.04601282, a: 0}
