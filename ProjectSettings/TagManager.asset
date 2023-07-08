@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Water
   - GroundTriggerZone
+  - Wall
   layers:
   - Default
   - TransparentFX

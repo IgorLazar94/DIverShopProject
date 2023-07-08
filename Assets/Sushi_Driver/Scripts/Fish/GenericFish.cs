@@ -1,23 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public abstract class GenericFish : MonoBehaviour
 {
     [field: SerializeField] protected float speed;
     private Rigidbody rb;
     private Vector3 randomDirection;
+    Sequence sequence;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        StartCoroutine(SwimInRandomDirection());
+        sequence = DOTween.Sequence();
+        //FistRotation();
+        StartCoroutine(ChooseRandomDirection());
     }
 
     protected void Swim(Vector3 randomDirection)
     {
         rb.velocity = randomDirection * speed * Time.deltaTime;
-        Vector3 targetPoint = transform.position + Quaternion.Euler(0,-270f, 0)  * randomDirection;
+        Vector3 targetPoint = transform.position + Quaternion.Euler(0, -270f, 0) * randomDirection;
+
         transform.LookAt(targetPoint);
     }
 
@@ -27,11 +32,10 @@ public abstract class GenericFish : MonoBehaviour
         int zDirection = Random.Range(0, 2) == 0 ? -1 : 1;
 
         Vector3 randomDirection = new Vector3(xDirection, 0f, zDirection);
-        Debug.Log(randomDirection + "random direction for fish");
         return randomDirection;
     }
 
-    private IEnumerator SwimInRandomDirection()
+    private IEnumerator ChooseRandomDirection()
     {
         while (true)
         {
@@ -45,10 +49,20 @@ public abstract class GenericFish : MonoBehaviour
         Swim(randomDirection);
     }
 
+    private void FistRotation()
+    {
+        sequence.Append(transform.DORotate(new Vector3(0f, transform.eulerAngles.y + 15f, 0f), 0.5f)).SetEase(Ease.InElastic).OnComplete(() => Debug.Log("left"));
+        sequence.Append(transform.DORotate(new Vector3(0f, transform.eulerAngles.y - 15f, 0f), 0.5f)).SetEase(Ease.InElastic).OnComplete(() => Debug.Log("right"));
+        sequence.SetLoops(-1);
+        sequence.Play();
+    }
 
-
-
-
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag(TagList.Wall))
+        {
+           randomDirection = randomDirection.Reverse();
+        }
+    }
 }
 
