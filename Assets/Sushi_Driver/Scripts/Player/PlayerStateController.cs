@@ -8,7 +8,7 @@ namespace Player
 {
     public class PlayerStateController : MonoBehaviour
     {
-
+        [SerializeField] private GameObject searchArea;
         private PlayerStateMachine playerSM;
         private OnTheGroundState onTheGroundState;
         private OnTheWaterState onTheWaterState;
@@ -40,6 +40,7 @@ namespace Player
 
         private void ChangeStateToGround()
         {
+            Debug.Log("Switch to ground");
             playerSM.ChangeState(onTheGroundState);
         }
 
@@ -48,10 +49,10 @@ namespace Player
             playerSM.ChangeState(onTheWaterState);
         }
 
-        //public bool GetIsInWaterState()
-        //{
-        //    return onTheWaterState.isInWater;
-        //}
+        public GameObject ReturnSearchArea()
+        {
+            return searchArea;
+        }
     }
 }
 

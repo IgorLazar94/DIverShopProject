@@ -14,10 +14,13 @@ public class OnTheGroundState : GenericState
     public override void Enter()
     {
         base.Enter();
+        playerSearchArea = playerStateController.ReturnSearchArea();
+        ActivateSearchArea(false);
     }
 
     public override void Exit()
     {
         base.Exit();
     }
+
 }

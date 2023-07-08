@@ -20,19 +20,22 @@ namespace Player
 
             if (other.CompareTag(TagList.GroundTriggerZone))
             {
-                Debug.LogWarning("!");
                 onPlayClimbAnim.Invoke();
-                onTriggerGround.Invoke();
+
+                if (OnTheWaterState.isInWater)
+                {
+                    onTriggerGround.Invoke();
+                }
             }
 
         }
-        //private void OnTriggerExit(Collider other)
-        //{
-        //    if (other.CompareTag(TagList.Water))
-        //    {
-        //        onTriggerGround.Invoke();
-        //    }
-        //}
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag(TagList.Water))
+            {
+                onTriggerGround.Invoke();
+            }
+        }
 
 
     }

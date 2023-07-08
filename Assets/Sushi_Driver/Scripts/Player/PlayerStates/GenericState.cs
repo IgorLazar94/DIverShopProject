@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class GenericState
 {
+    protected GameObject playerSearchArea;
 
     public virtual void Enter()
     {
@@ -14,4 +15,10 @@ public abstract class GenericState
     public virtual void Update()
     {
     }
+
+    protected virtual void ActivateSearchArea(bool value)
+    {
+        playerSearchArea.SetActive(value);
+    }
+
 }

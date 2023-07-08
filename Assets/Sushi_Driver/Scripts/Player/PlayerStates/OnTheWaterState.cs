@@ -16,6 +16,8 @@ public class OnTheWaterState : GenericState
     public override void Enter()
     {
         base.Enter();
+        playerSearchArea = playerStateController.ReturnSearchArea();
+        ActivateSearchArea(true);
         isInWater = true;
     }
 
@@ -32,4 +34,5 @@ public class OnTheWaterState : GenericState
         Debug.Log(isInWater + "is in water");
         base.Update();
     }
+
 }
