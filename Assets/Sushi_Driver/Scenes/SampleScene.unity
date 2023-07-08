@@ -2099,11 +2099,6 @@ Transform:
   m_Father: {fileID: 1968092012}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &104517610387245027 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4357904950861670614, guid: 0acea3ed71c9ade419c444abd7f6e291, type: 3}
-  m_PrefabInstance: {fileID: 4398100665522532149}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &260284952564643730
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2233,18 +2228,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: FishA
       objectReference: {fileID: 0}
+    - target: {fileID: 4398100665824975120, guid: 0acea3ed71c9ade419c444abd7f6e291, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438113881496802046, guid: 0acea3ed71c9ade419c444abd7f6e291, type: 3}
+      propertyPath: speed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438113881496802046, guid: 0acea3ed71c9ade419c444abd7f6e291, type: 3}
+      propertyPath: rotTest
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 5172119074214819849, guid: 0acea3ed71c9ade419c444abd7f6e291, type: 3}
+      propertyPath: m_Constraints
+      value: 84
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0acea3ed71c9ade419c444abd7f6e291, type: 3}
---- !u!114 &4438113881496802046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 104517610387245027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63b53e41910b8544ebb23c95eba220aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3

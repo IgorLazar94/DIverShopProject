@@ -17,6 +17,8 @@ public abstract class GenericFish : MonoBehaviour
     protected void Swim(Vector3 randomDirection)
     {
         rb.velocity = randomDirection * speed * Time.deltaTime;
+        Vector3 targetPoint = transform.position + Quaternion.Euler(0,-270f, 0)  * randomDirection;
+        transform.LookAt(targetPoint);
     }
 
     private Vector3 GetRandomDirection()
@@ -34,8 +36,7 @@ public abstract class GenericFish : MonoBehaviour
         while (true)
         {
             randomDirection = GetRandomDirection();
-            Swim(randomDirection);
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(3.0f);
         }
     }
 
