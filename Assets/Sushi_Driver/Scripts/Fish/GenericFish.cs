@@ -149,6 +149,7 @@ public abstract class GenericFish : MonoBehaviour
 
     private void PassTheFishToPlayer()
     {
+        PlayerInventoryPresenter.OnCurrentFishChanged(1);
         Destroy(gameObject);
     }
 }
