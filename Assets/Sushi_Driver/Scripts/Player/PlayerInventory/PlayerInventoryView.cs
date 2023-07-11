@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerInventoryView : MonoBehaviour
 {
-    PlayerInventoryAdapter inventoryAdapter = new PlayerInventoryAdapter();
+    PlayerInventoryAdapter inventoryAdapter;
 
     public PlayerInventoryView (PlayerInventoryAdapter inventoryAdapter)
     {

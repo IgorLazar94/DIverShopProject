@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerInventoryModel
 {
-    PlayerInventoryAdapter inventoryAdapter = new PlayerInventoryAdapter();
+    PlayerInventoryAdapter inventoryAdapter;
 
     public PlayerInventoryModel (PlayerInventoryAdapter _inventoryAdapter)
     {
