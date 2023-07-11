@@ -102,6 +102,7 @@ public abstract class GenericFish : MonoBehaviour
     public IEnumerator StartRunFromPlayer(Transform playerPos)
     {
         isRunFromPlayer = true;
+        EnableFishing(true);
         while (true && isRunFromPlayer)
         {
             UpdatePlayerLos(playerPos);
@@ -125,6 +126,7 @@ public abstract class GenericFish : MonoBehaviour
     public void StopRunFromPlayer()
     {
         isRunFromPlayer = false;
+        EnableFishing(false);
         StopCoroutine(StartRunFromPlayer(playerPos));
     }
 
@@ -140,23 +142,15 @@ public abstract class GenericFish : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            EnableFishing(true);
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            EnableFishing(false);
-        }
-    }
-
     public void FishCaught()
     {
-        Debug.Log("FishCaught");
+        transform.DOJump(playerPos.position, 1f, 1, 0.3f).OnComplete(() => PassTheFishToPlayer());
     }
 
+    private void PassTheFishToPlayer()
+    {
+        Destroy(gameObject);
+    }
 }
 
 

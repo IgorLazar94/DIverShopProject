@@ -37,7 +37,7 @@ Material:
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _Opacity: 0.4
+    - _Opacity: 0.25
     - _RippleDensity: 7
     - _RippleSlimness: 5
     - _RippleSpeed: 1
