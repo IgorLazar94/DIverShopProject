@@ -22,4 +22,8 @@ public class FishSpriteController : MonoBehaviour
         timerTween?.Kill();
     }
 
+    private void FixedUpdate()
+    {
+        transform.LookAt(Camera.main.transform);
+    }
 }
