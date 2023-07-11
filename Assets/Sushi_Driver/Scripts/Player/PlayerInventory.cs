@@ -1,19 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerInventoryController : MonoBehaviour
+public class PlayerInventory : MonoBehaviour
 {
+
     PlayerInventoryAdapter inventoryAdapter;
     PlayerInventoryModel inventoryModel;
-    PlayerInventoryView inventoryView;
+    [SerializeField] PlayerInventoryView inventoryView;
 
     private void Start()
     {
-        inventoryAdapter = new PlayerInventoryAdapter();
+        inventoryAdapter = new PlayerInventoryAdapter(inventoryView);
         inventoryModel = new PlayerInventoryModel(inventoryAdapter);
-        inventoryView = new PlayerInventoryView(inventoryAdapter);
-        inventoryAdapter.HelloWorld();
-        inventoryAdapter.SetInventoryComponent(inventoryView, inventoryModel);
+        inventoryAdapter.SetInventoryModel(inventoryModel);
+        Debug.Log(inventoryView + " view");
+        Debug.Log(inventoryModel + " model");
+        Debug.Log(inventoryAdapter + " adapter");
+
     }
 }

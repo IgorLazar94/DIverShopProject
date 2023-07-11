@@ -1,18 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class PlayerInventoryView : MonoBehaviour
-{
-    PlayerInventoryAdapter inventoryAdapter;
+public class PlayerInventoryView : MonoBehaviour {
 
-    public PlayerInventoryView (PlayerInventoryAdapter inventoryAdapter)
-    {
-        this.inventoryAdapter = inventoryAdapter;
-    }
+    public PlayerInventoryAdapter inventoryAdapter;
 
-    public void StartTestMessage()
-    {
-        Debug.Log("WORLD");
-    }
+    private TextMeshProUGUI maxFishText;
 }

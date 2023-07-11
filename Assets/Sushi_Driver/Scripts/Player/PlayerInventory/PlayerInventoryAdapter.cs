@@ -1,51 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using System;
 
-public class PlayerInventoryAdapter : MonoBehaviour
+public class PlayerInventoryAdapter
 {
-    public static PlayerInventoryAdapter Instance;
+    public PlayerInventoryView playerInventoryView;
+    public PlayerInventoryModel playerInventoryModel;
 
-    PlayerInventoryView inventoryView;
-    PlayerInventoryModel inventoryModel;
-
-    private void Awake()
+    public static Action onMaxFishValueChanged;
+    public PlayerInventoryAdapter (PlayerInventoryView _playerInventoryView)
     {
-        MakeSingleton();
+        this.playerInventoryView = _playerInventoryView;
     }
 
-
-    private void Update()
+    public void SetInventoryModel(PlayerInventoryModel _playerInventoryModel)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            inventoryView.StartTestMessage();
-            Debug.Log(inventoryView);
-        }
-    }
-
-    private void MakeSingleton()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-        DontDestroyOnLoad(this.gameObject);
-    }
-
-    public void HelloWorld()
-    {
-        Debug.Log("Hello");
-    }
-
-    public void SetInventoryComponent(PlayerInventoryView _inventoryView, PlayerInventoryModel _inventoryModel)
-    {
-        inventoryModel = _inventoryModel;
-        inventoryView = _inventoryView;
+        playerInventoryModel = _playerInventoryModel;
     }
 
 }
