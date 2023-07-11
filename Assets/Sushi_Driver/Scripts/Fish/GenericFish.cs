@@ -5,13 +5,18 @@ using DG.Tweening;
 
 public abstract class GenericFish : MonoBehaviour
 {
-    [field: SerializeField] protected float speed;
+    [field: SerializeField] protected float idleSpeed;
+    private float runSpeed;
     private Rigidbody rb;
     private Vector3 randomDirection;
-    Sequence sequence;
+    private Sequence sequence;
+    private bool isRunFromPlayer;
+    private Transform playerPos;
 
     private void Start()
     {
+        runSpeed = idleSpeed * 3f;
+        isRunFromPlayer = false;
         rb = GetComponent<Rigidbody>();
         sequence = DOTween.Sequence();
         //FistRotation();
@@ -20,9 +25,16 @@ public abstract class GenericFish : MonoBehaviour
 
     protected void Swim(Vector3 randomDirection)
     {
-        rb.velocity = randomDirection * speed * Time.deltaTime;
         Vector3 targetPoint = transform.position + Quaternion.Euler(0, -270f, 0) * randomDirection;
+        rb.velocity = randomDirection * idleSpeed * Time.deltaTime;
+        transform.LookAt(targetPoint);
+    }
 
+    protected void SwimFromPlayer()
+    {
+        Vector3 targetPoint = transform.position + Quaternion.Euler(0, -270f, 0) * randomDirection;
+        Vector3 direction = (transform.position - playerPos.position).normalized;
+        rb.velocity = (direction * runSpeed) * Time.deltaTime;
         transform.LookAt(targetPoint);
     }
 
@@ -37,7 +49,7 @@ public abstract class GenericFish : MonoBehaviour
 
     private IEnumerator ChooseRandomDirection()
     {
-        while (true)
+        while (true && !isRunFromPlayer)
         {
             randomDirection = GetRandomDirection();
             yield return new WaitForSeconds(3.0f);
@@ -46,7 +58,15 @@ public abstract class GenericFish : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Swim(randomDirection);
+        if (!isRunFromPlayer)
+        {
+            Swim(randomDirection);
+        }
+        else
+        {
+            CheckPlayerDistance(playerPos);
+            SwimFromPlayer();
+        }
     }
 
     private void FistRotation()
@@ -57,12 +77,51 @@ public abstract class GenericFish : MonoBehaviour
         sequence.Play();
     }
 
+    private void ReverseDirection()
+    {
+        randomDirection = randomDirection.Reverse();
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag(TagList.Wall))
         {
-           randomDirection = randomDirection.Reverse();
+            randomDirection = randomDirection.Reverse();
         }
+        if (collision.gameObject.TryGetComponent<GenericFish>(out GenericFish fish))
+        {
+            ReverseDirection();
+            fish.ReverseDirection();
+        }
+    }
+
+    public IEnumerator StartRunFromPlayer(Transform playerPos)
+    {
+        isRunFromPlayer = true;
+        while (true && isRunFromPlayer)
+        {
+            UpdatePlayerLos(playerPos);
+            yield return new WaitForSeconds(1.0f);
+        }
+    }
+
+    private void CheckPlayerDistance(Transform _playerPos)
+    {
+        if ((transform.position - _playerPos.position).magnitude > 10f)
+        {
+            StopRunFromPlayer();
+        }
+    }
+
+    private void UpdatePlayerLos(Transform _playerPos)
+    {
+        playerPos = _playerPos;
+    }
+
+    public void StopRunFromPlayer()
+    {
+        isRunFromPlayer = false;
+        StopCoroutine(StartRunFromPlayer(playerPos));
     }
 }
 

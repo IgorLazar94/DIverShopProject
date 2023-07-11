@@ -58,9 +58,7 @@ namespace Player
 
         private void StartClimbesAnim()
         {
-            //Debug.Log(playerStateController.GetIsInWaterState() + " Is in Water");
-            Debug.Log(OnTheWaterState.isInWater + "is in water");
-            if (OnTheWaterState.isInWater) // баг с выныриванием, проследить состояние??
+            if (OnTheWaterState.isInWater)
             {
                 animator.SetTrigger(AnimParameters.Climbes);
             }

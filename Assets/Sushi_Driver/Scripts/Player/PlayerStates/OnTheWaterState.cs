@@ -31,7 +31,6 @@ public class OnTheWaterState : GenericState
 
     public override void Update()
     {
-        Debug.Log(isInWater + "is in water");
         base.Update();
     }
 
