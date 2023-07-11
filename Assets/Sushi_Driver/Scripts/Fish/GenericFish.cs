@@ -5,7 +5,9 @@ using DG.Tweening;
 
 public abstract class GenericFish : MonoBehaviour
 {
-    [field: SerializeField] protected float idleSpeed;
+    [SerializeField] protected FishSpriteController childSprite;
+    [SerializeField] private float idleSpeed;
+    [SerializeField] private float timeToCatch;
     private float runSpeed;
     private Rigidbody rb;
     private Vector3 randomDirection;
@@ -13,11 +15,13 @@ public abstract class GenericFish : MonoBehaviour
     private bool isRunFromPlayer;
     private Transform playerPos;
 
+
     private void Start()
     {
         runSpeed = idleSpeed * 3f;
         isRunFromPlayer = false;
         rb = GetComponent<Rigidbody>();
+        childSprite.gameObject.SetActive(false);
         sequence = DOTween.Sequence();
         //FistRotation();
         StartCoroutine(ChooseRandomDirection());
@@ -123,5 +127,36 @@ public abstract class GenericFish : MonoBehaviour
         isRunFromPlayer = false;
         StopCoroutine(StartRunFromPlayer(playerPos));
     }
+
+    private void EnableFishing(bool isActivate)
+    {
+        childSprite.gameObject.SetActive(isActivate);
+        if (isActivate)
+        {
+            childSprite.FishingStartTimer(timeToCatch, this);
+        } else
+        {
+            childSprite.FishingStopTimer();
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            EnableFishing(true);
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            EnableFishing(false);
+        }
+    }
+
+    public void FishCaught()
+    {
+        Debug.Log("FishCaught");
+    }
+
 }
+
 
