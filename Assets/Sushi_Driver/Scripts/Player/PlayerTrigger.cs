@@ -15,9 +15,9 @@ namespace Player
         {
             CheckWaterGround(other);
 
-            if (other.gameObject.GetComponent<ReceivePoint>())
+            if (other.gameObject.TryGetComponent(out ReceivePoint receivePoint))
             {
-                CheckTypeOfReceiveBuild(other.gameObject.transform.parent.gameObject);
+                CheckTypeOfReceiveBuild(other.gameObject.transform.parent.gameObject, receivePoint);
             }
 
         }
@@ -47,12 +47,11 @@ namespace Player
             }
         }
 
-        private void CheckTypeOfReceiveBuild(GameObject parentBuild)
+        private void CheckTypeOfReceiveBuild(GameObject parentBuild, ReceivePoint receivePoint)
         {
             if (parentBuild.TryGetComponent(out Kitchen kitchen))
             {
-                Debug.Log("receive");
-
+                kitchen.GetFishFromPlayer();
             }
         }
     }

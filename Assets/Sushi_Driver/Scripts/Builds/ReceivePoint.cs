@@ -15,4 +15,5 @@ public class ReceivePoint : MonoBehaviour
     {
         playerZoneSprite.Rotate(0f, 0f, 50f * Time.deltaTime);
     }
+
 }

@@ -4,5 +4,13 @@ using UnityEngine;
 
 public class Kitchen : GenericBuild
 {
-    
+
+    private int fishOnKitchen = 0;
+
+    public void GetFishFromPlayer()
+    {
+        fishOnKitchen = playerInventory.GetCurrentFishValue();
+        playerInventory.RemoveFish();
+    }
+
 }

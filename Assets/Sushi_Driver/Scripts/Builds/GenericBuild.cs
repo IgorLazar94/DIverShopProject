@@ -11,7 +11,7 @@ public enum TypeOfBuild
 
 public abstract class GenericBuild : MonoBehaviour
 {
-    [SerializeField] private TypeOfBuild typeOfBuild;
-    [SerializeField] private PlayerInventoryModel inventoryModel;
+    [field: SerializeField] private TypeOfBuild typeOfBuild;
+    [field: SerializeField] public PlayerInventoryModel playerInventory { get; private set; } 
 
 }

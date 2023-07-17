@@ -18,12 +18,14 @@ public class PlayerInventoryModel : MonoBehaviour {
     {
         PlayerInventoryPresenter.OnMaxFishChanged += SetMaxFishValue;
         PlayerInventoryPresenter.OnCurrentFishChanged += SetCurrentFishValue;
+        PlayerInventoryPresenter.OnCurrentFishRemoved += RemoveFish;
     }
 
     private void OnDisable()
     {
         PlayerInventoryPresenter.OnMaxFishChanged -= SetMaxFishValue;
         PlayerInventoryPresenter.OnCurrentFishChanged -= SetCurrentFishValue;
+        PlayerInventoryPresenter.OnCurrentFishRemoved -= RemoveFish;
     }
 
     public void SetView(PlayerInventoryView view)
@@ -42,6 +44,17 @@ public class PlayerInventoryModel : MonoBehaviour {
         //if (currentFishValue + value > maxFishValue) currentFishValue = maxFishValue;
 
         currentFishValue += value;
+        view.UpdateCurrentFishText(currentFishValue);
+    }
+
+    public int GetCurrentFishValue()
+    {
+        return currentFishValue;
+    }
+
+    public void RemoveFish()
+    {
+        currentFishValue = 0;
         view.UpdateCurrentFishText(currentFishValue);
     }
 }

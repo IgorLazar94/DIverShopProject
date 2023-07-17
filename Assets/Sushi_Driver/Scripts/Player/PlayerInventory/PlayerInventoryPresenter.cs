@@ -11,6 +11,7 @@ public class PlayerInventoryPresenter : MonoBehaviour {
 
     public static Action<int> OnMaxFishChanged;
     public static Action<int> OnCurrentFishChanged;
+    public static Action OnCurrentFishRemoved;
     public void CreateInventory()
     {
         model = new PlayerInventoryModel();
