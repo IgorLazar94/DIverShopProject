@@ -148,6 +148,7 @@ MonoBehaviour:
   childSprite: {fileID: 3929667813204499506}
   idleSpeed: 50
   timeToCatch: 2.5
+  availabilityLevel: 2
 --- !u!1 &3929667812776881194
 GameObject:
   m_ObjectHideFlags: 0

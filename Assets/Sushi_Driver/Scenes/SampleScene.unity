@@ -568,6 +568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPos: {fileID: 1736953641}
+  playerLogic: {fileID: 0}
 --- !u!1 &268518385
 GameObject:
   m_ObjectHideFlags: 0
@@ -2093,7 +2094,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1704191508}
-  - component: {fileID: 1704191510}
   - component: {fileID: 1704191509}
   m_Layer: 0
   m_Name: PlayerInventory
@@ -2126,21 +2126,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1704191507}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 403a4df14a079a445918a6e433ad8212, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1704191510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1704191507}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e01b5a9e136940344a35315dc4942935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  view: {fileID: 1939939953}
 --- !u!1 &1736953635
 GameObject:
   m_ObjectHideFlags: 0
@@ -2158,7 +2147,6 @@ GameObject:
   - component: {fileID: 1736953645}
   - component: {fileID: 1736953646}
   - component: {fileID: 1736953647}
-  - component: {fileID: 1736953649}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2298,18 +2286,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &1736953649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1736953635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 465853f4718e45442a88000d904c2495, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1753943518
 GameObject:
   m_ObjectHideFlags: 0
@@ -2809,8 +2785,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d495175525aef024bbe99a6ea9d4e65f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentFishText: {fileID: 0}
-  maxFishText: {fileID: 0}
+  currentFishText: {fileID: 1753943520}
+  maxFishText: {fileID: 1217520442}
 --- !u!1 &1968092011
 GameObject:
   m_ObjectHideFlags: 0

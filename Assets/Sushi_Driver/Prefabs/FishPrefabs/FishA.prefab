@@ -331,3 +331,4 @@ MonoBehaviour:
   childSprite: {fileID: 272629103}
   idleSpeed: 30
   timeToCatch: 1.5
+  availabilityLevel: 1

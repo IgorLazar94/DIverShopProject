@@ -8,12 +8,14 @@ public abstract class GenericFish : MonoBehaviour
     [SerializeField] protected FishSpriteController childSprite;
     [SerializeField] private float idleSpeed;
     [SerializeField] private float timeToCatch;
+    [SerializeField] private float availabilityLevel;
     private float runSpeed;
     private Rigidbody rb;
     private Vector3 randomDirection;
     private Sequence sequence;
     private bool isRunFromPlayer;
     private Transform playerPos;
+    private PlayerLogic playerLogic;
 
 
     private void Start()
@@ -99,7 +101,7 @@ public abstract class GenericFish : MonoBehaviour
         }
     }
 
-    public IEnumerator StartRunFromPlayer(Transform playerPos)
+    public IEnumerator StartRunFromPlayer(Transform playerPos, PlayerLogic _playerLogic)
     {
         isRunFromPlayer = true;
         EnableFishing(true);
@@ -127,7 +129,7 @@ public abstract class GenericFish : MonoBehaviour
     {
         isRunFromPlayer = false;
         EnableFishing(false);
-        StopCoroutine(StartRunFromPlayer(playerPos));
+        StopCoroutine(StartRunFromPlayer(playerPos, playerLogic));
     }
 
     private void EnableFishing(bool isActivate)
