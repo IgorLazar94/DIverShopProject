@@ -13,19 +13,11 @@ namespace Player
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag(TagList.Water))
-            {
-                onTriggerWater.Invoke();
-            }
+            CheckWaterGround(other);
 
-            if (other.CompareTag(TagList.GroundTriggerZone))
+            if (other.gameObject.GetComponent<ReceivePoint>())
             {
-                onPlayClimbAnim.Invoke();
-
-                if (OnTheWaterState.isInWater)
-                {
-                    onTriggerGround.Invoke();
-                }
+                CheckTypeOfReceiveBuild(other.gameObject.transform.parent.gameObject);
             }
 
         }
@@ -37,7 +29,32 @@ namespace Player
             }
         }
 
+        private void CheckWaterGround(Collider collider)
+        {
+            if (collider.CompareTag(TagList.Water))
+            {
+                onTriggerWater.Invoke();
+            }
 
+            if (collider.CompareTag(TagList.GroundTriggerZone))
+            {
+                onPlayClimbAnim.Invoke();
+
+                if (OnTheWaterState.isInWater)
+                {
+                    onTriggerGround.Invoke();
+                }
+            }
+        }
+
+        private void CheckTypeOfReceiveBuild(GameObject parentBuild)
+        {
+            if (parentBuild.TryGetComponent(out Kitchen kitchen))
+            {
+                Debug.Log("receive");
+
+            }
+        }
     }
 }
 
