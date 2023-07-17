@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Kitchen : GenericBuild
 {
-
+    [SerializeField] private FoodCollection foodCollection;
     private int fishOnKitchen = 0;
 
     public void GetFishFromPlayer()

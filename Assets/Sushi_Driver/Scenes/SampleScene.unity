@@ -1962,7 +1962,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: AA
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2312,6 +2312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeOfBuild: 0
   <playerInventory>k__BackingField: {fileID: 1704191509}
+  foodCollection: {fileID: 1611696567}
 --- !u!1001 &1450066974
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2522,6 +2523,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1577119563}
   m_CullTransparentMesh: 1
+--- !u!1 &1611696566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1611696568}
+  - component: {fileID: 1611696567}
+  m_Layer: 0
+  m_Name: FoodCollection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1611696567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611696566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b552e1c95ed3cdc41a99a79cc1839326, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <FriedFish>k__BackingField: {fileID: 100000, guid: 231c918546ba58e44a0ceb1dae94f713, type: 3}
+  <Sandwich>k__BackingField: {fileID: 100000, guid: 5508bdb9c013f1e4d984b01038d007f7, type: 3}
+  <Fishburger>k__BackingField: {fileID: 100008, guid: 5a0a6ae0b3b302743abb8c8c0bda6cae, type: 3}
+--- !u!4 &1611696568
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611696566}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1623667807
 GameObject:
   m_ObjectHideFlags: 0
@@ -3200,7 +3248,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: AAA
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
