@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 829169544449816653}
   - component: {fileID: 8165011741683505492}
   - component: {fileID: 3897465535349202069}
-  - component: {fileID: 334529243405351757}
+  - component: {fileID: 8662169143938864193}
   m_Layer: 7
   m_Name: FishB
   m_TagString: Untagged
@@ -133,7 +133,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.85729635, y: 0.15818724, z: 0.07221814}
   m_Center: {x: 0.049005352, y: -0.03276062, z: 0}
---- !u!114 &334529243405351757
+--- !u!114 &8662169143938864193
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,12 +142,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 788868226421246347}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 659078ade6838b647b20f0effd8b61bc, type: 3}
+  m_Script: {fileID: 11500000, guid: 16a6e32efd053af46b62c73a597de35c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeOfFish: 1
   childSprite: {fileID: 3929667813204499506}
-  idleSpeed: 50
-  timeToCatch: 2.5
+  idleSpeed: 20
+  timeToCatch: 4
   availabilityLevel: 2
 --- !u!1 &3929667812776881194
 GameObject:

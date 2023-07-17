@@ -3,9 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public abstract class GenericFish : MonoBehaviour
+public enum TypeOfFish
 {
-    [SerializeField] protected FishSpriteController childSprite;
+    FishA,
+    FishB,
+    FishC
+}
+public class Fish : MonoBehaviour
+{
+    [SerializeField] private TypeOfFish typeOfFish;
+    [SerializeField] private FishSpriteController childSprite;
     [SerializeField] private float idleSpeed;
     [SerializeField] private float timeToCatch;
     [SerializeField] private float availabilityLevel;
@@ -94,7 +101,7 @@ public abstract class GenericFish : MonoBehaviour
         {
             randomDirection = randomDirection.Reverse();
         }
-        if (collision.gameObject.TryGetComponent<GenericFish>(out GenericFish fish))
+        if (collision.gameObject.TryGetComponent(out Fish fish))
         {
             ReverseDirection();
             fish.ReverseDirection();

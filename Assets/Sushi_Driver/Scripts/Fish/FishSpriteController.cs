@@ -6,10 +6,10 @@ using DG.Tweening;
 public class FishSpriteController : MonoBehaviour
 {
     [SerializeField] private Transform fullCircleSprite;
-    private GenericFish parentFish;
+    private Fish parentFish;
     private Tween timerTween;
 
-    public void FishingStartTimer(float time, GenericFish _parent)
+    public void FishingStartTimer(float time, Fish _parent)
     {
         parentFish = _parent;
         fullCircleSprite.localScale = Vector3.zero;

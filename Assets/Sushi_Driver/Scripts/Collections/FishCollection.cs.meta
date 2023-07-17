@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d4f16ffc3848d414bb063e149df50342
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - <FishA>k__BackingField: {fileID: 4357904950861670614, guid: 0acea3ed71c9ade419c444abd7f6e291, type: 3}
+  - <FishB>k__BackingField: {fileID: 788868226421246347, guid: 491222850cefb6b47aedf842c3d8bd0e, type: 3}
+  - <FishC>k__BackingField: {fileID: 7017628878400345731, guid: ea6160cc86a02554e8d2a599b324bc69, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

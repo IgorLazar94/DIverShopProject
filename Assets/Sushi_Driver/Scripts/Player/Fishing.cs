@@ -9,7 +9,7 @@ public class Fishing : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.TryGetComponent(out GenericFish fish))
+        if (other.gameObject.TryGetComponent(out Fish fish))
         {
             fish.StartCoroutine(fish.StartRunFromPlayer(playerPos, playerLogic));
         }
@@ -17,7 +17,7 @@ public class Fishing : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.TryGetComponent(out GenericFish fish))
+        if (other.gameObject.TryGetComponent(out Fish fish))
         {
             fish.StopRunFromPlayer();
         }
