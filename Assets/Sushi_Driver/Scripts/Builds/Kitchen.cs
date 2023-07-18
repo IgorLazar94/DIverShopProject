@@ -5,7 +5,8 @@ using Zenject;
 
 public class Kitchen : GenericBuild
 {
-    [Inject] private FoodCollection foodCollection;
+    //[Inject] private FoodCollection foodCollection;
+    [Inject] private UIController controller;
     private int fishOnKitchen = 0;
 
     public void GetFishFromPlayer()
@@ -13,7 +14,5 @@ public class Kitchen : GenericBuild
         fishOnKitchen = playerInventory.GetCurrentFishValue();
         playerInventory.RemoveFish();
     }
-
-
 
 }
