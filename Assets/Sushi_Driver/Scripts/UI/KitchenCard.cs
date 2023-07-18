@@ -15,6 +15,7 @@ public class KitchenCard : MonoBehaviour
 {
     [Inject] private FoodCollection foodCollection;
     [Inject] private FishCollection fishCollection;
+    public bool isReady { get; private set; }
 
     [SerializeField] private TypeOfCard typeOfCard;
     [SerializeField] private TextMeshProUGUI titleText;
@@ -23,17 +24,13 @@ public class KitchenCard : MonoBehaviour
     [SerializeField] private Image ingredientOneIcon;
     [SerializeField] private TextMeshProUGUI ingredientTwoText;
     [SerializeField] private Image ingredientTwoIcon;
-
-    private int requiredFishACount;
-    private int requiredFishBCount;
-    private int requiredFishCCount;
-
-
+    [SerializeField] private Image buttonImage;
 
 
     private void Start()
     {
         FillCard();
+        buttonImage.color = Color.green;
     }
 
     private void FillCard()
@@ -66,5 +63,48 @@ public class KitchenCard : MonoBehaviour
                 Debug.LogWarning("Undefined type of kitchen card");
                 break;
         }
+    }
+
+    public void SwitchReadyStatus(int fishA, int fishB, int fishC)
+    {
+        if (typeOfCard == TypeOfCard.FriedFish)
+        {
+            if (fishA >= 2)
+            {
+                ActivateButton();
+            }
+        }
+        else if (typeOfCard == TypeOfCard.SandWich)
+        {
+            if (fishA >= 2 && fishB >= 1)
+            {
+                ActivateButton();
+            }
+        }
+        else if (typeOfCard == TypeOfCard.Fishburger)
+        {
+            if (fishB >= 2 && fishC >= 2)
+            {
+                ActivateButton();
+            }
+        }
+        else
+        {
+            DeactivateButton();
+        }
+    }
+
+    private void ActivateButton()
+    {
+        isReady = true;
+        buttonImage.color = Color.green;
+        buttonImage.gameObject.GetComponent<Button>().enabled = true;
+    }
+
+    private void DeactivateButton()
+    {
+        isReady = false;
+        buttonImage.color = Color.red;
+        buttonImage.gameObject.GetComponent<Button>().enabled = false;
     }
 }

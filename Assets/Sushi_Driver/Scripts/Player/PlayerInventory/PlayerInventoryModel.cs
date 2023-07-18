@@ -77,7 +77,7 @@ public class PlayerInventoryModel : MonoBehaviour
     {
         if (currentTotalFishQuantity > maxFishValue)
         {
-            Debug.Log("Max inventory"); // Action to block fishing
+            Debug.Log("Max inventory"); // Action to block fishing (disable fishing zone)
         }
     }
 
@@ -102,12 +102,5 @@ public class PlayerInventoryModel : MonoBehaviour
         currentFishCValue = 0;
         CalculateTotalFishQuantity();
         view.UpdateCurrentFishText(currentTotalFishQuantity);
-    }
-
-    private void Update()
-    {
-        Debug.Log(currentFishAValue + "A");
-        Debug.Log(currentFishBValue + "B");
-        Debug.Log(currentFishCValue + "C");
     }
 }

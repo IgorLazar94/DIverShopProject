@@ -663,6 +663,7 @@ MonoBehaviour:
   ingredientOneIcon: {fileID: 5187520410467129498}
   ingredientTwoText: {fileID: 5187520410047600645}
   ingredientTwoIcon: {fileID: 5187520410046865619}
+  buttonImage: {fileID: 5187520411280189766}
 --- !u!1 &5187520411581285111
 GameObject:
   m_ObjectHideFlags: 0

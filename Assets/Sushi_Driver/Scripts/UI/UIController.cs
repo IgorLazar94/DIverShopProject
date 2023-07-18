@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
+using System.Linq;
 
 public class UIController : MonoBehaviour
 {
@@ -13,6 +14,20 @@ public class UIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI kitchenCurrentAFish;
     [SerializeField] private TextMeshProUGUI kitchenCurrentBFish;
     [SerializeField] private TextMeshProUGUI kitchenCurrentCFish;
+
+    [SerializeField] private List<KitchenCard> kitchenCards = new List<KitchenCard>();
+
+
+    private void Start()
+    {
+        FillKitchenCardsList();
+        KitchenPanel.SetActive(false);
+    }
+
+    private void FillKitchenCardsList()
+    {
+        kitchenCards = gameObject.GetComponentsInChildren<KitchenCard>().ToList();
+    }
 
     public void ShowKitchenUI()
     {
@@ -44,5 +59,14 @@ public class UIController : MonoBehaviour
         kitchenCurrentAFish.text = " - " + fishACount.ToString();
         kitchenCurrentBFish.text = " - " + fishBCount.ToString();
         kitchenCurrentCFish.text = " - " + fishCCount.ToString();
+        CheckReadyCards(fishACount, fishBCount, fishACount);
+    }
+
+    private void CheckReadyCards(int fishACount, int fishBCount, int fishCCount)
+    {
+        foreach (var card in kitchenCards)
+        {
+            card.SwitchReadyStatus(fishACount, fishBCount, fishCCount);
+        }
     }
 }
