@@ -23,6 +23,7 @@ namespace Player
 
             Player.PlayerTrigger.onPlayClimbAnim += StartClimbesAnim;
             Player.PlayerTrigger.onTriggerWater += StartDivesAnim;
+            Player.PlayerMovementControl.onPlayerStopped += StopRunAnimation;
         }
 
         private void OnDisable()
@@ -32,6 +33,7 @@ namespace Player
 
             Player.PlayerTrigger.onPlayClimbAnim -= StartClimbesAnim;
             Player.PlayerTrigger.onTriggerWater -= StartDivesAnim;
+            Player.PlayerMovementControl.onPlayerStopped -= StopRunAnimation;
         }
 
         private void StartRunAnimation(Vector3 direction)

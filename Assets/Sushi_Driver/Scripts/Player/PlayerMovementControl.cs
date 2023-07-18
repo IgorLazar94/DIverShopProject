@@ -11,7 +11,7 @@ namespace Player
         private Rigidbody rb;
         private bool isReadyToMove = true;
 
-        public static System.Action<float> onPlayerStopped;
+        public static System.Action onPlayerStopped;
 
         private void Start()
         {
@@ -54,16 +54,16 @@ namespace Player
             rb.velocity = Vector3.zero;
         }
 
-        private void EnableStopPlayer(float time)
+        private void EnableStopPlayer()
         {
-            //StartCoroutine(StopPlayer(time));
+            StartCoroutine(StopPlayer());
         }
 
-        private IEnumerator StopPlayer(float _time)
+        private IEnumerator StopPlayer()
         {
             isReadyToMove = false;
             ResetSpeed();
-            yield return new WaitForSeconds(_time);
+            yield return new WaitForSeconds(0.5f);
             isReadyToMove = true;
         }
 

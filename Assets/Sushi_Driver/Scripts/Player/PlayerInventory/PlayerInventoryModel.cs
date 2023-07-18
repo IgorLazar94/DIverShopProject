@@ -81,14 +81,33 @@ public class PlayerInventoryModel : MonoBehaviour
         }
     }
 
-    public int GetCurrentFishValue()
+    public int GetCurrentFishAValue()
     {
         return currentFishAValue;
     }
 
-    public void RemoveFish()
+    public int GetCurrentFishBValue()
     {
-        currentTotalFishQuantity = 0;
+        return currentFishBValue;
+    }
+    public int GetCurrentFishCValue()
+    {
+        return currentFishCValue;
+    }
+
+    public void RemoveAllFish()
+    {
+        currentFishAValue = 0;
+        currentFishBValue = 0;
+        currentFishCValue = 0;
+        CalculateTotalFishQuantity();
         view.UpdateCurrentFishText(currentTotalFishQuantity);
+    }
+
+    private void Update()
+    {
+        Debug.Log(currentFishAValue + "A");
+        Debug.Log(currentFishBValue + "B");
+        Debug.Log(currentFishCValue + "C");
     }
 }

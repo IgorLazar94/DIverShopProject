@@ -24,6 +24,13 @@ public class KitchenCard : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ingredientTwoText;
     [SerializeField] private Image ingredientTwoIcon;
 
+    private int requiredFishACount;
+    private int requiredFishBCount;
+    private int requiredFishCCount;
+
+
+
+
     private void Start()
     {
         FillCard();
