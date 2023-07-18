@@ -1452,6 +1452,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentFishText: {fileID: 8080841664030177181}
   maxFishText: {fileID: 8080841663492856135}
+  currentFish: 0
 --- !u!1001 &4024297192515362319
 PrefabInstance:
   m_ObjectHideFlags: 0

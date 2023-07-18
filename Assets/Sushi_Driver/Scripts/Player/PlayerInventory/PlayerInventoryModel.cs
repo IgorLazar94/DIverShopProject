@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerInventoryModel : MonoBehaviour {
+public class PlayerInventoryModel : MonoBehaviour
+{
 
     [SerializeField] private PlayerInventoryView view;
     private int maxFishValue = 0;
-    private int currentFishValue = 0;
+    private int currentTotalFishQuantity;
+    private int currentFishAValue = 0;
+    private int currentFishBValue = 0;
+    private int currentFishCValue = 0;
 
     private void Start()
     {
+        CalculateTotalFishQuantity();
         //maxFishValue = 12; // (!) from GameSettings
         PlayerInventoryPresenter.OnMaxFishChanged.Invoke(12);
     }
@@ -18,14 +23,19 @@ public class PlayerInventoryModel : MonoBehaviour {
     {
         PlayerInventoryPresenter.OnMaxFishChanged += SetMaxFishValue;
         PlayerInventoryPresenter.OnCurrentFishChanged += SetCurrentFishValue;
-        PlayerInventoryPresenter.OnCurrentFishRemoved += RemoveFish;
+        //PlayerInventoryPresenter.OnCurrentFishRemoved += RemoveFish;
     }
 
     private void OnDisable()
     {
         PlayerInventoryPresenter.OnMaxFishChanged -= SetMaxFishValue;
         PlayerInventoryPresenter.OnCurrentFishChanged -= SetCurrentFishValue;
-        PlayerInventoryPresenter.OnCurrentFishRemoved -= RemoveFish;
+        //PlayerInventoryPresenter.OnCurrentFishRemoved -= RemoveFish;
+    }
+
+    private void CalculateTotalFishQuantity()
+    {
+        currentTotalFishQuantity = currentFishAValue + currentFishBValue + currentFishCValue;
     }
 
     public void SetView(PlayerInventoryView view)
@@ -39,22 +49,46 @@ public class PlayerInventoryModel : MonoBehaviour {
         maxFishValue = value;
         view.UpdateMaxFishText(value);
     }
-    private void SetCurrentFishValue(int value)
+    private void SetCurrentFishValue(int value, TypeOfFish typeOfFish)
     {
         //if (currentFishValue + value > maxFishValue) currentFishValue = maxFishValue;
 
-        currentFishValue += value;
-        view.UpdateCurrentFishText(currentFishValue);
+        switch (typeOfFish)
+        {
+            case TypeOfFish.FishA:
+                currentFishAValue += value;
+                break;
+            case TypeOfFish.FishB:
+                currentFishBValue += value;
+                break;
+            case TypeOfFish.FishC:
+                currentFishCValue += value;
+                break;
+            default:
+                Debug.LogWarning("Undefined type Of Fish");
+                break;
+        }
+        CalculateTotalFishQuantity();
+        CheckMaxFish();
+        view.UpdateCurrentFishText(currentTotalFishQuantity);
+    }
+
+    private void CheckMaxFish()
+    {
+        if (currentTotalFishQuantity > maxFishValue)
+        {
+            Debug.Log("Max inventory"); // Action to block fishing
+        }
     }
 
     public int GetCurrentFishValue()
     {
-        return currentFishValue;
+        return currentFishAValue;
     }
 
     public void RemoveFish()
     {
-        currentFishValue = 0;
-        view.UpdateCurrentFishText(currentFishValue);
+        currentTotalFishQuantity = 0;
+        view.UpdateCurrentFishText(currentTotalFishQuantity);
     }
 }

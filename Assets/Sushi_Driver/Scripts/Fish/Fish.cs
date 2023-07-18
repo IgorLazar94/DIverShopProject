@@ -158,7 +158,7 @@ public class Fish : MonoBehaviour
 
     private void PassTheFishToPlayer()
     {
-        PlayerInventoryPresenter.OnCurrentFishChanged?.Invoke(1);
+        PlayerInventoryPresenter.OnCurrentFishChanged?.Invoke(1, typeOfFish);
         Destroy(gameObject);
     }
 }
