@@ -47,3 +47,6 @@ MonoBehaviour:
   <FishA>k__BackingField: {fileID: 4357904950861670614, guid: 0acea3ed71c9ade419c444abd7f6e291, type: 3}
   <FishB>k__BackingField: {fileID: 788868226421246347, guid: 491222850cefb6b47aedf842c3d8bd0e, type: 3}
   <FishC>k__BackingField: {fileID: 7017628878400345731, guid: ea6160cc86a02554e8d2a599b324bc69, type: 3}
+  <FishA_Sprite>k__BackingField: {fileID: 21300000, guid: 8f4488658d5612948beb32d558acf7f5, type: 3}
+  <FishB_Sprite>k__BackingField: {fileID: 21300000, guid: 2ab80e3af9c013a4eb62f7cf8e2bc8f5, type: 3}
+  <FishC_Sprite>k__BackingField: {fileID: 21300000, guid: d75ff9490f2c0a343ba6dffc145305b4, type: 3}

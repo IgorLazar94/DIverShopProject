@@ -47,3 +47,6 @@ MonoBehaviour:
   <FriedFish>k__BackingField: {fileID: 100000, guid: 231c918546ba58e44a0ceb1dae94f713, type: 3}
   <Sandwich>k__BackingField: {fileID: 100000, guid: 5508bdb9c013f1e4d984b01038d007f7, type: 3}
   <Fishburger>k__BackingField: {fileID: 100008, guid: 5a0a6ae0b3b302743abb8c8c0bda6cae, type: 3}
+  <FriedFish_Sprite>k__BackingField: {fileID: 21300000, guid: c41d1a1d512d5da46857f3e5dbbafe83, type: 3}
+  <Sandwich_Sprite>k__BackingField: {fileID: 21300000, guid: d0f1b3782996b174dab9230147c03cbb, type: 3}
+  <Fishburger_Sprite>k__BackingField: {fileID: 21300000, guid: 912fadc9e90c8f14eaf745ed05ddc979, type: 3}
