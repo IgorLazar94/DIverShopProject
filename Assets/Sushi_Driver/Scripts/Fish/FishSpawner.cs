@@ -40,6 +40,7 @@ public class FishSpawner : MonoBehaviour
             yield return new WaitForSeconds(1.0f);
         }
     }
+
     private void AddNewFish()
     {
         var fish = Instantiate(currentFishGameObject, fishContainer);
@@ -97,10 +98,8 @@ public class FishSpawner : MonoBehaviour
 
     private void CheckFishesCount()
     {
-        Debug.Log(fishList.Count + " fish list");
         if (fishList.Count >= maxCountOfFish)
         {
-
             StopSpawnNewFishes();
         }
     }

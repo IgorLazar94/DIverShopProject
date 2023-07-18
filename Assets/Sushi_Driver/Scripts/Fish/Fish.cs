@@ -45,7 +45,7 @@ public class Fish : MonoBehaviour
 
     protected void SwimFromPlayer()
     {
-        Vector3 targetPoint = transform.position + Quaternion.Euler(0, -270f, 0) * randomDirection;
+        Vector3 targetPoint = transform.position /*+ Quaternion.Euler(0, -270f, 0)*//* * randomDirection*/;
         Vector3 direction = (transform.position - playerPos.position).normalized;
         rb.velocity = (direction * runSpeed) * Time.deltaTime;
         transform.LookAt(targetPoint);

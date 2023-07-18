@@ -11,5 +11,6 @@ public class FishCollectionInstaller : MonoInstaller
         var fishInstance = Container.InstantiatePrefabForComponent<FishCollection>(fishCollection, transform);
 
         Container.Bind<FishCollection>().FromInstance(fishCollection).AsSingle().NonLazy();
+        //Container.QueueForInject(fishInstance);
     }
 }
