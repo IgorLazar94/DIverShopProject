@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public struct SandwichRecipe
 {
     public int FishA { get; }

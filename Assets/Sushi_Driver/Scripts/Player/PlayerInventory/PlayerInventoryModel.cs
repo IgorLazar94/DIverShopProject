@@ -12,6 +12,7 @@ public class PlayerInventoryModel : MonoBehaviour
     private int currentFishAValue = 0;
     private int currentFishBValue = 0;
     private int currentFishCValue = 0;
+    private List<Food> foodInHandList = new List<Food>();
 
     private void Start()
     {
@@ -103,4 +104,10 @@ public class PlayerInventoryModel : MonoBehaviour
         CalculateTotalFishQuantity();
         view.UpdateCurrentFishText(currentTotalFishQuantity);
     }
+
+    public void AddNewFoodToPlayerHand(Food food)
+    {
+        foodInHandList.Add(food);
+    }
+
 }

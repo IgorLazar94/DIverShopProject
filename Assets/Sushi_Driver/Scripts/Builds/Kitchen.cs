@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Player;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ public class Kitchen : GenericBuild
     [Inject] private FoodCollection foodCollection;
     [SerializeField] private UIController ui_Controller;
     [SerializeField] private Transform spawnProductPoint;
+    [SerializeField] private Transform foodContainer;
     private int fishAOnKitchen = 0;
     private int fishBOnKitchen = 0;
     private int fishCOnKitchen = 0;
@@ -71,11 +73,11 @@ public class Kitchen : GenericBuild
     {
         var food = ChooseFoodType();
         readyFoodList.Add(food.GetComponent<Food>());
-        food.transform.position = new Vector3(spawnProductPoint.position.x, 
-                                               spawnProductPoint.position.y + (lastProductHeight * 0.8f), 
+        food.transform.position = new Vector3(spawnProductPoint.position.x,
+                                               spawnProductPoint.position.y + (lastProductHeight * 0.8f),
                                                spawnProductPoint.position.z);
+        food.transform.parent = foodContainer;
         lastProductHeight += food.GetComponent<BoxCollider>().bounds.size.y;
-        Debug.Log(lastProductHeight + " lastProductHeight");
     }
 
     private GameObject ChooseFoodType()
@@ -92,5 +94,26 @@ public class Kitchen : GenericBuild
                 Debug.LogWarning("Undefined type of food on kitchen");
                 return null;
         }
+    }
+
+    public void SetFoodForPlayer()
+    {
+        Vector3 defaultSpawnPos = foodContainer.position;
+        foodContainer.DOJump(playerInventory.transform.position, 3f, 1, 0.5f).OnComplete(() => RemoveReadyFood(defaultSpawnPos));
+    }
+
+    private void RemoveReadyFood(Vector3 _defaultSpawnPos)
+    {
+        PlayerAnimatorFXController.OnPlayerTookHands.Invoke();
+        foreach (var food in readyFoodList)
+        {
+            playerInventory.AddNewFoodToPlayerHand(food);
+            float foodHeight = food.transform.position.y;
+            food.transform.parent = playerInventory.transform;
+            food.transform.localPosition = new Vector3(0f, foodHeight + 0.25f, 0.7f);
+        }
+        readyFoodList.Clear();
+        lastProductHeight = 0f;
+        foodContainer.position = _defaultSpawnPos;
     }
 }

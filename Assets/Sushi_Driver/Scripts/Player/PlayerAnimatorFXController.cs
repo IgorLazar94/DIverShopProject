@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ namespace Player
     [RequireComponent(typeof(PlayerStateController))]
     public class PlayerAnimatorFXController : MonoBehaviour
     {
+        public static Action OnPlayerTookHands;
         private Animator animator;
         private PlayerStateController playerStateController;
 
@@ -24,6 +26,7 @@ namespace Player
             Player.PlayerTrigger.onPlayClimbAnim += StartClimbesAnim;
             Player.PlayerTrigger.onTriggerWater += StartDivesAnim;
             Player.PlayerMovementControl.onPlayerStopped += StopRunAnimation;
+            OnPlayerTookHands += EnableBusyHands;
         }
 
         private void OnDisable()
@@ -34,6 +37,7 @@ namespace Player
             Player.PlayerTrigger.onPlayClimbAnim -= StartClimbesAnim;
             Player.PlayerTrigger.onTriggerWater -= StartDivesAnim;
             Player.PlayerMovementControl.onPlayerStopped -= StopRunAnimation;
+            OnPlayerTookHands -= EnableBusyHands;
         }
 
         private void StartRunAnimation(Vector3 direction)

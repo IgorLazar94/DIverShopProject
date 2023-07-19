@@ -12,6 +12,7 @@ public class PlayerInventoryPresenter : MonoBehaviour {
 
     public static Action<int> OnMaxFishChanged;
     public static Action<int, TypeOfFish> OnCurrentFishChanged;
+    public static Action<int> OnCurrentFoodChanged;
     //public static Action OnCurrentFishRemoved;
     public void CreateInventory()
     {

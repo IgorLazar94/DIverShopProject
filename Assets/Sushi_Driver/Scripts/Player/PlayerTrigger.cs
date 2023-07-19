@@ -17,7 +17,11 @@ namespace Player
 
             if (other.gameObject.TryGetComponent(out ReceivePoint receivePoint))
             {
-                CheckTypeOfReceiveBuild(other.gameObject.transform.parent.gameObject, receivePoint);
+                CheckTypeOfReceiveBuild(other.gameObject.transform.parent.gameObject);
+            }
+            if (other.gameObject.TryGetComponent(out ProductPoint productPoint))
+            {
+                CheckTypeOfProductBuild(other.gameObject.transform.parent.gameObject);
             }
 
         }
@@ -47,11 +51,19 @@ namespace Player
             }
         }
 
-        private void CheckTypeOfReceiveBuild(GameObject parentBuild, ReceivePoint receivePoint)
+        private void CheckTypeOfReceiveBuild(GameObject parentBuild)
         {
             if (parentBuild.TryGetComponent(out Kitchen kitchen))
             {
                 kitchen.GetFishFromPlayer();
+            }
+        }
+
+        private void CheckTypeOfProductBuild(GameObject parentBuild)
+        {
+            if (parentBuild.TryGetComponent(out Kitchen kitchen))
+            {
+                kitchen.SetFoodForPlayer();
             }
         }
     }
