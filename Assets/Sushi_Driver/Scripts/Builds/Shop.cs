@@ -69,4 +69,24 @@ public class Shop : GenericBuild
         }
     }
 
+    public void SetProductToCustomer(CustomerBehaviour customer)
+    {
+        if (foodInShop.Count > 0)
+        {
+            Food lastFood = foodInShop[foodInShop.Count - 1];
+            customer.SetFood(lastFood);
+            lastFood.transform.DOMove(customer.transform.position, 0.25f).OnComplete(() => Transaktion(customer, lastFood));
+        }
+        else
+        {
+            customer.NoneFood();
+        }
+    }
+
+    private void Transaktion(CustomerBehaviour customer, Food food)
+    {
+        foodInShop.Remove(food);
+        Destroy(food.gameObject);
+        customer.GiveMoney(food);
+    }
 }

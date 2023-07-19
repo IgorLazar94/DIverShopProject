@@ -11,6 +11,5 @@ public enum TypeOfFood
 
 public class Food : MonoBehaviour
 {
-    [SerializeField] TypeOfFood typeOfFood;
-
+    public TypeOfFood typeOfFood;
 }
