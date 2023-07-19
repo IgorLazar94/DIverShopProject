@@ -13,13 +13,17 @@ public abstract class GenericBuild : MonoBehaviour
 {
     [field: SerializeField] private TypeOfBuild typeOfBuild;
     [field: SerializeField] public PlayerInventoryModel playerInventory { get; private set; }
-    [SerializeField] protected Transform playerPos;
     [SerializeField] protected GameObject receivePoint;
     [SerializeField] protected GameObject productPoint;
+    protected Transform playerPos;
     private bool isPlayerClose = false;
     private bool isPlayerFar = false;
 
-    private void Update()
+    protected virtual void Start()
+    {
+        playerPos = playerInventory.gameObject.transform.parent;
+    }
+    protected virtual void Update()
     {
         CheckPlayerDistance();
     }

@@ -110,4 +110,14 @@ public class PlayerInventoryModel : MonoBehaviour
         foodInHandList.Add(food);
     }
 
+    public List<Food> SetFoodToShop()
+    {
+
+
+
+
+
+        return foodInHandList;
+    }
+
 }

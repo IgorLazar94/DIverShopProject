@@ -57,6 +57,10 @@ namespace Player
             {
                 kitchen.GetFishFromPlayer();
             }
+            if (parentBuild.TryGetComponent(out Shop shop))
+            {
+                shop.GetFoodFromPlayer();
+            }
         }
 
         private void CheckTypeOfProductBuild(GameObject parentBuild)

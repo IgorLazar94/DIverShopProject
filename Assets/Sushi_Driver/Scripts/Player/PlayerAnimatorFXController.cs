@@ -8,7 +8,8 @@ namespace Player
     [RequireComponent(typeof(PlayerStateController))]
     public class PlayerAnimatorFXController : MonoBehaviour
     {
-        public static Action OnPlayerTookHands;
+        public static Action OnPlayerHandsTook;
+        public static Action OnPlayerHandsFree;
         private Animator animator;
         private PlayerStateController playerStateController;
 
@@ -26,7 +27,8 @@ namespace Player
             Player.PlayerTrigger.onPlayClimbAnim += StartClimbesAnim;
             Player.PlayerTrigger.onTriggerWater += StartDivesAnim;
             Player.PlayerMovementControl.onPlayerStopped += StopRunAnimation;
-            OnPlayerTookHands += EnableBusyHands;
+            OnPlayerHandsTook += EnableBusyHands;
+            OnPlayerHandsFree += DisableBusyHands;
         }
 
         private void OnDisable()
@@ -37,7 +39,8 @@ namespace Player
             Player.PlayerTrigger.onPlayClimbAnim -= StartClimbesAnim;
             Player.PlayerTrigger.onTriggerWater -= StartDivesAnim;
             Player.PlayerMovementControl.onPlayerStopped -= StopRunAnimation;
-            OnPlayerTookHands -= EnableBusyHands;
+            OnPlayerHandsTook -= EnableBusyHands;
+            OnPlayerHandsFree -= DisableBusyHands;
         }
 
         private void StartRunAnimation(Vector3 direction)

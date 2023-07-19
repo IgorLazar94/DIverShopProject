@@ -19,8 +19,9 @@ public class Kitchen : GenericBuild
     private List<Food> readyFoodList = new List<Food>();
     private TypeOfFood currentTypeOfFood;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         ui_Controller.SetKitchen(this);
     }
 
@@ -104,7 +105,7 @@ public class Kitchen : GenericBuild
 
     private void RemoveReadyFood(Vector3 _defaultSpawnPos)
     {
-        PlayerAnimatorFXController.OnPlayerTookHands.Invoke();
+        PlayerAnimatorFXController.OnPlayerHandsTook.Invoke();
         foreach (var food in readyFoodList)
         {
             playerInventory.AddNewFoodToPlayerHand(food);
