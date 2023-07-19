@@ -67,9 +67,6 @@ public class KitchenCard : MonoBehaviour
 
     public void SwitchButtonReadyStatus(int fishA, int fishB, int fishC)
     {
-        Debug.Log(fishA + "A");
-        Debug.Log(fishB + "B"); 
-        Debug.Log(fishC + "C");
         if (typeOfCard == TypeOfCard.FriedFish)
         {
             if (fishA >= 2)

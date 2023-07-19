@@ -58,10 +58,10 @@ public class Kitchen : GenericBuild
     public void CookedFishburger()
     {
         currentTypeOfFood = TypeOfFood.Fishburger;
-        FriedFishReceipe friedFishReceipe = new FriedFishReceipe(fishAOnKitchen, fishBOnKitchen, fishCOnKitchen);
-        fishAOnKitchen = friedFishReceipe.CookIngredientOne();
-        fishBOnKitchen = friedFishReceipe.CookIngredientTwo();
-        fishCOnKitchen = friedFishReceipe.CookIngredientThree();
+        FishburgerRecipe fishburgerRecipe = new FishburgerRecipe(fishAOnKitchen, fishBOnKitchen, fishCOnKitchen);
+        fishAOnKitchen = fishburgerRecipe.CookIngredientOne();
+        fishBOnKitchen = fishburgerRecipe.CookIngredientTwo();
+        fishCOnKitchen = fishburgerRecipe.CookIngredientThree();
         ui_Controller.UpdateCurrentFishText(fishAOnKitchen, fishBOnKitchen, fishCOnKitchen);
         CreateFood();
     }
@@ -72,7 +72,7 @@ public class Kitchen : GenericBuild
         var food = ChooseFoodType();
         readyFoodList.Add(food.GetComponent<Food>());
         food.transform.position = new Vector3(spawnProductPoint.position.x, 
-                                               spawnProductPoint.position.y + lastProductHeight, 
+                                               spawnProductPoint.position.y + (lastProductHeight * 0.8f), 
                                                spawnProductPoint.position.z);
         lastProductHeight += food.GetComponent<BoxCollider>().bounds.size.y;
         Debug.Log(lastProductHeight + " lastProductHeight");
