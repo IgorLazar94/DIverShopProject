@@ -2319,6 +2319,34 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 89450973fbb2cb842aad27b20fb54fd1, type: 3}
+    - target: {fileID: 5187520411280189761, guid: 536c4be434a87cb46b3c24ff144f2739, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5187520411280189761, guid: 536c4be434a87cb46b3c24ff144f2739, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5187520411280189761, guid: 536c4be434a87cb46b3c24ff144f2739, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8080841662402656519}
+    - target: {fileID: 5187520411280189761, guid: 536c4be434a87cb46b3c24ff144f2739, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5187520411280189761, guid: 536c4be434a87cb46b3c24ff144f2739, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RequireToCookFish
+      objectReference: {fileID: 0}
+    - target: {fileID: 5187520411280189761, guid: 536c4be434a87cb46b3c24ff144f2739, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5187520411280189761, guid: 536c4be434a87cb46b3c24ff144f2739, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5187520411458332312, guid: 536c4be434a87cb46b3c24ff144f2739, type: 3}
       propertyPath: m_Name
       value: KitchenCard

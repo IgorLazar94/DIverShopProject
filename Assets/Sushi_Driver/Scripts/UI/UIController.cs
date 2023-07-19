@@ -16,6 +16,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI kitchenCurrentCFish;
 
     [SerializeField] private List<KitchenCard> kitchenCards = new List<KitchenCard>();
+    private Kitchen kitchen;
 
 
     private void Start()
@@ -66,7 +67,25 @@ public class UIController : MonoBehaviour
     {
         foreach (var card in kitchenCards)
         {
-            card.SwitchReadyStatus(fishACount, fishBCount, fishCCount);
+            card.SwitchButtonReadyStatus(fishACount, fishBCount, fishCCount);
         }
+    }
+
+    public void SetKitchen(Kitchen _kitchen)
+    {
+        kitchen = _kitchen;
+    }
+
+    public void RequireToCookFoodA()
+    {
+        kitchen.CookedFriedFish();
+    }
+    public void RequireToCookFoodB()
+    {
+        kitchen.CookedSandwich();
+    }
+    public void RequireToCookFoodC()
+    {
+        kitchen.CookedFishburger();
     }
 }

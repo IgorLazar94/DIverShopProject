@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &400000
 Transform:
@@ -59,6 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccb41f7a23bd5bc4fbea46a60bab973e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeOfFood: 0
 --- !u!1 &100002
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,7 +77,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &400002
 Transform:
@@ -203,9 +204,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4934228666077161722}
     m_Modifications:
+    - target: {fileID: 100000, guid: 2549ae6035719b741a0a2f2aa3ee80c4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 2549ae6035719b741a0a2f2aa3ee80c4, type: 3}
       propertyPath: m_Name
       value: Plate_Large
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 2549ae6035719b741a0a2f2aa3ee80c4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 2549ae6035719b741a0a2f2aa3ee80c4, type: 3}
       propertyPath: m_RootOrder

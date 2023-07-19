@@ -65,13 +65,20 @@ public class KitchenCard : MonoBehaviour
         }
     }
 
-    public void SwitchReadyStatus(int fishA, int fishB, int fishC)
+    public void SwitchButtonReadyStatus(int fishA, int fishB, int fishC)
     {
+        Debug.Log(fishA + "A");
+        Debug.Log(fishB + "B"); 
+        Debug.Log(fishC + "C");
         if (typeOfCard == TypeOfCard.FriedFish)
         {
             if (fishA >= 2)
             {
                 ActivateButton();
+            }
+            else
+            {
+                DeactivateButton();
             }
         }
         else if (typeOfCard == TypeOfCard.SandWich)
@@ -80,6 +87,10 @@ public class KitchenCard : MonoBehaviour
             {
                 ActivateButton();
             }
+            else
+            {
+                DeactivateButton();
+            }
         }
         else if (typeOfCard == TypeOfCard.Fishburger)
         {
@@ -87,10 +98,10 @@ public class KitchenCard : MonoBehaviour
             {
                 ActivateButton();
             }
-        }
-        else
-        {
-            DeactivateButton();
+            else
+            {
+                DeactivateButton();
+            }
         }
     }
 

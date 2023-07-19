@@ -161,6 +161,23 @@ public class Fish : MonoBehaviour
         PlayerInventoryPresenter.OnCurrentFishChanged?.Invoke(1, typeOfFish);
         Destroy(gameObject);
     }
+
+    private void Update()
+    {
+        // Debugging
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            PlayerInventoryPresenter.OnCurrentFishChanged?.Invoke(1, TypeOfFish.FishA);
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            PlayerInventoryPresenter.OnCurrentFishChanged?.Invoke(1, TypeOfFish.FishB);
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            PlayerInventoryPresenter.OnCurrentFishChanged?.Invoke(1, TypeOfFish.FishC);
+        }
+    }
 }
 
 
