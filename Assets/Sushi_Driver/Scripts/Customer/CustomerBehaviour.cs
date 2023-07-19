@@ -7,6 +7,7 @@ public class CustomerBehaviour : MonoBehaviour
 {
     [SerializeField] private GameObject happySprite;
     [SerializeField] private GameObject angrySprite;
+    [SerializeField] private GameObject dollarPrefab;
 
     private Vector3 initialPosition;
     private void Start()

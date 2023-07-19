@@ -8,11 +8,11 @@ using UnityEngine.UIElements;
 
 public class Shop : GenericBuild
 {
-    private List<Food> foodInShop = new List<Food>();
     [SerializeField] private Transform foodContainer;
-    [SerializeField] private GameObject testCube;
-
+    [SerializeField] private GameObject dollarContainer;
+    private List<Food> foodInShop = new List<Food>();
     private Vector3 foodPos;
+    // Food pack
     private float offsetXFood = 0.5f;
     private float offsetYFood = 0.2f;
     private float offsetZFood = 0.5f;
@@ -21,6 +21,15 @@ public class Shop : GenericBuild
     private float lengthFood = 0;
     private float heightFood = 0;
     private float widthFood = 0;
+    // DollarPack
+    private float offsetXDollar = 0.5f;
+    private float offsetYDollar = 0.2f;
+    private float offsetZDollar = 0.5f;
+    private int widthLimitDollar = 3;
+    private int lengthLimitDollar = 4;
+    private float lengthDollar = 0;
+    private float heightDollar = 0;
+    private float widthDollar = 0;
     public void GetFoodFromPlayer()
     {
         foodInShop = playerInventory.SetFoodToShop();
@@ -76,6 +85,10 @@ public class Shop : GenericBuild
             Food lastFood = foodInShop[foodInShop.Count - 1];
             customer.SetFood(lastFood);
             lastFood.transform.DOMove(customer.transform.position, 0.25f).OnComplete(() => Transaktion(customer, lastFood));
+            if (foodInShop.Count == 1)
+            {
+                ResetFoodPosition();
+            }
         }
         else
         {
@@ -83,10 +96,22 @@ public class Shop : GenericBuild
         }
     }
 
+    private void ResetFoodPosition()
+    {
+        lengthFood = 0f;
+        widthFood = 0f;
+        heightFood = 0f;
+    }
+
     private void Transaktion(CustomerBehaviour customer, Food food)
     {
         foodInShop.Remove(food);
         Destroy(food.gameObject);
         customer.GiveMoney(food);
+    }
+
+    public void ChooseDollarPos(Transform dollar)
+    {
+
     }
 }
