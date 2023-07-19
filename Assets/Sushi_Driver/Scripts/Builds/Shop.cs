@@ -24,6 +24,7 @@ public class Shop : GenericBuild
     public void GetFoodFromPlayer()
     {
         foodInShop = playerInventory.SetFoodToShop();
+        PlayerLogic.isBusyHands = true;
         float counter = 0.2f;
         foreach (var food in foodInShop)
         {

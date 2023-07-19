@@ -57,7 +57,7 @@ namespace Player
             {
                 kitchen.GetFishFromPlayer();
             }
-            if (parentBuild.TryGetComponent(out Shop shop))
+            if (parentBuild.TryGetComponent(out Shop shop) && PlayerLogic.isBusyHands)
             {
                 shop.GetFoodFromPlayer();
             }

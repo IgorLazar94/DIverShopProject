@@ -99,6 +99,7 @@ public class Kitchen : GenericBuild
 
     public void SetFoodForPlayer()
     {
+        PlayerLogic.isBusyHands = true;
         Vector3 defaultSpawnPos = foodContainer.position;
         foodContainer.DOJump(playerInventory.transform.position, 3f, 1, 0.5f).OnComplete(() => RemoveReadyFood(defaultSpawnPos));
     }
