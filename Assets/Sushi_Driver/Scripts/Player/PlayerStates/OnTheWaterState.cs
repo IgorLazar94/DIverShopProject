@@ -17,7 +17,10 @@ public class OnTheWaterState : GenericState
     {
         base.Enter();
         playerSearchArea = playerStateController.ReturnSearchArea();
-        ActivateSearchArea(true);
+        if (!playerStateController.isFishingBlock)
+        {
+            ActivateSearchArea(true);
+        }
         isInWater = true;
     }
 
@@ -27,7 +30,7 @@ public class OnTheWaterState : GenericState
         isInWater = false;
     }
 
-   
+
 
     public override void Update()
     {

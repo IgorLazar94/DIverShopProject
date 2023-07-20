@@ -32,6 +32,7 @@ public class Kitchen : GenericBuild
         fishCOnKitchen += playerInventory.GetCurrentFishCValue();
         ui_Controller.UpdateCurrentFishText(fishAOnKitchen, fishBOnKitchen, fishCOnKitchen);
         playerInventory.RemoveAllFish();
+        PlayerStateController.OnMaxFishBlocked.Invoke(false);
         PlayerMovementControl.onPlayerStopped.Invoke();
         ui_Controller.ShowKitchenUI();
     }

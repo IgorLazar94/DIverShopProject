@@ -1,3 +1,4 @@
+using Player;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,6 +6,7 @@ using UnityEngine;
 
 public class PlayerInventoryModel : MonoBehaviour
 {
+
 
     [SerializeField] private PlayerInventoryView view;
     private int maxFishValue;
@@ -79,9 +81,10 @@ public class PlayerInventoryModel : MonoBehaviour
 
     private void CheckMaxFish()
     {
-        if (currentTotalFishQuantity > maxFishValue)
+        if (currentTotalFishQuantity >= maxFishValue)
         {
-            Debug.Log("Max inventory"); // Action to block fishing (disable fishing zone)
+            //currentTotalFishQuantity = maxFishValue;
+            PlayerStateController.OnMaxFishBlocked.Invoke(true);
         }
     }
 
