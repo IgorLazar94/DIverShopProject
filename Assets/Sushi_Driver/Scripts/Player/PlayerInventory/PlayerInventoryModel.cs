@@ -13,6 +13,7 @@ public class PlayerInventoryModel : MonoBehaviour
     private int currentFishBValue = 0;
     private int currentFishCValue = 0;
     private List<Food> foodInHandList = new List<Food>();
+    private int dollarsInInventory = 0;
 
     private void Start()
     {
@@ -112,12 +113,11 @@ public class PlayerInventoryModel : MonoBehaviour
 
     public List<Food> SetFoodToShop()
     {
-
-
-
-
-
         return foodInHandList;
     }
 
+    public void SetDollarsToInventory(int value)
+    {
+        dollarsInInventory += value;
+    }
 }

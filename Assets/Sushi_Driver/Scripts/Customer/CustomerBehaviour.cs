@@ -7,14 +7,15 @@ public class CustomerBehaviour : MonoBehaviour
 {
     [SerializeField] private GameObject happySprite;
     [SerializeField] private GameObject angrySprite;
-    [SerializeField] private GameObject dollarPrefab;
 
+    private Shop connectShop;
     private Vector3 initialPosition;
     private void Start()
     {
         initialPosition = transform.position;
         VisitCustomer();
     }
+
 
 
 
@@ -35,6 +36,7 @@ public class CustomerBehaviour : MonoBehaviour
         if (other.transform.parent.TryGetComponent(out Shop shop))
         {
             shop.SetProductToCustomer(this);
+            connectShop = shop;
         }
     }
 
@@ -60,21 +62,12 @@ public class CustomerBehaviour : MonoBehaviour
         angrySprite.transform.LookAt(Camera.main.transform);
     }
 
-    public void GiveMoney(Food food)
+    public void GiveMoney(ushort price)
     {
-        if (food.typeOfFood == TypeOfFood.FriedFish)
+        for (int i = 0; i < price; i++)
         {
-            Debug.Log("fish price");
-        }
-        else if (food.typeOfFood == TypeOfFood.Sandwich)
-        {
-            Debug.Log("Sandwich");
-        }
-        else if (food.typeOfFood == TypeOfFood.Fishburger)
-        {
-            Debug.Log("Fishburger");
+            connectShop.InstantDollar();
         }
     }
-
 }
 

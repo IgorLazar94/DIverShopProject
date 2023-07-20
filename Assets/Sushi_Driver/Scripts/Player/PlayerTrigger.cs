@@ -69,6 +69,10 @@ namespace Player
             {
                 kitchen.SetFoodForPlayer();
             }
+            if (parentBuild.TryGetComponent(out Shop shop))
+            {
+                shop.SetDollarsForPlayer();
+            }
         }
     }
 }
