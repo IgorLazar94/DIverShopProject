@@ -8,9 +8,15 @@ public class PlayerInventoryView : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI currentFishText;
     [SerializeField] private TextMeshProUGUI maxFishText;
+    [SerializeField] private TextMeshProUGUI dollarsCountText;
     private PlayerInventoryModel model;
     private int lastFishCount = 0;
     private int maxFishCount = 0;
+
+    public void SetModel(PlayerInventoryModel _model)
+    {
+        this.model = _model;
+    }
 
     public void UpdateCurrentFishText(int value)
     {
@@ -30,8 +36,9 @@ public class PlayerInventoryView : MonoBehaviour
         maxFishText.text = value.ToString();
     }
 
-    public void SetModel(PlayerInventoryModel _model)
+    public void UpdateDollarsCount(int value)
     {
-        this.model = _model;
+        dollarsCountText.text = value.ToString();
     }
+
 }

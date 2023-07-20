@@ -25,6 +25,7 @@ public class PlayerInventoryModel : MonoBehaviour
     {
         PlayerInventoryPresenter.OnMaxFishChanged += SetMaxFishValue;
         PlayerInventoryPresenter.OnCurrentFishChanged += SetCurrentFishValue;
+        PlayerInventoryPresenter.OnCurrentDollarsChanged += SetDollarsToInventory;
         //PlayerInventoryPresenter.OnCurrentFishRemoved += RemoveFish;
     }
 
@@ -32,6 +33,7 @@ public class PlayerInventoryModel : MonoBehaviour
     {
         PlayerInventoryPresenter.OnMaxFishChanged -= SetMaxFishValue;
         PlayerInventoryPresenter.OnCurrentFishChanged -= SetCurrentFishValue;
+        PlayerInventoryPresenter.OnCurrentDollarsChanged -= SetDollarsToInventory;
         //PlayerInventoryPresenter.OnCurrentFishRemoved -= RemoveFish;
     }
 
@@ -119,5 +121,6 @@ public class PlayerInventoryModel : MonoBehaviour
     public void SetDollarsToInventory(int value)
     {
         dollarsInInventory += value;
+        view.UpdateDollarsCount(dollarsInInventory);
     }
 }

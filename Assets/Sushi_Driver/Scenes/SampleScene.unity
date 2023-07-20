@@ -4365,62 +4365,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4024297193211766490, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4024297193211766490, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4024297193211766490, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 194315130}
-    - target: {fileID: 4024297193211766490, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4024297193211766490, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RequireToCookFoodB
-      objectReference: {fileID: 0}
-    - target: {fileID: 4024297193211766490, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UIController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4024297193211766490, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 4024297194024571967, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4024297194024571967, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4024297194024571967, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 194315130}
-    - target: {fileID: 4024297194024571967, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4024297194024571967, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RequireToCookFoodC
-      objectReference: {fileID: 0}
-    - target: {fileID: 4024297194024571967, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UIController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4024297194024571967, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 4024297194236533735, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4536,34 +4480,6 @@ PrefabInstance:
     - target: {fileID: 8080841662402656520, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
       propertyPath: m_Name
       value: UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 8080841662707734144, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8080841662707734144, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8080841662707734144, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8080841662707734145, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8080841663465617225, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8080841663465617230, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8080841663465617230, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RequireToCookFoodA
       objectReference: {fileID: 0}
     - target: {fileID: 8080841663522879638, guid: 3d3f3801e76c4b0488027704608e54f5, type: 3}
       propertyPath: m_AnchorMax.y

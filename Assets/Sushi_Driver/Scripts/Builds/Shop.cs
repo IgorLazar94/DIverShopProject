@@ -184,7 +184,8 @@ public class Shop : GenericBuild
 
     private void TransitDollarToPlayer(GameObject _dollar)
     {
-        playerInventory.SetDollarsToInventory(1);
+        //playerInventory.SetDollarsToInventory(1);
+        PlayerInventoryPresenter.OnCurrentDollarsChanged.Invoke(1);
         dollarsInShop.Remove(_dollar);
         Destroy(_dollar);
     }

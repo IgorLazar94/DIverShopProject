@@ -112,7 +112,7 @@ public class Kitchen : GenericBuild
             playerInventory.AddNewFoodToPlayerHand(food);
             float foodHeight = food.transform.position.y;
             food.transform.parent = playerInventory.transform;
-            food.transform.localPosition = new Vector3(0f, foodHeight + 0.25f, 0.7f);
+            food.transform.localPosition = new Vector3(0f, foodHeight - 0.75f, 0.7f);
         }
         readyFoodList.Clear();
         lastProductHeight = 0f;
