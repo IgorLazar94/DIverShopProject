@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -24,6 +25,7 @@ namespace Player
 
             UI.JoyStickInput.isHasInputDirection += PlayerMove;
             UI.JoyStickInput.isNotHasInputDirection += ResetSpeed;
+            PlayerTrigger.onTriggerWater += OffsetDiving;
         }
 
         private void OnDisable()
@@ -32,6 +34,7 @@ namespace Player
 
             UI.JoyStickInput.isHasInputDirection -= PlayerMove;
             UI.JoyStickInput.isNotHasInputDirection -= ResetSpeed;
+            PlayerTrigger.onTriggerWater -= OffsetDiving;
         }
 
         private void PlayerMove(Vector3 _inputDirection)
@@ -67,14 +70,10 @@ namespace Player
             isReadyToMove = true;
         }
 
-        //private void Update()
-        //{
-        //    // Debug
-        //    if (Input.GetKeyDown(KeyCode.Space))
-        //    {
-        //        EnableStopPlayer(1.0f);
-        //    }
-        //}
+        private void OffsetDiving()
+        {
+            transform.DOLocalMoveX(-9f, 0.5f);
+        }
     }
 }
 
