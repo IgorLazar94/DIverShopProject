@@ -7,7 +7,7 @@ public class PlayerInventoryModel : MonoBehaviour
 {
 
     [SerializeField] private PlayerInventoryView view;
-    private int maxFishValue = 0;
+    private int maxFishValue;
     private int currentTotalFishQuantity;
     private int currentFishAValue = 0;
     private int currentFishBValue = 0;
@@ -18,8 +18,8 @@ public class PlayerInventoryModel : MonoBehaviour
     private void Start()
     {
         CalculateTotalFishQuantity();
-        //maxFishValue = 12; // (!) from GameSettings
-        PlayerInventoryPresenter.OnMaxFishChanged.Invoke(12);
+        maxFishValue = GameSettings.Instance.GetMaxPlayerFishInventory();
+        PlayerInventoryPresenter.OnMaxFishChanged.Invoke(maxFishValue);
     }
     private void OnEnable()
     {

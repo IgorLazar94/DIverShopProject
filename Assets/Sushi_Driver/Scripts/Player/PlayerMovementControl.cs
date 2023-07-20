@@ -8,7 +8,7 @@ namespace Player
 {
     public class PlayerMovementControl : MonoBehaviour
     {
-        [SerializeField] private float speed = 5f;
+        private float speed;
         private Rigidbody rb;
         private bool isReadyToMove = true;
 
@@ -16,6 +16,7 @@ namespace Player
 
         private void Start()
         {
+            speed = GameSettings.Instance.GetPlayerSpeed();
             rb = GetComponent<Rigidbody>();
         }
 
