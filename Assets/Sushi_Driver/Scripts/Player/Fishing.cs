@@ -5,13 +5,12 @@ using UnityEngine;
 public class Fishing : MonoBehaviour
 {
     [SerializeField] private Transform playerPos;
-    [SerializeField] private PlayerLogic playerLogic;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.TryGetComponent(out Fish fish))
         {
-            fish.StartCoroutine(fish.StartRunFromPlayer(playerPos, playerLogic));
+            fish.StartCoroutine(fish.StartRunFromPlayer(playerPos));
         }
     }
 

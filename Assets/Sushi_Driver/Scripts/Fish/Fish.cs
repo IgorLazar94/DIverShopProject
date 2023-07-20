@@ -22,8 +22,6 @@ public class Fish : MonoBehaviour
     private Sequence sequence;
     private bool isRunFromPlayer;
     private Transform playerPos;
-    private PlayerLogic playerLogic;
-
 
     private void Start()
     {
@@ -108,7 +106,7 @@ public class Fish : MonoBehaviour
         }
     }
 
-    public IEnumerator StartRunFromPlayer(Transform playerPos, PlayerLogic _playerLogic)
+    public IEnumerator StartRunFromPlayer(Transform playerPos)
     {
         isRunFromPlayer = true;
         EnableFishing(true);
@@ -136,7 +134,7 @@ public class Fish : MonoBehaviour
     {
         isRunFromPlayer = false;
         EnableFishing(false);
-        StopCoroutine(StartRunFromPlayer(playerPos, playerLogic));
+        StopCoroutine(StartRunFromPlayer(playerPos));
     }
 
     private void EnableFishing(bool isActivate)
