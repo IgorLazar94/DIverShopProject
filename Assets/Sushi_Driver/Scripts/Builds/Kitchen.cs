@@ -79,6 +79,7 @@ public class Kitchen : GenericBuild
                                                spawnProductPoint.position.z);
         food.transform.parent = foodContainer;
         lastProductHeight += food.GetComponent<BoxCollider>().bounds.size.y;
+        food.GetComponent<BoxCollider>().enabled = false;
     }
 
     private GameObject ChooseFoodType()
