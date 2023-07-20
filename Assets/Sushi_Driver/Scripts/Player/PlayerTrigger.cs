@@ -35,7 +35,7 @@ namespace Player
 
         private void CheckWaterGround(Collider collider)
         {
-            if (collider.CompareTag(TagList.Water))
+            if (collider.CompareTag(TagList.Water) && !OnTheWaterState.isInWater)
             {
                 onTriggerWater.Invoke();
             }
