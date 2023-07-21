@@ -20,7 +20,7 @@ public class Fish : MonoBehaviour
     private Rigidbody rb;
     private Vector3 randomDirection;
     private Sequence sequence;
-    private bool isRunFromPlayer;
+    public bool isRunFromPlayer { get; private set; }
     private Transform playerPos;
 
     private void Start()
