@@ -15,6 +15,7 @@ public class FishSpawner : MonoBehaviour
     //private ushort maxBFish;
     //private ushort maxCFish;
     private bool isReadyToSpawn = true;
+    private bool isSpawning = true;
     private Vector3 spawnPoint;
 
     private void Start()
@@ -29,22 +30,24 @@ public class FishSpawner : MonoBehaviour
     {
         while (true)
         {
-            CheckTypeOfFish();
-            AddNewFish();
-            CalculateNextTypeOfFish();
-            CheckFishesCount();
             if (!isReadyToSpawn)
             {
                 yield break;
             }
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(2.0f);
+            CheckTypeOfFish();
+            AddNewFish();
+            CalculateNextTypeOfFish();
+            CheckFishesCount();
         }
     }
 
     private void AddNewFish()
     {
         var fish = Instantiate(currentFishGameObject, fishContainer);
-        fishList.Add(fish.GetComponent<Fish>());
+        var fishScript = fish.GetComponent<Fish>();
+        fishScript.SetFishSpawner(this);
+        fishList.Add(fishScript);
         SpawnToPosition(fish.transform);
     }
 
@@ -93,6 +96,7 @@ public class FishSpawner : MonoBehaviour
     private void StopSpawnNewFishes()
     {
         isReadyToSpawn = false;
+        isSpawning = false;
         StopCoroutine(SpawnNewFishes());
     }
 
@@ -102,5 +106,17 @@ public class FishSpawner : MonoBehaviour
         {
             StopSpawnNewFishes();
         }
+        else if (fishList.Count < maxCountOfFish && !isSpawning)
+        {
+            isReadyToSpawn = true;
+            isSpawning = true;
+            StartSpawnNewFishes();
+        }
+    }
+
+    public void RemoveFish(Fish fish)
+    {
+        fishList.Remove(fish);
+        CheckFishesCount();
     }
 }

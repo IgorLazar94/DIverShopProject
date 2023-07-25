@@ -20,6 +20,7 @@ public class Fish : MonoBehaviour
     private Rigidbody rb;
     private Vector3 randomDirection;
     private Sequence sequence;
+    private FishSpawner fishSpawner;
     public bool isRunFromPlayer { get; private set; }
     private Transform playerPos;
 
@@ -32,6 +33,11 @@ public class Fish : MonoBehaviour
         sequence = DOTween.Sequence();
         //FistRotation();
         StartCoroutine(ChooseRandomDirection());
+    }
+
+    public void SetFishSpawner(FishSpawner _fishSpawner)
+    {
+        fishSpawner = _fishSpawner;
     }
 
     protected void Swim(Vector3 randomDirection)
@@ -157,6 +163,7 @@ public class Fish : MonoBehaviour
     private void PassTheFishToPlayer()
     {
         PlayerInventoryPresenter.OnCurrentFishChanged?.Invoke(1, typeOfFish);
+        fishSpawner.RemoveFish(this);
         Destroy(gameObject);
     }
 
