@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerFOV : MonoBehaviour
@@ -36,9 +35,42 @@ public class PlayerFOV : MonoBehaviour
     private void LateUpdate()
     {
         DrawFieldOfView();
+        CheckNonVisibleFishg();
     }
 
+    private void CheckNonVisibleFishg()
+    {
+        foreach (Fish fish in visibleFishes.ToArray())
+        {
+            if (fish == null)
+            {
+                visibleFishes.Remove(fish);
+                return;
+            }
 
+            if (!IsFishVisible(fish))
+            {
+                fish.StopRunFromPlayer();
+                visibleFishes.Remove(fish);
+            }
+        }
+    }
+
+    private bool IsFishVisible(Fish fish)
+    {
+        Vector3 dirToFish = (fish.transform.position - transform.position).normalized;
+        if (Vector3.Angle(transform.forward, dirToFish) < viewAngle / 2)
+        {
+            float distanceToFish = Vector3.Distance(transform.position, fish.transform.position);
+            if (!Physics.Raycast(transform.position, dirToFish, distanceToFish, obstacleMask))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private List<Fish> visibleFishes = new List<Fish>();
     private void FindVisibleTarget()
     {
         visibleTargets.Clear();
@@ -63,6 +95,11 @@ public class PlayerFOV : MonoBehaviour
                 if (!Physics.Raycast(transform.position, dirToTarget, distanceToTarget, obstacleMask))
                 {
                     visibleTargets.Add(target);
+                    if (target.TryGetComponent(out Fish fish) && !fish.isRunFromPlayer)
+                    {
+                        visibleFishes.Add(fish);
+                        fish.StartCoroutine(fish.StartRunFromPlayer(transform));
+                    }
                 }
             }
         }
