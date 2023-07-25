@@ -331,5 +331,5 @@ MonoBehaviour:
   typeOfFish: 2
   childSprite: {fileID: 6708607791263253306}
   idleSpeed: 30
-  timeToCatch: 6
+  timeToCatch: 2
   availabilityLevel: 3

@@ -148,7 +148,7 @@ MonoBehaviour:
   typeOfFish: 1
   childSprite: {fileID: 3929667813204499506}
   idleSpeed: 20
-  timeToCatch: 4
+  timeToCatch: 1
   availabilityLevel: 2
 --- !u!1 &3929667812776881194
 GameObject:
