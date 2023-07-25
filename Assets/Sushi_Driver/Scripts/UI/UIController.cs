@@ -22,6 +22,7 @@ public class UIController : MonoBehaviour
     private void Start()
     {
         FillKitchenCardsList();
+        UpdateCurrentFishText(0, 0, 0);
         KitchenPanel.SetActive(false);
     }
 
@@ -60,7 +61,7 @@ public class UIController : MonoBehaviour
         kitchenCurrentAFish.text = " - " + fishACount.ToString();
         kitchenCurrentBFish.text = " - " + fishBCount.ToString();
         kitchenCurrentCFish.text = " - " + fishCCount.ToString();
-        CheckReadyCards(fishACount, fishBCount, fishACount);
+        CheckReadyCards(fishACount, fishBCount, fishCCount);
     }
 
     private void CheckReadyCards(int fishACount, int fishBCount, int fishCCount)

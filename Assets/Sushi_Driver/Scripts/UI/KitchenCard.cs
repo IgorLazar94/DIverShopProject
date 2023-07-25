@@ -30,7 +30,6 @@ public class KitchenCard : MonoBehaviour
     private void Start()
     {
         FillCard();
-        buttonImage.color = Color.green;
     }
 
     private void FillCard()
