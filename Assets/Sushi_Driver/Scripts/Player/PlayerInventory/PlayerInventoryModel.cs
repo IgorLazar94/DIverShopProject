@@ -83,7 +83,7 @@ public class PlayerInventoryModel : MonoBehaviour
     {
         if (currentTotalFishQuantity >= maxFishValue)
         {
-            //currentTotalFishQuantity = maxFishValue;
+            currentTotalFishQuantity = maxFishValue;
             PlayerStateController.OnMaxFishBlocked.Invoke(true);
         }
     }
