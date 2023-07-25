@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class GenericState
 {
-    protected GameObject playerSearchArea;
+    protected PlayerFOV playerFOV;
 
     public virtual void Enter()
     {
@@ -18,7 +18,14 @@ public abstract class GenericState
 
     protected virtual void ActivateSearchArea(bool value)
     {
-        playerSearchArea.SetActive(value);
+        if (!value)
+        {
+            playerFOV.viewRadius = 0;
+        }
+        if (value)
+        {
+            playerFOV.viewRadius = 6.5f;
+        }
     }
 
 }

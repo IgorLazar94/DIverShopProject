@@ -11,7 +11,7 @@ namespace Player
     {
         public static Action<bool> OnMaxFishBlocked;
         public bool isFishingBlock { get; private set; }
-        [SerializeField] private GameObject searchArea;
+        [SerializeField] private PlayerFOV playerFOV;
         [SerializeField] private GameObject maxSprite;
         private PlayerStateMachine playerSM;
         private OnTheGroundState onTheGroundState;
@@ -59,9 +59,9 @@ namespace Player
             playerSM.ChangeState(onTheWaterState);
         }
 
-        public GameObject ReturnSearchArea()
+        public PlayerFOV ReturnSearchArea()
         {
-            return searchArea;
+            return playerFOV;
         }
 
         private void MaxFishBlockedFishing(bool isBlock)
@@ -70,12 +70,11 @@ namespace Player
             {
                 isFishingBlock = true;
                 maxSprite.transform.DOScale(Vector3.one, 0.5f).OnComplete(() => ShakingMaxSprite());
-                searchArea.transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => searchArea.SetActive(false));
+                playerFOV.viewRadius = 0;
             } else
             {
                 isFishingBlock = false;
                 maxSprite.transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => maxSprite.SetActive(false));
-                searchArea.transform.DOScale(Vector3.one, 0.25f);
             }
         }
 

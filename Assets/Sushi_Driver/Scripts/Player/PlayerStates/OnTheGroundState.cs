@@ -14,7 +14,7 @@ public class OnTheGroundState : GenericState
     public override void Enter()
     {
         base.Enter();
-        playerSearchArea = playerStateController.ReturnSearchArea();
+        playerFOV = playerStateController.ReturnSearchArea();
         ActivateSearchArea(false);
     }
 

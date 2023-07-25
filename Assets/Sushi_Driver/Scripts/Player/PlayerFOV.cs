@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerFOV : MonoBehaviour
 {
-    public float viewRadius;
+    public float viewRadius { get; set; } 
     [Range(0, 360)] public float viewAngle;
     public LayerMask targetMask;
     public LayerMask obstacleMask;
@@ -23,6 +23,17 @@ public class PlayerFOV : MonoBehaviour
         viewMeshFilter.mesh = viewMesh;
         StartCoroutine(FindTargetsWithDelay(0.25f));
     }
+
+    public void EnableView()
+    {
+        viewMeshFilter.gameObject.SetActive(true);
+    }
+
+    public void DisableView()
+    {
+        viewMeshFilter.gameObject.SetActive(false);
+    }
+
     private IEnumerator FindTargetsWithDelay(float delay)
     {
         while (true)

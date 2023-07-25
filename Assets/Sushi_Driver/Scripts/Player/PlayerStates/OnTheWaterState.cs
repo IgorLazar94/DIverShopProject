@@ -16,7 +16,7 @@ public class OnTheWaterState : GenericState
     public override void Enter()
     {
         base.Enter();
-        playerSearchArea = playerStateController.ReturnSearchArea();
+        playerFOV = playerStateController.ReturnSearchArea();
         if (!playerStateController.isFishingBlock)
         {
             ActivateSearchArea(true);
