@@ -47,8 +47,14 @@ public class FishSpawner : MonoBehaviour
         var fish = Instantiate(currentFishGameObject, fishContainer);
         var fishScript = fish.GetComponent<Fish>();
         fishScript.SetFishSpawner(this);
+        CheckTutorialPhase(fishScript);
         fishList.Add(fishScript);
         SpawnToPosition(fish.transform);
+    }
+
+    private void CheckTutorialPhase(Fish _fish)
+    {
+        TutorialController.OnAddNewFishA?.Invoke(_fish);
     }
 
     private void CheckTypeOfFish()

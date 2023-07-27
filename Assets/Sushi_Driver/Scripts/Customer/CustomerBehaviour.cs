@@ -16,11 +16,22 @@ public class CustomerBehaviour : MonoBehaviour
     private Animator customerAnimator;
     private CustomerController customerController;
     private float spawnTime;
+    private bool isFindShop = false;
     private void Start()
     {
         customerAnimator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         SetDestination(shopPoint.position);
+        StartCoroutine(CheckShop());
+    }
+
+    private IEnumerator CheckShop()
+    {
+        yield return new WaitForSeconds(6.5f);
+        if (!isFindShop)
+        {
+            MoveToExit();
+        }
     }
 
     public void SetSpawnTime(float _spawnTime)
@@ -34,6 +45,7 @@ public class CustomerBehaviour : MonoBehaviour
         {
             shop.SetProductToCustomer(this);
             connectShop = shop;
+            isFindShop = true;
         }
     }
 
