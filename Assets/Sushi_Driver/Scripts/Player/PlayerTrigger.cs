@@ -23,6 +23,10 @@ namespace Player
             {
                 CheckTypeOfProductBuild(other.gameObject.transform.parent.gameObject);
             }
+            if (other.gameObject.TryGetComponent(out BuyingZone buyingZone))
+            {
+                buyingZone.CheckPlayerMoney();
+            }
 
         }
         private void OnTriggerExit(Collider other)

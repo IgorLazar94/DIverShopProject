@@ -15,10 +15,12 @@ public class PlayerInventoryModel : MonoBehaviour
     private int currentFishBValue = 0;
     private int currentFishCValue = 0;
     private List<Food> foodInHandList = new List<Food>();
-    private int dollarsInInventory = 0;
+    public static int dollarsInInventory { get; private set; }
+    private int defaultDollarsInInventory = 200; // GameSettings
 
     private void Start()
     {
+        PlayerInventoryPresenter.OnCurrentDollarsChanged.Invoke(defaultDollarsInInventory);
         CalculateTotalFishQuantity();
         maxFishValue = GameSettings.Instance.GetMaxPlayerFishInventory();
         PlayerInventoryPresenter.OnMaxFishChanged.Invoke(maxFishValue);
