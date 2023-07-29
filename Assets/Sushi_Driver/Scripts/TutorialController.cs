@@ -1,18 +1,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TutorialController : MonoBehaviour
 {
-    [SerializeField] private Transform PlayerPos;
-    [SerializeField] private SpriteRenderer pointerSprite;
-    private Quaternion defaultSpriteRotation;
-    [SerializeField] private Transform testCube;
     public static Action OnNextTutorialStep;
     public static Action<Fish> OnAddNewFishA;
+    [SerializeField] private Transform playerPos;
+    [SerializeField] private SpriteRenderer pointerSprite;
+    [SerializeField] private Transform kitchenBuyingZone;
+    [SerializeField] private Transform shopBuyingZone;
+    [SerializeField] private UIController uIController;
+    private Vector3 kitchenPosition;
+    private Vector3 shopPosition;
+    private List<BuyingZone> BuyingZones = new List<BuyingZone>();
+    private BuyingZone[] buyingZones;
+    private Quaternion defaultSpriteRotation;
     private Fish targetFish;
-    private int tutorialPhase;
+    public static int tutorialPhase { get; private set; }
     private const string tutorialKey = "TutorialCompleted";
 
     private void OnEnable()
@@ -29,7 +36,11 @@ public class TutorialController : MonoBehaviour
 
     private void Start()
     {
-        defaultSpriteRotation = pointerSprite.transform.rotation;
+        CheckTutorialComplete();
+    }
+
+    private void CheckTutorialComplete()
+    {
         bool tutorialCompleted = PlayerPrefs.GetInt(tutorialKey, 0) == 1;
         if (tutorialCompleted)
         {
@@ -37,21 +48,44 @@ public class TutorialController : MonoBehaviour
         }
         else
         {
-            Debug.Log("Init tutorial");
             tutorialPhase = 1;
             CheckTutorialPhase();
+            kitchenPosition = kitchenBuyingZone.position;
+            shopPosition = shopBuyingZone.position;
+            defaultSpriteRotation = pointerSprite.transform.rotation;
         }
+    }
+
+    private void DiactivateBuyingZones()
+    {
+        BuyingZones = FindObjectsOfType<BuyingZone>().ToList();
+        BuyingZones.ForEach(zone =>
+            zone.GetComponent<Collider>().enabled = false);
     }
 
     private void FixedUpdate()
     {
-        pointerSprite.transform.position = PlayerPos.position;
+        pointerSprite.transform.position = playerPos.position;
         if (tutorialPhase == 1 && targetFish != null)
         {
-            Debug.Log(targetFish + "look at targetFish");
-            //Vector3 direction = (testCube.position - transform.position);
-            pointerSprite.transform.LookAt(testCube);
+            ChooseTargetForPointer(targetFish.transform.position);
         }
+        else if (tutorialPhase == 2)
+        {
+            ChooseTargetForPointer(kitchenPosition);
+        }
+        else if (tutorialPhase == 3)
+        {
+            ChooseTargetForPointer(shopPosition);
+        }
+    }
+
+    private void ChooseTargetForPointer(Vector3 targetPos)
+    {
+        Vector3 directionToTarget = targetPos - pointerSprite.transform.position;
+        Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+        targetRotation *= defaultSpriteRotation;
+        pointerSprite.transform.rotation = Quaternion.Slerp(pointerSprite.transform.rotation, targetRotation, 10.0f * Time.deltaTime);
     }
 
     private void AddFish(Fish fish)
@@ -60,7 +94,7 @@ public class TutorialController : MonoBehaviour
         //if (targetFish != null)
         //{
         //    Debug.Log("2");
-            targetFish = fish;
+        targetFish = fish;
         //} else
         //{
         //    return;
@@ -80,6 +114,9 @@ public class TutorialController : MonoBehaviour
             case 3:
                 ThirdStep();
                 break;
+            case 4:
+                FourthStep();
+                break;
             default:
                 break;
         }
@@ -87,17 +124,36 @@ public class TutorialController : MonoBehaviour
 
     private void FirstStep()
     {
-
+        string message = "Need to catch fish";
+        uIController.ShowTutorialMessage(message);
+        DiactivateBuyingZones();
     }
 
     private void SecondStep()
     {
+        string message = "Buy a kitchen and cook fish";
+        uIController.ShowTutorialMessage(message);
 
+        kitchenBuyingZone.GetComponent<BoxCollider>().enabled = true;
+        BuyingZones.Remove(kitchenBuyingZone.GetComponent<BuyingZone>());
     }
 
     private void ThirdStep()
     {
-        MarkTutorialCompleted();
+        string message = "Take the fish, buy a store and sell fish";
+        uIController.ShowTutorialMessage(message);
+
+        shopBuyingZone.GetComponent<BoxCollider>().enabled = true;
+        BuyingZones.Remove(shopBuyingZone.GetComponent<BuyingZone>());
+    }
+
+    private void FourthStep()
+    {
+        string message = "Now you can grow your business";
+        uIController.ShowTutorialMessage(message);
+
+        Invoke(nameof(MarkTutorialCompleted), 2.5f);
+        //MarkTutorialCompleted();
     }
 
     public void MarkTutorialCompleted()
@@ -109,7 +165,7 @@ public class TutorialController : MonoBehaviour
 
     private void UpdateTutorialLevel()
     {
-        Debug.Log(tutorialPhase + " tutorialPhase");
+        Debug.Log(tutorialPhase + " tutorialPhase Update!");
         tutorialPhase += 1;
         CheckTutorialPhase();
     }

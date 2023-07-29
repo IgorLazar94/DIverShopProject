@@ -17,9 +17,12 @@ public class PlayerInventoryModel : MonoBehaviour
     private List<Food> foodInHandList = new List<Food>();
     public static int dollarsInInventory { get; private set; }
     private int defaultDollarsInInventory = 200; // GameSettings
+    private TutorialController tutorial;
+    private bool isActiveTutorial = false;
 
     private void Start()
     {
+        CheckTutorial();
         PlayerInventoryPresenter.OnCurrentDollarsChanged.Invoke(defaultDollarsInInventory);
         CalculateTotalFishQuantity();
         maxFishValue = GameSettings.Instance.GetMaxPlayerFishInventory();
@@ -41,9 +44,22 @@ public class PlayerInventoryModel : MonoBehaviour
         //PlayerInventoryPresenter.OnCurrentFishRemoved -= RemoveFish;
     }
 
+    private void CheckTutorial()
+    {
+        tutorial = FindObjectOfType<TutorialController>();
+        if (tutorial != null)
+        {
+            isActiveTutorial = true;
+        }
+    }
+
     private void CalculateTotalFishQuantity()
     {
         currentTotalFishQuantity = currentFishAValue + currentFishBValue + currentFishCValue;
+        if (isActiveTutorial && TutorialController.tutorialPhase == 1 && currentTotalFishQuantity >= 3)
+        {
+            TutorialController.OnNextTutorialStep.Invoke();
+        }
     }
 
     public void SetView(PlayerInventoryView view)

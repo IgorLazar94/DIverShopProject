@@ -16,6 +16,8 @@ public class Shop : GenericBuild
     private Vector3 foodPos;
     private ushort currentPrice;
     private Transform currentCustomer;
+    private TutorialController tutorial;
+    private bool isActiveTutorial = false;
     // Food pack
     private float offsetXFood = 0.5f;
     private float offsetYFood = 0.2f;
@@ -38,6 +40,13 @@ public class Shop : GenericBuild
     private ushort friedFishPrice = 5;
     private ushort sandwichPrice = 10;
     private ushort fishburgerPrice = 15;
+
+    protected override void Start()
+    {
+        base.Start();
+        CheckTutorial();
+    }
+
     public void GetFoodFromPlayer()
     {
         foodInShop = playerInventory.SetFoodToShop();
@@ -52,6 +61,19 @@ public class Shop : GenericBuild
             CalculateNewPosition();
         }
         PlayerAnimatorFXController.OnPlayerHandsFree.Invoke();
+        if (isActiveTutorial && TutorialController.tutorialPhase == 3)
+        {
+            TutorialController.OnNextTutorialStep.Invoke();
+        }
+    }
+
+    private void CheckTutorial()
+    {
+        tutorial = FindObjectOfType<TutorialController>();
+        if (tutorial != null)
+        {
+            isActiveTutorial = true;
+        }
     }
 
     protected override void Update()

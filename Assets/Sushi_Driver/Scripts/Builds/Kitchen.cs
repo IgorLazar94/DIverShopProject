@@ -18,11 +18,14 @@ public class Kitchen : GenericBuild
     private float lastProductHeight = 0;
     private List<Food> readyFoodList = new List<Food>();
     private TypeOfFood currentTypeOfFood;
+    private TutorialController tutorial;
+    private bool isActiveTutorial = false;
 
     protected override void Start()
     {
         base.Start();
         ui_Controller.SetKitchen(this);
+        CheckTutorial();
     }
 
     public void GetFishFromPlayer()
@@ -37,6 +40,15 @@ public class Kitchen : GenericBuild
         ui_Controller.ShowKitchenUI();
     }
 
+    private void CheckTutorial()
+    {
+        tutorial = FindObjectOfType<TutorialController>();
+        if (tutorial != null)
+        {
+            isActiveTutorial = true;
+        }
+    }
+
     public void CookedFriedFish()
     {
         currentTypeOfFood = TypeOfFood.FriedFish;
@@ -46,7 +58,10 @@ public class Kitchen : GenericBuild
         fishCOnKitchen = friedFishReceipe.CookIngredientThree();
         ui_Controller.UpdateCurrentFishText(fishAOnKitchen, fishBOnKitchen, fishCOnKitchen);
         CreateFood();
+
+        
     }
+
 
     public void CookedSandwich()
     {
@@ -81,6 +96,10 @@ public class Kitchen : GenericBuild
         food.transform.parent = foodContainer;
         lastProductHeight += food.GetComponent<BoxCollider>().bounds.size.y;
         food.GetComponent<BoxCollider>().enabled = false;
+        if (isActiveTutorial && TutorialController.tutorialPhase == 2)
+        {
+            TutorialController.OnNextTutorialStep.Invoke();
+        }
     }
 
     private GameObject ChooseFoodType()

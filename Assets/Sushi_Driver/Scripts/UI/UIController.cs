@@ -15,6 +15,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI kitchenCurrentBFish;
     [SerializeField] private TextMeshProUGUI kitchenCurrentCFish;
 
+    [SerializeField] private TextMeshProUGUI tutorialText;
     [SerializeField] private List<KitchenCard> kitchenCards = new List<KitchenCard>();
     private Kitchen kitchen;
 
@@ -24,6 +25,11 @@ public class UIController : MonoBehaviour
         FillKitchenCardsList();
         UpdateCurrentFishText(0, 0, 0);
         KitchenPanel.SetActive(false);
+    }
+
+    private void HideTutorialText()
+    {
+        tutorialText.rectTransform.DOScale(Vector3.zero, 0.25f).OnComplete(() => tutorialText.gameObject.SetActive(false));
     }
 
     private void FillKitchenCardsList()
@@ -89,4 +95,25 @@ public class UIController : MonoBehaviour
     {
         kitchen.CookedFishburger();
     }
+
+    public void ShowTutorialMessage(string message)
+    {
+        tutorialText.text = message;
+        tutorialText.gameObject.SetActive(true);
+
+        Sequence tutorialSequence = DOTween.Sequence();
+
+        tutorialSequence.Append(tutorialText.rectTransform.DOScale(Vector3.one, 0.5f)).SetEase(Ease.InQuint);
+        tutorialSequence.AppendInterval(2.5f);
+        tutorialSequence.AppendCallback(HideTutorialText);
+    }
+
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Tab))
+    //    {
+    //        ShowTutorialMessage("Append esquense");
+    //    }
+    //}
+
 }
