@@ -149,7 +149,7 @@ public class TutorialController : MonoBehaviour
 
     private void FourthStep()
     {
-        string message = "Now you can grow your business";
+        string message = "Now buyers will buy food, and you can develop your business";
         uIController.ShowTutorialMessage(message);
 
         Invoke(nameof(MarkTutorialCompleted), 2.5f);
