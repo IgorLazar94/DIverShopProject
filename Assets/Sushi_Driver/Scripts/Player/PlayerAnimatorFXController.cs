@@ -11,12 +11,12 @@ namespace Player
         public static Action OnPlayerHandsTook;
         public static Action OnPlayerHandsFree;
         private Animator animator;
-        private PlayerStateController playerStateController;
+        private ParticleSystem rippleSplashFX;
 
         private void Start()
         {
+            rippleSplashFX = GetComponentInChildren<ParticleSystem>();
             animator = GetComponent<Animator>();
-            playerStateController = GetComponent<PlayerStateController>();
         }
 
         private void OnEnable()
@@ -79,6 +79,12 @@ namespace Player
         private void StartDivesAnim()
         {
             animator.SetTrigger(AnimParameters.Dives);
+            Invoke(nameof(PlayRippleFX), 0.85f);
+        }
+
+        private void PlayRippleFX()
+        {
+            rippleSplashFX.Play();
         }
 
 
