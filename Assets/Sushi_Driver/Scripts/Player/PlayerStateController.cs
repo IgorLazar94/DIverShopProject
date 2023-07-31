@@ -12,10 +12,12 @@ namespace Player
         public static Action<bool> OnMaxFishBlocked;
         public bool isFishingBlock { get; private set; }
         [SerializeField] private PlayerFOV playerFOV;
-        [SerializeField] private GameObject maxSprite;
+        [SerializeField] private GameObject maxText;
         private PlayerStateMachine playerSM;
         private OnTheGroundState onTheGroundState;
         private OnTheWaterState onTheWaterState;
+        private RectTransform textRectTransfrom;
+        private Transform mainCameraTransform;
 
         private void Start()
         {
@@ -23,6 +25,9 @@ namespace Player
             onTheGroundState = new OnTheGroundState(this);
             onTheWaterState = new OnTheWaterState(this);
             playerSM.Initialize(new OnTheGroundState(this));
+
+            textRectTransfrom = maxText.GetComponent<RectTransform>();
+            mainCameraTransform = Camera.main.transform;
         }
 
         private void OnEnable()
@@ -44,7 +49,9 @@ namespace Player
             playerSM.CurrentState.Update();
             if (isFishingBlock)
             {
-                maxSprite.transform.LookAt(Camera.main.transform);
+                Vector3 toCamera = mainCameraTransform.position - textRectTransfrom.position;
+                Quaternion lookRotation = Quaternion.LookRotation(-toCamera, mainCameraTransform.up);
+                textRectTransfrom.rotation = lookRotation;
             }
         }
 
@@ -69,19 +76,19 @@ namespace Player
             if (isBlock)
             {
                 isFishingBlock = true;
-                maxSprite.transform.DOScale(Vector3.one, 0.5f).OnComplete(() => ShakingMaxSprite());
+                maxText.transform.DOScale(Vector3.one, 0.5f).OnComplete(() => ShakingMaxText());
                 playerFOV.viewRadius = 0;
             } else
             {
                 isFishingBlock = false;
-                maxSprite.transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => maxSprite.SetActive(false));
+                maxText.transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => maxText.SetActive(false));
             }
         }
 
-        private void ShakingMaxSprite()
+        private void ShakingMaxText()
         {
-            maxSprite.SetActive(true);
-            maxSprite.transform.DOShakeScale(1f, 1, 2).SetLoops(-1).SetEase(Ease.InBounce);
+            maxText.SetActive(true);
+            maxText.transform.DOShakeScale(1f, 0.5f, 1).SetLoops(-1).SetEase(Ease.InBounce);
         }
     }
 }
