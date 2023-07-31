@@ -21,7 +21,7 @@ public class PlayerInventoryPresenter : MonoBehaviour {
         view = new PlayerInventoryView();
 
         model.SetView(view);
-        view.SetModel(model);
+        //view.SetModel(model);
     }
 
 }

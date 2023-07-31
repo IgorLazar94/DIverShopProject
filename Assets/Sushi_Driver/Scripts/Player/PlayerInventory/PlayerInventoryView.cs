@@ -9,14 +9,14 @@ public class PlayerInventoryView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentFishText;
     [SerializeField] private TextMeshProUGUI maxFishText;
     [SerializeField] private TextMeshProUGUI dollarsCountText;
-    private PlayerInventoryModel model;
-    private int lastFishCount = 0;
-    private int maxFishCount = 0;
+    //private PlayerInventoryModel model;
+    //private int lastFishCount = 0;
+    //private int maxFishCount = 0;
 
-    public void SetModel(PlayerInventoryModel _model)
-    {
-        this.model = _model;
-    }
+    //public void SetModel(PlayerInventoryModel _model)
+    //{
+    //    this.model = _model;
+    //}
 
     public void UpdateCurrentFishText(int value)
     {
