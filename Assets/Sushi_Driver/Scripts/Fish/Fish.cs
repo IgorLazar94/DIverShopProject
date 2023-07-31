@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public enum TypeOfFish
 {
@@ -11,28 +12,34 @@ public enum TypeOfFish
 }
 public class Fish : MonoBehaviour
 {
+    public bool isRunFromPlayer { get; private set; }
     [SerializeField] private TypeOfFish typeOfFish;
-    [SerializeField] private FishSpriteController childSprite;
+    //[SerializeField] private FishSpriteController childSprite;
     [SerializeField] private float idleSpeed;
     [SerializeField] private float timeToCatch;
     [SerializeField] private float availabilityLevel;
+    [SerializeField] private Image emptyImage;
+    [SerializeField] private GameObject fishCanvas;
     private float runSpeed;
     private Rigidbody rb;
     private Vector3 randomDirection;
     private Sequence sequence;
     private FishSpawner fishSpawner;
-    public bool isRunFromPlayer { get; private set; }
     private Transform playerPos;
     private Outline outline;
+    private Transform mainCameraTransform;
+    private Tween fillTween;
 
     private void Start()
     {
+        mainCameraTransform = Camera.main.transform;
         runSpeed = idleSpeed * 3f;
         isRunFromPlayer = false;
         outline = GetComponent<Outline>();
         rb = GetComponent<Rigidbody>();
         ActivateOutline(false);
-        childSprite.gameObject.SetActive(false);
+        EnableFishBar(false);
+        //childSprite.gameObject.SetActive(false);
         sequence = DOTween.Sequence();
         //FistRotation();
         StartCoroutine(ChooseRandomDirection());
@@ -57,7 +64,7 @@ public class Fish : MonoBehaviour
 
     protected void SwimFromPlayer()
     {
-        Vector3 targetPoint = transform.position /*+ Quaternion.Euler(0, -270f, 0)*//* * randomDirection*/;
+        Vector3 targetPoint = transform.position + Quaternion.Euler(0, -270f, 0) * randomDirection;
         Vector3 direction = (transform.position - playerPos.position).normalized;
         rb.velocity = (direction * runSpeed) * Time.deltaTime;
         transform.LookAt(targetPoint);
@@ -89,9 +96,22 @@ public class Fish : MonoBehaviour
         }
         else
         {
+            RotateFishBarToCamera();
             CheckPlayerDistance(playerPos);
             SwimFromPlayer();
         }
+    }
+
+    private void RotateFishBarToCamera()
+    {
+        Vector3 toCamera = mainCameraTransform.position - fishCanvas.transform.position;
+        Quaternion lookRotation = Quaternion.LookRotation(-toCamera, mainCameraTransform.up);
+        fishCanvas.transform.rotation = lookRotation;
+    }
+
+    private void EnableFishBar(bool value)
+    {
+        emptyImage.transform.parent.gameObject.SetActive(value);
     }
 
     private void FistRotation()
@@ -150,22 +170,31 @@ public class Fish : MonoBehaviour
         EnableFishing(false);
         StopCoroutine(StartRunFromPlayer(playerPos));
     }
-
     private void EnableFishing(bool isActivate)
     {
-        childSprite.gameObject.SetActive(isActivate);
+        //childSprite.gameObject.SetActive(isActivate);
         ActivateOutline(isActivate);
+        EnableFishBar(isActivate);
         if (isActivate)
         {
-            childSprite.FishingStartTimer(timeToCatch, this);
-        } else
+            fillTween = DOTween.To(() => emptyImage.fillAmount, 
+                                   v => emptyImage.fillAmount = v, 
+                                   1f, 
+                                   timeToCatch)
+                                   .OnComplete(() => FishCaught());
+            //childSprite.FishingStartTimer(timeToCatch, this);
+        }
+        else
         {
-            childSprite.FishingStopTimer();
+            emptyImage.fillAmount = 0;
+            fillTween?.Kill();
+            //childSprite.FishingStopTimer();
         }
     }
 
     public void FishCaught()
     {
+        EnableFishBar(false);
         transform.DOJump(playerPos.position, 1f, 1, 0.3f).OnComplete(() => PassTheFishToPlayer());
     }
 
