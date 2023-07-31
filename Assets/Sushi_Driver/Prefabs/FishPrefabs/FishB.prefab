@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8165011741683505492}
   - component: {fileID: 3897465535349202069}
   - component: {fileID: 8662169143938864193}
+  - component: {fileID: 4982230001692929175}
   m_Layer: 7
   m_Name: FishB
   m_TagString: Untagged
@@ -150,6 +151,24 @@ MonoBehaviour:
   idleSpeed: 40
   timeToCatch: 1
   availabilityLevel: 2
+--- !u!114 &4982230001692929175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788868226421246347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &3929667812776881194
 GameObject:
   m_ObjectHideFlags: 0

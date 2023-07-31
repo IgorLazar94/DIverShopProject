@@ -23,16 +23,24 @@ public class Fish : MonoBehaviour
     private FishSpawner fishSpawner;
     public bool isRunFromPlayer { get; private set; }
     private Transform playerPos;
+    private Outline outline;
 
     private void Start()
     {
         runSpeed = idleSpeed * 3f;
         isRunFromPlayer = false;
+        outline = GetComponent<Outline>();
         rb = GetComponent<Rigidbody>();
+        ActivateOutline(false);
         childSprite.gameObject.SetActive(false);
         sequence = DOTween.Sequence();
         //FistRotation();
         StartCoroutine(ChooseRandomDirection());
+    }
+
+    private void ActivateOutline(bool value)
+    {
+        outline.enabled = value;
     }
 
     public void SetFishSpawner(FishSpawner _fishSpawner)
@@ -146,6 +154,7 @@ public class Fish : MonoBehaviour
     private void EnableFishing(bool isActivate)
     {
         childSprite.gameObject.SetActive(isActivate);
+        ActivateOutline(isActivate);
         if (isActivate)
         {
             childSprite.FishingStartTimer(timeToCatch, this);
