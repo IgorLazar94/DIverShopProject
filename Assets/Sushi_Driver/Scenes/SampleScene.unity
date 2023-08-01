@@ -7224,6 +7224,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 91171811, guid: 038e2e5e6bfd9964d94aa9d159b1a40b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 91171811, guid: 038e2e5e6bfd9964d94aa9d159b1a40b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 91171811, guid: 038e2e5e6bfd9964d94aa9d159b1a40b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 91171811, guid: 038e2e5e6bfd9964d94aa9d159b1a40b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 91171811, guid: 038e2e5e6bfd9964d94aa9d159b1a40b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 91171811, guid: 038e2e5e6bfd9964d94aa9d159b1a40b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 91171813, guid: 038e2e5e6bfd9964d94aa9d159b1a40b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
