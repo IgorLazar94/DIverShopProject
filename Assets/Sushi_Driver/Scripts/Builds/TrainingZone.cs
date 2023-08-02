@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class TrainingZone : GenericBuild
 {
+    [SerializeField] private UIController uIController;
     public void Enter()
     {
-        Debug.Log("Enter");
+        uIController.ShowTrainingPanel();
     }
-    private void Exit()
+
+    public void Exit()
     {
-        Debug.Log("Exit");
+        uIController.HideTrainingPanel();
     }
 }

@@ -17,15 +17,19 @@ public class UIController : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI tutorialText;
     [SerializeField] private List<KitchenCard> kitchenCards = new List<KitchenCard>();
+    private List<Parameter> parameters = new List<Parameter>();
     private Kitchen kitchen;
 
     [SerializeField] private GameObject debugPanel;
+    [SerializeField] private GameObject trainingPanel;
 
     private void Start()
     {
         FillKitchenCardsList();
+        FillParameters();
         UpdateCurrentFishText(0, 0, 0);
         KitchenPanel.SetActive(false);
+        trainingPanel.SetActive(false);
     }
 
     private void OnEnable()
@@ -48,6 +52,15 @@ public class UIController : MonoBehaviour
     private void FillKitchenCardsList()
     {
         kitchenCards = gameObject.GetComponentsInChildren<KitchenCard>().ToList();
+    }
+
+    private void FillParameters()
+    {
+        parameters = gameObject.GetComponentsInChildren<Parameter>().ToList();
+        //foreach (var parameter in parameters)
+        //{
+        //    parameter.SetUIParentObject(this);
+        //}
     }
 
     public void ShowKitchenUI()
@@ -145,6 +158,26 @@ public class UIController : MonoBehaviour
         debugPanel.SetActive(false);
     }
 
+    public void ShowTrainingPanel()
+    {
+        HidePanel(InputPanel);
+        ShowPanel(trainingPanel);
+        CheckTrainingButtonsActive();
+    }
+
+    public void CheckTrainingButtonsActive()
+    {
+        foreach (var parameter in parameters)
+        {
+            parameter.CheckReadyUpdateButton();
+        }
+    }
+
+    public void HideTrainingPanel()
+    {
+        HidePanel(trainingPanel);
+        ShowPanel(InputPanel);
+    }
     
 
 }
