@@ -15,7 +15,7 @@ public class KitchenCard : MonoBehaviour
 {
     [Inject] private FoodCollection foodCollection;
     [Inject] private FishCollection fishCollection;
-    public bool isReady { get; private set; }
+    public bool isReadyToCook { get; private set; }
 
     [SerializeField] private TypeOfCard typeOfCard;
     [SerializeField] private TextMeshProUGUI titleText;
@@ -24,12 +24,21 @@ public class KitchenCard : MonoBehaviour
     [SerializeField] private Image ingredientOneIcon;
     [SerializeField] private TextMeshProUGUI ingredientTwoText;
     [SerializeField] private Image ingredientTwoIcon;
-    [SerializeField] private Image buttonImage;
+    [SerializeField] private Image cookButtonImage;
+
+    [SerializeField] private TextMeshProUGUI blockTitle;
+    [SerializeField] private GameObject blockPanel;
+    [SerializeField] private TextMeshProUGUI purchasePriceText;
+    private int purchasePrice;
+    private const string tutorialKey = "TutorialCompleted";
+    private bool isCompleteTutorial;
 
 
     private void Start()
     {
         FillCard();
+        SetDefaultCardBlockState();
+        CheckTutorialComplete();
     }
 
     private void FillCard()
@@ -38,25 +47,34 @@ public class KitchenCard : MonoBehaviour
         {
             case TypeOfCard.FriedFish:
                 titleText.text = "FriedFish";
+                blockTitle.text = "FriedFish";
                 recipeIcon.sprite = foodCollection.FriedFish_Sprite;
                 ingredientOneText.text = 2.ToString();
                 ingredientOneIcon.sprite = fishCollection.FishA_Sprite;
+                purchasePrice = 0;
+                purchasePriceText.text = purchasePrice.ToString();
                 break;
             case TypeOfCard.SandWich:
                 titleText.text = "SandWich";
+                blockTitle.text = "SandWich";
                 recipeIcon.sprite = foodCollection.Sandwich_Sprite;
                 ingredientOneText.text = 2.ToString();
                 ingredientOneIcon.sprite = fishCollection.FishA_Sprite;
                 ingredientTwoText.text = 1.ToString();
                 ingredientTwoIcon.sprite = fishCollection.FishB_Sprite;
+                purchasePrice = 30;
+                purchasePriceText.text = purchasePrice.ToString();
                 break;
             case TypeOfCard.Fishburger:
                 titleText.text = "Fishburger";
+                blockTitle.text = "Fishburger";
                 recipeIcon.sprite = foodCollection.Fishburger_Sprite;
                 ingredientOneText.text = 2.ToString();
                 ingredientOneIcon.sprite = fishCollection.FishB_Sprite;
                 ingredientTwoText.text = 2.ToString();
                 ingredientTwoIcon.sprite = fishCollection.FishC_Sprite;
+                purchasePrice = 50;
+                purchasePriceText.text = purchasePrice.ToString();
                 break;
             default:
                 Debug.LogWarning("Undefined type of kitchen card");
@@ -103,15 +121,54 @@ public class KitchenCard : MonoBehaviour
 
     private void ActivateButton()
     {
-        isReady = true;
-        buttonImage.color = Color.green;
-        buttonImage.gameObject.GetComponent<Button>().enabled = true;
+
+        isReadyToCook = true;
+        cookButtonImage.color = Color.green;
+        cookButtonImage.gameObject.GetComponent<Button>().enabled = true;
     }
 
     private void DeactivateButton()
     {
-        isReady = false;
-        buttonImage.color = Color.red;
-        buttonImage.gameObject.GetComponent<Button>().enabled = false;
+        isReadyToCook = false;
+        cookButtonImage.color = Color.red;
+        cookButtonImage.gameObject.GetComponent<Button>().enabled = false;
+    }
+
+    public void CheckPriceToUnblock()
+    {
+        CheckTutorialComplete();
+        if (PlayerInventoryModel.dollarsInInventory >= purchasePrice && isCompleteTutorial)
+        {
+            PlayerInventoryPresenter.OnCurrentDollarsChanged.Invoke(-purchasePrice);
+            BlockCard(false);
+        }
+    }
+
+    private void BlockCard(bool value)
+    {
+        blockPanel.SetActive(value);
+    }
+
+    private void SetDefaultCardBlockState()
+    {
+        switch (typeOfCard)
+        {
+            case TypeOfCard.FriedFish:
+                BlockCard(false);
+                break;
+            case TypeOfCard.SandWich:
+                BlockCard(true);
+                break;
+            case TypeOfCard.Fishburger:
+                BlockCard(true);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void CheckTutorialComplete()
+    {
+        isCompleteTutorial = PlayerPrefs.GetInt(tutorialKey, 0) == 1;
     }
 }
