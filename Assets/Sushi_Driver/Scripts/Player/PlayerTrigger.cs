@@ -65,6 +65,10 @@ namespace Player
             {
                 shop.GetFoodFromPlayer();
             }
+            if (parentBuild.TryGetComponent(out TrainingZone trainingZone))
+            {
+                trainingZone.Enter();
+            }
         }
 
         private void CheckTypeOfProductBuild(GameObject parentBuild)

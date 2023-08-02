@@ -6,7 +6,8 @@ using UnityEngine;
 public enum TypeOfBuild
 {
     Kitchen,
-    Shop
+    Shop,
+    Training
 }
 
 public abstract class GenericBuild : MonoBehaviour
