@@ -19,12 +19,25 @@ public class UIController : MonoBehaviour
     [SerializeField] private List<KitchenCard> kitchenCards = new List<KitchenCard>();
     private Kitchen kitchen;
 
+    [SerializeField] private GameObject debugPanel;
 
     private void Start()
     {
         FillKitchenCardsList();
         UpdateCurrentFishText(0, 0, 0);
         KitchenPanel.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        DebugZone.OnEnterDebug += InDebug;
+        DebugZone.OnExitDebug += OutDebug;
+    }
+
+    private void OnDisable()
+    {
+        DebugZone.OnEnterDebug -= InDebug;
+        DebugZone.OnExitDebug -= OutDebug;
     }
 
     private void HideTutorialText()
@@ -108,12 +121,30 @@ public class UIController : MonoBehaviour
         tutorialSequence.AppendCallback(HideTutorialText);
     }
 
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Tab))
-    //    {
-    //        ShowTutorialMessage("Append esquense");
-    //    }
-    //}
+
+
+    // Debug
+    private void InDebug()
+    {
+        HidePanel(InputPanel);
+        ActivateDebugPanel();
+    }
+
+    private void OutDebug()
+    {
+        ShowPanel(InputPanel);
+    }
+
+    private void ActivateDebugPanel()
+    {
+        debugPanel.SetActive(true);
+    }
+
+    public void DeactivateDebugPanel()
+    {
+        debugPanel.SetActive(false);
+    }
+
+    
 
 }
