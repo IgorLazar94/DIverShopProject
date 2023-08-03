@@ -24,10 +24,25 @@ public class Parameter : MonoBehaviour
     private int price;
     private string violetHEX = "F359EC";
     private string orangeHEX = "FD9C68";
+    private int price_1Level;
+    private int price_2Level;
+    private int price_3Level;
+    private int price_4Level;
+    private int price_5Level;
 
     private void Start()
     {
+        CalculatePrices();
         CalculateNewLevelParameters();
+    }
+
+    private void CalculatePrices()
+    {
+        price_1Level = GameSettings.Instance.GetParameterPriceLevelOne();
+        price_2Level = GameSettings.Instance.GetParameterPriceLevelTwo();
+        price_3Level = GameSettings.Instance.GetParameterPriceLevelThree();
+        price_4Level = GameSettings.Instance.GetParameterPriceLevelFour();
+        price_5Level = GameSettings.Instance.GetParameterPriceLevelFive();
     }
 
     //public void SetUIParentObject(UIController _uiController)
@@ -40,15 +55,15 @@ public class Parameter : MonoBehaviour
         switch (level)
         {
             case 1:
-                price = 30;
+                price = price_1Level;
                 levelText.color = Color.grey;
                 break;
             case 2:
-                price = 50;
+                price = price_2Level;
                 levelText.color = Color.green;
                 break;
             case 3:
-                price = 80;
+                price = price_3Level;
                 levelText.color = Color.blue;
                 if (typeOfParameter == TypeOfParameter.Harpoon)
                 {
@@ -56,11 +71,11 @@ public class Parameter : MonoBehaviour
                 }
                 break;
             case 4:
-                price = 120;
+                price = price_4Level;
                 levelText.color = HexToColor(orangeHEX);
                 break;
             case 5:
-                price = 180;
+                price = price_5Level;
                 levelText.color = HexToColor(violetHEX);
                 ActivateMaxLabel();
                 break;

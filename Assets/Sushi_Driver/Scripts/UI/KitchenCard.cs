@@ -29,7 +29,7 @@ public class KitchenCard : MonoBehaviour
     [SerializeField] private TextMeshProUGUI blockTitle;
     [SerializeField] private GameObject blockPanel;
     [SerializeField] private TextMeshProUGUI purchasePriceText;
-    private int purchasePrice;
+    private int priceToUnblockReceipe;
     private const string tutorialKey = "TutorialCompleted";
     private bool isCompleteTutorial;
 
@@ -51,8 +51,8 @@ public class KitchenCard : MonoBehaviour
                 recipeIcon.sprite = foodCollection.FriedFish_Sprite;
                 ingredientOneText.text = 2.ToString();
                 ingredientOneIcon.sprite = fishCollection.FishA_Sprite;
-                purchasePrice = 0;
-                purchasePriceText.text = purchasePrice.ToString();
+                priceToUnblockReceipe = 0;
+                purchasePriceText.text = priceToUnblockReceipe.ToString();
                 break;
             case TypeOfCard.SandWich:
                 titleText.text = "SandWich";
@@ -62,8 +62,8 @@ public class KitchenCard : MonoBehaviour
                 ingredientOneIcon.sprite = fishCollection.FishA_Sprite;
                 ingredientTwoText.text = 1.ToString();
                 ingredientTwoIcon.sprite = fishCollection.FishB_Sprite;
-                purchasePrice = 30;
-                purchasePriceText.text = purchasePrice.ToString();
+                priceToUnblockReceipe = GameSettings.Instance.GetPriceToUnblockSandwitch();
+                purchasePriceText.text = priceToUnblockReceipe.ToString();
                 break;
             case TypeOfCard.Fishburger:
                 titleText.text = "Fishburger";
@@ -73,8 +73,8 @@ public class KitchenCard : MonoBehaviour
                 ingredientOneIcon.sprite = fishCollection.FishB_Sprite;
                 ingredientTwoText.text = 2.ToString();
                 ingredientTwoIcon.sprite = fishCollection.FishC_Sprite;
-                purchasePrice = 50;
-                purchasePriceText.text = purchasePrice.ToString();
+                priceToUnblockReceipe = GameSettings.Instance.GetPriceToUnblockFishburger();
+                purchasePriceText.text = priceToUnblockReceipe.ToString();
                 break;
             default:
                 Debug.LogWarning("Undefined type of kitchen card");
@@ -137,9 +137,9 @@ public class KitchenCard : MonoBehaviour
     public void CheckPriceToUnblock()
     {
         CheckTutorialComplete();
-        if (PlayerInventoryModel.dollarsInInventory >= purchasePrice && isCompleteTutorial)
+        if (PlayerInventoryModel.dollarsInInventory >= priceToUnblockReceipe && isCompleteTutorial)
         {
-            PlayerInventoryPresenter.OnCurrentDollarsChanged.Invoke(-purchasePrice);
+            PlayerInventoryPresenter.OnCurrentDollarsChanged.Invoke(-priceToUnblockReceipe);
             BlockCard(false);
         }
     }

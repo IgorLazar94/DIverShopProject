@@ -37,15 +37,24 @@ public class Shop : GenericBuild
     private float heightDollar = 0;
     private float widthDollar = 0;
 
-    private ushort friedFishPrice = 5;
-    private ushort sandwichPrice = 10;
-    private ushort fishburgerPrice = 15;
+    private ushort friedFishPrice;
+    private ushort sandwichPrice;
+    private ushort fishburgerPrice;
 
     protected override void Start()
     {
         base.Start();
+        FillPrices();
         CheckTutorial();
     }
+
+    private void FillPrices()
+    {
+        friedFishPrice = GameSettings.Instance.GetProductPriceFriedFish();
+        sandwichPrice = GameSettings.Instance.GetProductPriceSandwich();
+        fishburgerPrice = GameSettings.Instance.GetProductPriceFishburger();
+    }
+
 
     public void GetFoodFromPlayer()
     {
@@ -170,8 +179,8 @@ public class Shop : GenericBuild
 
     private Vector3 ChooseDollarPos()
     {
-        Vector3 spawnPosition = dollarContainer.transform.position + new Vector3(lengthDollar * offsetXDollar, 
-                                                                                 (widthDollar * offsetYDollar) - 0.15f, 
+        Vector3 spawnPosition = dollarContainer.transform.position + new Vector3(lengthDollar * offsetXDollar,
+                                                                                 (widthDollar * offsetYDollar) - 0.15f,
                                                                                  -(heightDollar * offsetZDollar));
         return spawnPosition;
     }

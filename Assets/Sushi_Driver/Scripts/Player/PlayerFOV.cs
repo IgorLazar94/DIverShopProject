@@ -17,10 +17,10 @@ public class PlayerFOV : MonoBehaviour
     public int edgeResolveIterations;
     public float edgeDistanceThreshold;
     private Mesh viewMesh;
-    private float viewRadiusUpgradeFactor = 1f;
+    private float viewRadiusUpgradeFactor;
     private int currentharpoonLevel;
-    private int harpoonTrainingFactor = 1;
-    private int defaultharpoonLevel = 1; // From GameSettings
+    private int harpoonTrainingFactor;
+    private int defaultharpoonLevel;
 
     private void OnEnable()
     {
@@ -36,12 +36,20 @@ public class PlayerFOV : MonoBehaviour
 
     private void Start()
     {
+        ConnectGameSettings();
         currentharpoonLevel = defaultharpoonLevel;
-        defaultViewRadius = 4f;
         viewMesh = new Mesh();
         viewMesh.name = "View Mesh";
         viewMeshFilter.mesh = viewMesh;
         StartCoroutine(FindTargetsWithDelay(0.25f));
+    }
+
+    private void ConnectGameSettings()
+    {
+        defaultViewRadius = GameSettings.Instance.GetDefaultPlayerFOV();
+        defaultharpoonLevel = GameSettings.Instance.GetDefaultHarpoonLevel();
+        harpoonTrainingFactor = GameSettings.Instance.GetHarpoonFactor();
+        viewRadiusUpgradeFactor = GameSettings.Instance.GetPlayerFOVFactor();
     }
 
     private void UpdateHarpoonLevel()

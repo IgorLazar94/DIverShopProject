@@ -11,10 +11,11 @@ public class CustomerController : MonoBehaviour
     [SerializeField] private Transform shopPoint;
     [SerializeField] private Transform exitPoint;
     private List<CustomerBehaviour> customers = new List<CustomerBehaviour>();
-    public float timeToSpawn = 6.0f;
+    private float timeToSpawn;
 
     private void Start()
     {
+        timeToSpawn = GameSettings.Instance.GetTimeToVisitCustomers();
         StartCoroutine(SpawnCustomers());
     }
 

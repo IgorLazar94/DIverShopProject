@@ -9,7 +9,7 @@ namespace Player
     public class PlayerMovementControl : MonoBehaviour
     {
         private float speed;
-        private float trainingFactorSpeed = 1f;
+        private float trainingFactorSpeed;
         private Rigidbody rb;
         private bool isReadyToMove = true;
 
@@ -17,7 +17,8 @@ namespace Player
 
         private void Start()
         {
-            speed = GameSettings.Instance.GetPlayerSpeed();
+            speed = GameSettings.Instance.GetPlayerSpeedParameter();
+            trainingFactorSpeed = GameSettings.Instance.GetPlayerSpeedFactor();
             rb = GetComponent<Rigidbody>();
         }
 

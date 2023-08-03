@@ -1130,7 +1130,6 @@ MonoBehaviour:
   spawnPoint: {fileID: 1829708038}
   shopPoint: {fileID: 1694080771}
   exitPoint: {fileID: 2135554816}
-  timeToSpawn: 6
 --- !u!4 &236963575
 Transform:
   m_ObjectHideFlags: 0
@@ -4773,8 +4772,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f3d5bd733926304b9804d3e47a1b890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 5
-  maxPlayerFishInventory: 6
+  defaultPlayerSpeedParameter: 4
+  defaultMaxPlayerFishInventory: 6
+  defaultHarpoonParameter: 1
+  defaultFOVRadiusParameter: 4
+  defaultPlayerSpeedParameterFactor: 1
+  defaultMaxPlayerFishInventoryFactor: 3
+  defaultHarpoonParameterFactor: 1
+  defaultFOVRadiusParameterFactor: 1
+  parameterPriceLevel_1: 30
+  parameterPriceLevel_2: 50
+  parameterPriceLevel_3: 80
+  parameterPriceLevel_4: 120
+  parameterPriceLevel_5: 180
+  timeToVisitCustomers: 6
+  priceToUnblockSandwitch: 30
+  priceToUnblockFishburger: 50
+  friedFishPrice: 10
+  sandwichPrice: 15
+  fishburgerPrice: 20
 --- !u!4 &1071560900
 Transform:
   m_ObjectHideFlags: 0
@@ -5247,7 +5263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishContainer: {fileID: 1428530051}
-  maxCountOfFish: 15
+  maxCountOfFish: 20
 --- !u!4 &1186845387
 Transform:
   m_ObjectHideFlags: 0
