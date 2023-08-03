@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using DG.Tweening;
 
 public class FishSpawner : MonoBehaviour
 {
@@ -11,18 +12,22 @@ public class FishSpawner : MonoBehaviour
     [SerializeField] private ushort maxCountOfFish;
     private GameObject currentFishGameObject;
     private TypeOfFish spawnTypeOfFish;
-    //private ushort maxAFish;
-    //private ushort maxBFish;
-    //private ushort maxCFish;
+    private ushort maxAFish;
+    private ushort maxBFish;
+    private ushort maxCFish;
+    private ushort currentAFish;
+    private ushort currentBFish;
+    private ushort currentCFish;
     private bool isReadyToSpawn = true;
     private bool isSpawning = true;
     private Vector3 spawnPoint;
+    private float timeToSpawnNewFishes = 1f; // GameSettings
 
     private void Start()
     {
         spawnPoint = new Vector3(-20, 0, 0);
         spawnTypeOfFish = TypeOfFish.FishA;
-        //CalculateSizeOfFishStack();
+        CalculateSizeOfFishStack();
         StartSpawnNewFishes();
     }
 
@@ -34,7 +39,7 @@ public class FishSpawner : MonoBehaviour
             {
                 yield break;
             }
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(timeToSpawnNewFishes);
             CheckTypeOfFish();
             AddNewFish();
             CalculateNextTypeOfFish();
@@ -45,6 +50,8 @@ public class FishSpawner : MonoBehaviour
     private void AddNewFish()
     {
         var fish = Instantiate(currentFishGameObject, fishContainer);
+        fish.transform.localScale = Vector3.zero;
+        fish.transform.DOScale(Vector3.one, 0.75f);
         var fishScript = fish.GetComponent<Fish>();
         fishScript.SetFishSpawner(this);
         CheckTutorialPhase(fishScript);
@@ -77,16 +84,31 @@ public class FishSpawner : MonoBehaviour
 
     private void CalculateNextTypeOfFish()
     {
-        int nextType = ((int)spawnTypeOfFish + 1) % System.Enum.GetNames(typeof(TypeOfFish)).Length;
-        spawnTypeOfFish = (TypeOfFish)nextType;
+        //int nextType = ((int)spawnTypeOfFish + 1) % System.Enum.GetNames(typeof(TypeOfFish)).Length;
+        //spawnTypeOfFish = (TypeOfFish)nextType;
+        if (currentAFish < maxAFish)
+        {
+            spawnTypeOfFish = TypeOfFish.FishA;
+            currentAFish++;
+        }
+        else if (currentBFish < maxBFish)
+        {
+            spawnTypeOfFish = TypeOfFish.FishB;
+            currentBFish++;
+        }
+        else if (currentCFish < maxCFish)
+        {
+            spawnTypeOfFish = TypeOfFish.FishC;
+            currentCFish++;
+        }
     }
 
-    //private void CalculateSizeOfFishStack()
-    //{
-    //    maxAFish = (ushort)(maxCountOfFish * 0.5f);
-    //    maxBFish = (ushort)(maxCountOfFish * 0.25f);
-    //    maxCFish = (ushort)(maxCountOfFish * 0.25f);
-    //}
+    private void CalculateSizeOfFishStack()
+    {
+        maxAFish = (ushort)(maxCountOfFish * 0.5f);
+        maxBFish = (ushort)(maxCountOfFish * 0.25f);
+        maxCFish = (ushort)(maxCountOfFish * 0.25f);
+    }
 
     private void SpawnToPosition(Transform fish)
     {
@@ -123,6 +145,18 @@ public class FishSpawner : MonoBehaviour
     public void RemoveFish(Fish fish)
     {
         fishList.Remove(fish);
+        if (fish.typeOfFish == TypeOfFish.FishA)
+        {
+            currentAFish--;
+        }
+        else if (fish.typeOfFish == TypeOfFish.FishB)
+        {
+            currentBFish--;
+        }
+        else if (fish.typeOfFish == TypeOfFish.FishC)
+        {
+            currentCFish--;
+        }
         CheckFishesCount();
     }
 }
