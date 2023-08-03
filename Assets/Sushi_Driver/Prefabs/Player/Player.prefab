@@ -445,7 +445,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1241305856687595693}
   - component: {fileID: 1241305856687595682}
-  - component: {fileID: 1241305856687595700}
   - component: {fileID: 1241305856687595694}
   - component: {fileID: 1241305856687595688}
   - component: {fileID: 1241305856687595695}
@@ -493,20 +492,6 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
---- !u!136 &1241305856687595700
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1241305856687595687}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -637,6 +622,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7abbe114cdb60a5458d70d895967782d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <currentViewRadius>k__BackingField: 0
+  <defaultViewRadius>k__BackingField: 0
   viewAngle: 100
   targetMask:
     serializedVersion: 2
