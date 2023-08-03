@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -18,9 +19,9 @@ public class Parameter : MonoBehaviour
     [SerializeField] private TextMeshProUGUI costText;
     [SerializeField] private Image updateLevelButtonImage;
     [SerializeField] private UIController uIController;
+    [SerializeField] private GameObject maxLabel;
     private int level = 1;
     private int price;
-
     private string violetHEX = "F359EC";
     private string orangeHEX = "FD9C68";
 
@@ -49,6 +50,10 @@ public class Parameter : MonoBehaviour
             case 3:
                 price = 80;
                 levelText.color = Color.blue;
+                if (typeOfParameter == TypeOfParameter.Harpoon)
+                {
+                    ActivateMaxLabel();
+                }
                 break;
             case 4:
                 price = 120;
@@ -57,6 +62,7 @@ public class Parameter : MonoBehaviour
             case 5:
                 price = 180;
                 levelText.color = HexToColor(violetHEX);
+                ActivateMaxLabel();
                 break;
             default:
                 Debug.LogWarning("Undefined parameter level update");
@@ -64,6 +70,27 @@ public class Parameter : MonoBehaviour
         }
         UpdateLevelText();
         uIController.CheckTrainingButtonsActive();
+    }
+
+    private void UpdateParameter()
+    {
+        switch (typeOfParameter)
+        {
+            case TypeOfParameter.Harpoon:
+                TrainingZone.OnHarpoonUpdateParameter.Invoke();
+                break;
+            case TypeOfParameter.Backpack:
+                TrainingZone.OnBackpackUpdateParameter.Invoke();
+                break;
+            case TypeOfParameter.Speed:
+                TrainingZone.OnSpeedUpdateParameter.Invoke();
+                break;
+            case TypeOfParameter.FOV:
+                TrainingZone.OnFOVUpdateParameter.Invoke();
+                break;
+            default:
+                break;
+        }
     }
 
     private void UpdateLevelText()
@@ -86,6 +113,7 @@ public class Parameter : MonoBehaviour
     {
         Debug.Log(typeOfParameter + "type of parameter update");
         PlayerInventoryPresenter.OnCurrentDollarsChanged(-price);
+        UpdateParameter();
         level++;
         CalculateNewLevelParameters();
         //CheckReadyUpdateButton();
@@ -114,5 +142,10 @@ public class Parameter : MonoBehaviour
     {
         updateLevelButtonImage.color = Color.red;
         updateLevelButtonImage.gameObject.GetComponent<Button>().enabled = false;
+    }
+
+    private void ActivateMaxLabel()
+    {
+        maxLabel.SetActive(true);
     }
 }

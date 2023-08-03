@@ -10,6 +10,7 @@ public class PlayerInventoryModel : MonoBehaviour
 
     [SerializeField] private PlayerInventoryView view;
     private int maxFishValue;
+    private int maxFishTrainingFactor = 2;
     private int currentTotalFishQuantity;
     private int currentFishAValue = 0;
     private int currentFishBValue = 0;
@@ -34,6 +35,7 @@ public class PlayerInventoryModel : MonoBehaviour
         PlayerInventoryPresenter.OnCurrentFishChanged += SetCurrentFishValue;
         PlayerInventoryPresenter.OnCurrentDollarsChanged += SetDollarsToInventory;
         //PlayerInventoryPresenter.OnCurrentFishRemoved += RemoveFish;
+        TrainingZone.OnBackpackUpdateParameter += TrainingNewMaxFishValue;
     }
 
     private void OnDisable()
@@ -42,6 +44,14 @@ public class PlayerInventoryModel : MonoBehaviour
         PlayerInventoryPresenter.OnCurrentFishChanged -= SetCurrentFishValue;
         PlayerInventoryPresenter.OnCurrentDollarsChanged -= SetDollarsToInventory;
         //PlayerInventoryPresenter.OnCurrentFishRemoved -= RemoveFish;
+        TrainingZone.OnBackpackUpdateParameter -= TrainingNewMaxFishValue;
+    }
+
+    private void TrainingNewMaxFishValue()
+    {
+        maxFishValue += maxFishTrainingFactor;
+        PlayerInventoryPresenter.OnMaxFishChanged.Invoke(maxFishValue);
+
     }
 
     private void CheckTutorial()

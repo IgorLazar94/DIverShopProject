@@ -77,7 +77,7 @@ namespace Player
             {
                 isFishingBlock = true;
                 maxText.transform.DOScale(Vector3.one, 0.5f).OnComplete(() => ShakingMaxText());
-                playerFOV.viewRadius = 0;
+                playerFOV.currentViewRadius = 0;
             } else
             {
                 isFishingBlock = false;

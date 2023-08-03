@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerFOV : MonoBehaviour
 {
-    public float viewRadius { get; set; } 
+    [field: SerializeField] public float currentViewRadius { get; set; }
+    [field: SerializeField] public float defaultViewRadius { get; private set; }
     [Range(0, 360)] public float viewAngle;
     public LayerMask targetMask;
     public LayerMask obstacleMask;
@@ -16,12 +17,41 @@ public class PlayerFOV : MonoBehaviour
     public int edgeResolveIterations;
     public float edgeDistanceThreshold;
     private Mesh viewMesh;
+    private float viewRadiusUpgradeFactor = 1f;
+    private int currentharpoonLevel;
+    private int harpoonTrainingFactor = 1;
+    private int defaultharpoonLevel = 1; // From GameSettings
+
+    private void OnEnable()
+    {
+        TrainingZone.OnFOVUpdateParameter += UpgradeViewRadius;
+        TrainingZone.OnHarpoonUpdateParameter += UpdateHarpoonLevel;
+    }
+
+    private void OnDisable()
+    {
+        TrainingZone.OnFOVUpdateParameter -= UpgradeViewRadius;
+        TrainingZone.OnHarpoonUpdateParameter -= UpdateHarpoonLevel;
+    }
+
     private void Start()
     {
+        currentharpoonLevel = defaultharpoonLevel;
+        defaultViewRadius = 4f;
         viewMesh = new Mesh();
         viewMesh.name = "View Mesh";
         viewMeshFilter.mesh = viewMesh;
         StartCoroutine(FindTargetsWithDelay(0.25f));
+    }
+
+    private void UpdateHarpoonLevel()
+    {
+        currentharpoonLevel += harpoonTrainingFactor;
+    }
+
+    private void UpgradeViewRadius()
+    {
+        defaultViewRadius += viewRadiusUpgradeFactor;
     }
 
     public void EnableView()
@@ -85,7 +115,7 @@ public class PlayerFOV : MonoBehaviour
     private void FindVisibleTarget()
     {
         visibleTargets.Clear();
-        Collider[] targetsInFOV = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
+        Collider[] targetsInFOV = Physics.OverlapSphere(transform.position, currentViewRadius, targetMask);
 
         for (int i = 0; i < targetsInFOV.Length; i++)
         {
@@ -108,11 +138,38 @@ public class PlayerFOV : MonoBehaviour
                     visibleTargets.Add(target);
                     if (target.TryGetComponent(out Fish fish) && !fish.isRunFromPlayer)
                     {
-                        visibleFishes.Add(fish);
-                        fish.StartCoroutine(fish.StartRunFromPlayer(transform));
+                        if (CheckHarpoonFishLevel(fish))
+                        {
+                            visibleFishes.Add(fish);
+                            fish.StartCoroutine(fish.StartRunFromPlayer(transform));
+                        }
+                        else
+                        {
+                            fish.ShowBlockSprite();
+                        }
                     }
                 }
             }
+        }
+    }
+
+    private bool CheckHarpoonFishLevel(Fish fish)
+    {
+        if (fish.typeOfFish == TypeOfFish.FishA)
+        {
+            return true;
+        }
+        else if (fish.typeOfFish == TypeOfFish.FishB && currentharpoonLevel > 1)
+        {
+            return true;
+        }
+        else if (fish.typeOfFish == TypeOfFish.FishC && currentharpoonLevel > 2)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
@@ -121,7 +178,7 @@ public class PlayerFOV : MonoBehaviour
         int stepCount = Mathf.RoundToInt(viewAngle * MeshResolution);
         float stepAngleSize = viewAngle / stepCount;
         List<Vector3> viewPoints = new List<Vector3>();
-        ViewCastInfo oldViewCast = new ViewCastInfo(); 
+        ViewCastInfo oldViewCast = new ViewCastInfo();
         for (int i = 0; i < stepCount; i++)
         {
             float angle = transform.eulerAngles.y - viewAngle / 2 + stepAngleSize * i;
@@ -187,7 +244,8 @@ public class PlayerFOV : MonoBehaviour
             {
                 minAngle = angle;
                 minPoint = newViewCast.point;
-            } else
+            }
+            else
             {
                 maxAngle = angle;
                 maxPoint = newViewCast.point;
@@ -201,13 +259,13 @@ public class PlayerFOV : MonoBehaviour
         Vector3 dir = DirForAngle(globalAngle, true);
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, dir, out hit, viewRadius, obstacleMask))
+        if (Physics.Raycast(transform.position, dir, out hit, currentViewRadius, obstacleMask))
         {
             return new ViewCastInfo(true, hit.point, hit.distance, globalAngle);
         }
         else
         {
-            return new ViewCastInfo(false, transform.position + dir * viewRadius, viewRadius, globalAngle);
+            return new ViewCastInfo(false, transform.position + dir * currentViewRadius, currentViewRadius, globalAngle);
         }
     }
 

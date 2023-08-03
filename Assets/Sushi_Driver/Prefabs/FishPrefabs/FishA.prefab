@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 272629102}
   - component: {fileID: 272629103}
   m_Layer: 7
-  m_Name: SpriteTimerEmpty
+  m_Name: SpriteBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,7 +125,7 @@ Transform:
   m_GameObject: {fileID: 1790102903}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 272629101}
@@ -172,7 +172,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 00f6eea1111dc424bbebbd79bf8bda6f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 471255d051c05aa4ca76381035ee455f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -432,12 +432,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16a6e32efd053af46b62c73a597de35c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeOfFish: 0
+  <typeOfFish>k__BackingField: 0
   idleSpeed: 20
   timeToCatch: 0.5
   availabilityLevel: 1
   emptyImage: {fileID: 5063242288792454865}
   fishCanvas: {fileID: 1308506091957552541}
+  blockSprite: {fileID: 272629102}
 --- !u!114 &1359254219029307744
 MonoBehaviour:
   m_ObjectHideFlags: 0

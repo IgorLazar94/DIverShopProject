@@ -20,11 +20,11 @@ public abstract class GenericState
     {
         if (!value)
         {
-            playerFOV.viewRadius = 0;
+            playerFOV.currentViewRadius = 0;
         }
         if (value)
         {
-            playerFOV.viewRadius = 6.5f;
+            playerFOV.currentViewRadius = playerFOV.defaultViewRadius;
         }
     }
 

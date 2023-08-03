@@ -9,6 +9,7 @@ namespace Player
     public class PlayerMovementControl : MonoBehaviour
     {
         private float speed;
+        private float trainingFactorSpeed = 1f;
         private Rigidbody rb;
         private bool isReadyToMove = true;
 
@@ -27,6 +28,7 @@ namespace Player
             UI.JoyStickInput.isHasInputDirection += PlayerMove;
             UI.JoyStickInput.isNotHasInputDirection += ResetSpeed;
             PlayerTrigger.onTriggerWater += OffsetDiving;
+            TrainingZone.OnSpeedUpdateParameter += UpdateSpeedParameter;
         }
 
         private void OnDisable()
@@ -36,6 +38,12 @@ namespace Player
             UI.JoyStickInput.isHasInputDirection -= PlayerMove;
             UI.JoyStickInput.isNotHasInputDirection -= ResetSpeed;
             PlayerTrigger.onTriggerWater -= OffsetDiving;
+            TrainingZone.OnSpeedUpdateParameter -= UpdateSpeedParameter;
+        }
+
+        private void UpdateSpeedParameter()
+        {
+            speed += trainingFactorSpeed;
         }
 
         private void PlayerMove(Vector3 _inputDirection)

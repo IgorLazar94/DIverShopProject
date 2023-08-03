@@ -13,13 +13,14 @@ public enum TypeOfFish
 public class Fish : MonoBehaviour
 {
     public bool isRunFromPlayer { get; private set; }
-    [SerializeField] private TypeOfFish typeOfFish;
+    [field: SerializeField] public TypeOfFish typeOfFish { get; set; }
     //[SerializeField] private FishSpriteController childSprite;
     [SerializeField] private float idleSpeed;
     [SerializeField] private float timeToCatch;
     [SerializeField] private float availabilityLevel;
     [SerializeField] private Image emptyImage;
     [SerializeField] private GameObject fishCanvas;
+    [SerializeField] private SpriteRenderer blockSprite;
     private float runSpeed;
     private Rigidbody rb;
     private Vector3 randomDirection;
@@ -46,9 +47,25 @@ public class Fish : MonoBehaviour
         StartCoroutine(ChooseRandomDirection());
     }
 
+    public void ShowBlockSprite()
+    {
+        ActivateBlockSprite(true);
+        Invoke(nameof(HideBlockSprite), 1f);
+    }
+
+    private void HideBlockSprite()
+    {
+        ActivateBlockSprite(false);
+    }
+
     private void ActivateOutline(bool value)
     {
         outline.enabled = value;
+    }
+
+    private void ActivateBlockSprite(bool value)
+    {
+        blockSprite.gameObject.SetActive(value);
     }
 
     public void SetFishSpawner(FishSpawner _fishSpawner)
@@ -101,6 +118,7 @@ public class Fish : MonoBehaviour
             CheckPlayerDistance(playerPos);
             SwimFromPlayer();
         }
+        blockSprite?.transform.LookAt(Camera.main.transform);
     }
 
     private void RotateFishBarToCamera()
