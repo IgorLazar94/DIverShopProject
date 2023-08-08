@@ -2983,10 +2983,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 499583526}
     m_Modifications:
-    - target: {fileID: 940666260395121844, guid: 73fb678d08dcea0418cef15be57415c3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -34.227
-      objectReference: {fileID: 0}
     - target: {fileID: 5669640868414626742, guid: 73fb678d08dcea0418cef15be57415c3, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -3035,17 +3031,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gate (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 5669640868969709260, guid: 73fb678d08dcea0418cef15be57415c3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -63.043
-      objectReference: {fileID: 0}
-    - target: {fileID: 5669640868969709262, guid: 73fb678d08dcea0418cef15be57415c3, type: 3}
+    - target: {fileID: 5669640868414626743, guid: 73fb678d08dcea0418cef15be57415c3, type: 3}
       propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5669640869440561394, guid: 73fb678d08dcea0418cef15be57415c3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73fb678d08dcea0418cef15be57415c3, type: 3}
@@ -3270,9 +3258,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 798852928}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 798852931}
+        m_TargetAssemblyTypeName: DebugZone, Assembly-CSharp
+        m_MethodName: ClearPlayerPrefs
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7599,7 +7587,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ClearPlayerPrefs
+  m_text: Reset Tutorial Progress
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9135,9 +9123,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 194315130}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: DeactivateDebugPanel
+      - m_Target: {fileID: 798852931}
+        m_TargetAssemblyTypeName: DebugZone, Assembly-CSharp
+        m_MethodName: Exit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10098,6 +10086,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1241305856687595691, guid: c89ac1c4cb577ff4ea13341f2f463931, type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 1704191509}
     - target: {fileID: 1241305856687595693, guid: c89ac1c4cb577ff4ea13341f2f463931, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -10289,9 +10281,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 499583526}
     m_Modifications:
+    - target: {fileID: 327553263549230950, guid: 73fb678d08dcea0418cef15be57415c3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 327553263549230950, guid: 73fb678d08dcea0418cef15be57415c3, type: 3}
+      propertyPath: isOutSideGate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 940666260395121844, guid: 73fb678d08dcea0418cef15be57415c3, type: 3}
       propertyPath: m_LocalPosition.z
       value: -34.227
+      objectReference: {fileID: 0}
+    - target: {fileID: 1072226067119531336, guid: 73fb678d08dcea0418cef15be57415c3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -62.457
       objectReference: {fileID: 0}
     - target: {fileID: 5669640868414626742, guid: 73fb678d08dcea0418cef15be57415c3, type: 3}
       propertyPath: m_RootOrder
@@ -10340,6 +10344,10 @@ PrefabInstance:
     - target: {fileID: 5669640868414626743, guid: 73fb678d08dcea0418cef15be57415c3, type: 3}
       propertyPath: m_Name
       value: Gate
+      objectReference: {fileID: 0}
+    - target: {fileID: 5669640868969709260, guid: 73fb678d08dcea0418cef15be57415c3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -61.991
       objectReference: {fileID: 0}
     - target: {fileID: 5669640869440561394, guid: 73fb678d08dcea0418cef15be57415c3, type: 3}
       propertyPath: m_IsActive

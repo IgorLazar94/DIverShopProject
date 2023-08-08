@@ -140,22 +140,13 @@ public class UIController : MonoBehaviour
     private void InDebug()
     {
         HidePanel(InputPanel);
-        ActivateDebugPanel();
+        debugPanel.SetActive(true);
     }
 
     private void OutDebug()
     {
-        ShowPanel(InputPanel);
-    }
-
-    private void ActivateDebugPanel()
-    {
-        debugPanel.SetActive(true);
-    }
-
-    public void DeactivateDebugPanel()
-    {
         debugPanel.SetActive(false);
+        ShowPanel(InputPanel);
     }
 
     public void ShowTrainingPanel()

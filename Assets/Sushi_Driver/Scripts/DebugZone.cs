@@ -12,19 +12,17 @@ public class DebugZone : MonoBehaviour
     {
         if (other.TryGetComponent(out PlayerTrigger playerTrigger))
         {
-            Debug.Log("IN");
             OnEnterDebug.Invoke();
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.TryGetComponent(out PlayerTrigger playerTrigger))
-        {
-            Debug.Log("OUT");
-            OnExitDebug.Invoke();
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.TryGetComponent(out PlayerTrigger playerTrigger))
+    //    {
+    //        OnExitDebug.Invoke();
+    //    }
+    //}
 
     public void ClearPlayerPrefs()
     {
@@ -39,5 +37,10 @@ public class DebugZone : MonoBehaviour
     public void Load()
     {
 
+    }
+
+    public void Exit()
+    {
+        OnExitDebug.Invoke();
     }
 }
