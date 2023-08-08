@@ -17,12 +17,16 @@ public abstract class GenericBuild : MonoBehaviour
     [SerializeField] protected GameObject receivePoint;
     [SerializeField] protected GameObject productPoint;
     protected Transform playerPos;
-    //private bool isPlayerClose = false;
-    //private bool isPlayerFar = false;
+    private bool isPlayerClose = true;
+    private bool isActivateBuild = false;
 
     protected virtual void Start()
     {
         playerPos = playerInventory.gameObject.transform.parent;
+        receivePoint.transform.localScale = Vector3.zero;
+        productPoint.transform.localScale = Vector3.zero;
+        receivePoint.SetActive(false);
+        productPoint.SetActive(false);
     }
     protected virtual void FixedUpdate()
     {
@@ -32,33 +36,38 @@ public abstract class GenericBuild : MonoBehaviour
     private void CheckPlayerDistance()
     {
         float distance = (playerPos.position - transform.position).magnitude;
-        if (distance < 5f/* && !isPlayerClose*/)
+        if (distance < 5f)
         {
-            //isPlayerClose = true;
-            //isPlayerFar = false;
+            isPlayerClose = true;
+        }
+        else
+        {
+            isPlayerClose = false;
+        }
+
+        if (isPlayerClose && !isActivateBuild)
+        {
             ActivateBuild();
         }
-        else if (distance >= 5f/* && !isPlayerFar*/)
+        else if (distance >= 5f && isActivateBuild)
         {
-            //isPlayerFar = true;
-            //isPlayerClose = false;
             DeactivateBuild();
         }
     }
 
     private void ActivateBuild()
     {
+        isActivateBuild = true;
         receivePoint.SetActive(true);
         productPoint.SetActive(true);
-        //receivePoint.transform.DOScale(Vector3.one, 0.5f);
-        //productPoint.transform.DOScale(Vector3.one, 0.5f);
+        receivePoint.transform.DOScale(Vector3.one, 0.2f);
+        productPoint.transform.DOScale(Vector3.one, 0.2f);
     }
 
     private void DeactivateBuild()
     {
-        //receivePoint.transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => receivePoint.SetActive(false));
-        //productPoint.transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => productPoint.SetActive(false));
-        receivePoint.SetActive(false);
-        productPoint.SetActive(false);
+        isActivateBuild = false;
+        receivePoint.transform.DOScale(Vector3.zero, 0.2f).OnComplete(() => receivePoint.SetActive(false));
+        productPoint.transform.DOScale(Vector3.zero, 0.2f).OnComplete(() => productPoint.SetActive(false));
     }
 }
