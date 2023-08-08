@@ -59,7 +59,7 @@ public class Kitchen : GenericBuild
         ui_Controller.UpdateCurrentFishText(fishAOnKitchen, fishBOnKitchen, fishCOnKitchen);
         CreateFood();
 
-        
+
     }
 
 
@@ -120,9 +120,12 @@ public class Kitchen : GenericBuild
 
     public void SetFoodForPlayer()
     {
-        PlayerLogic.isBusyHands = true;
-        Vector3 defaultSpawnPos = foodContainer.position;
-        foodContainer.DOJump(playerInventory.transform.position, 3f, 1, 0.5f).OnComplete(() => RemoveReadyFood(defaultSpawnPos));
+        if (readyFoodList.Count > 0)
+        {
+            PlayerLogic.isBusyHands = true;
+            Vector3 defaultSpawnPos = foodContainer.position;
+            foodContainer.DOJump(playerInventory.transform.position, 3f, 1, 0.5f).OnComplete(() => RemoveReadyFood(defaultSpawnPos));
+        }
     }
 
     private void RemoveReadyFood(Vector3 _defaultSpawnPos)
