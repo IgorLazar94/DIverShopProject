@@ -17,14 +17,14 @@ public abstract class GenericBuild : MonoBehaviour
     [SerializeField] protected GameObject receivePoint;
     [SerializeField] protected GameObject productPoint;
     protected Transform playerPos;
-    private bool isPlayerClose = false;
-    private bool isPlayerFar = false;
+    //private bool isPlayerClose = false;
+    //private bool isPlayerFar = false;
 
     protected virtual void Start()
     {
         playerPos = playerInventory.gameObject.transform.parent;
     }
-    protected virtual void Update()
+    protected virtual void FixedUpdate()
     {
         CheckPlayerDistance();
     }
@@ -32,16 +32,16 @@ public abstract class GenericBuild : MonoBehaviour
     private void CheckPlayerDistance()
     {
         float distance = (playerPos.position - transform.position).magnitude;
-        if (distance < 5f && !isPlayerClose)
+        if (distance < 5f/* && !isPlayerClose*/)
         {
-            isPlayerClose = true;
-            isPlayerFar = false;
+            //isPlayerClose = true;
+            //isPlayerFar = false;
             ActivateBuild();
         }
-        else if (distance >= 5f && !isPlayerFar)
+        else if (distance >= 5f/* && !isPlayerFar*/)
         {
-            isPlayerFar = true;
-            isPlayerClose = false;
+            //isPlayerFar = true;
+            //isPlayerClose = false;
             DeactivateBuild();
         }
     }

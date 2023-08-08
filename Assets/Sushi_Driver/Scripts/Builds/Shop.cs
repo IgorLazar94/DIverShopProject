@@ -110,16 +110,6 @@ public class Shop : GenericBuild
         }
     }
 
-    protected override void Update()
-    {
-        base.Update();
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            CalculateFoodPosition();
-        }
-    }
-
     private Vector3 CalculateFoodPosition()
     {
         Vector3 spawnPosition = foodContainer.position + new Vector3(lengthFood * offsetXFood, widthFood * offsetYFood, -(heightFood * offsetZFood));
