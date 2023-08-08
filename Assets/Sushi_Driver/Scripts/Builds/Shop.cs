@@ -19,11 +19,11 @@ public class Shop : GenericBuild
     private TutorialController tutorial;
     private bool isActiveTutorial = false;
     // Food pack
-    private float offsetXFood = 0.5f;
+    private float offsetXFood = 1f;
     private float offsetYFood = 0.2f;
-    private float offsetZFood = 0.5f;
-    private int widthLimitFood = 3;
-    private int lengthLimitFood = 4;
+    private float offsetZFood = 1f;
+    private int widthLimitFood = 1;
+    private int lengthLimitFood = 2;
     private float lengthFood = 0;
     private float heightFood = 0;
     private float widthFood = 0;
@@ -82,6 +82,7 @@ public class Shop : GenericBuild
         }
         x = null;
         CleanupFoodList();
+        widthFood = 0f;
         PlayerLogic.isBusyHands = false;
         float counter = 0.15f;
         foreach (var food in foodInShop)
@@ -127,16 +128,16 @@ public class Shop : GenericBuild
 
     private void CalculateNewPosition()
     {
-        lengthFood++;
+        lengthFood ++;
         if (lengthFood > widthLimitFood)
         {
             lengthFood = 0;
-            heightFood++;
+            heightFood ++;
             if (heightFood > lengthLimitFood)
             {
                 lengthFood = 0;
                 heightFood = 0;
-                widthFood++;
+                widthFood ++;
             }
         }
     }
