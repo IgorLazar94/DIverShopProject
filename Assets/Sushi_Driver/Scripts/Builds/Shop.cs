@@ -11,7 +11,7 @@ public class Shop : GenericBuild
     [SerializeField] private Transform foodContainer;
     [SerializeField] private GameObject dollarContainer;
     [SerializeField] private GameObject dollarPrefab;
-    private List<Food> foodInShop = new List<Food>();
+    [SerializeField] private List<Food> foodInShop = new List<Food>();
     private List<GameObject> dollarsInShop = new List<GameObject>();
     private Vector3 foodPos;
     private ushort currentPrice;
@@ -55,15 +55,38 @@ public class Shop : GenericBuild
         fishburgerPrice = GameSettings.Instance.GetProductPriceFishburger();
     }
 
+    private void CleanupFoodList()
+    {
+        List<int> indexesToRemove = new List<int>();
+        for (int i = 0; i < foodInShop.Count; i++)
+        {
+            if (foodInShop[i] == null)
+            {
+                indexesToRemove.Add(i);
+            }
+        }
+        for (int i = indexesToRemove.Count - 1; i >= 0; i--)
+        {
+            foodInShop.RemoveAt(indexesToRemove[i]);
+        }
+    }
+
 
     public void GetFoodFromPlayer()
     {
-        foodInShop = playerInventory.SetFoodToShop();
+        foodInShop.Clear();
+        var x = playerInventory.SetFoodToShop();
+        foreach (var item in x)
+        {
+            foodInShop.Add(item);
+        }
+        x = null;
+        CleanupFoodList();
         PlayerLogic.isBusyHands = false;
-        float counter = 0.2f;
+        float counter = 0.15f;
         foreach (var food in foodInShop)
         {
-            counter += 0.1f;
+            counter += 0.01f;
             foodPos = CalculateFoodPosition();
             //food.transform.parent = null;
             food.transform.DOJump(foodPos, 3f, 1, counter).OnComplete(() => food.transform.parent = foodContainer);
@@ -74,6 +97,7 @@ public class Shop : GenericBuild
         {
             TutorialController.OnNextTutorialStep.Invoke();
         }
+        //CleanupFoodList();
     }
 
     private void CheckTutorial()

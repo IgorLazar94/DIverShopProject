@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerFOV : MonoBehaviour
 {
-    [field: SerializeField] public float currentViewRadius { get; set; }
-    [field: SerializeField] public float defaultViewRadius { get; private set; }
+    public float currentViewRadius { get; set; }
+    public float defaultViewRadius { get; private set; }
     [Range(0, 360)] public float viewAngle;
     public LayerMask targetMask;
     public LayerMask obstacleMask;
