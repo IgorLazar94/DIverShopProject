@@ -7,6 +7,8 @@ public class GameSettings : MonoBehaviour
     public static GameSettings Instance { get; private set; }
 
     [Space]
+    [SerializeField] private int playerDefaultDollars;
+    [Space]
     [Header("Default parameter values")]
     [SerializeField][Range(1f, 10f)] private float defaultPlayerSpeedParameter;
     [SerializeField] private ushort defaultMaxPlayerFishInventory;
@@ -63,6 +65,10 @@ public class GameSettings : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+    public int GetPlayerDefaultDollars()
+    {
+        return playerDefaultDollars;
+    }
     //Parameters
     public float GetPlayerSpeedParameter()
     {

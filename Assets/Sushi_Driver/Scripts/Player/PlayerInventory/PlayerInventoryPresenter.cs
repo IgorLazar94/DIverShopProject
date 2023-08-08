@@ -24,13 +24,4 @@ public class PlayerInventoryPresenter : MonoBehaviour
         model.SetView(view);
         //view.SetModel(model);
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            OnCurrentDollarsChanged.Invoke(5);
-        }
-    }
-
 }
