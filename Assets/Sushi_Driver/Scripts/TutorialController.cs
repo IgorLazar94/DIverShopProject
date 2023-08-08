@@ -8,6 +8,7 @@ public class TutorialController : MonoBehaviour
 {
     public static Action OnNextTutorialStep;
     public static Action<Fish> OnAddNewFishA;
+    public static int tutorialPhase { get; private set; }
     [SerializeField] private Transform playerPos;
     [SerializeField] private SpriteRenderer pointerSprite;
     [SerializeField] private Transform kitchenBuyingZone;
@@ -19,7 +20,7 @@ public class TutorialController : MonoBehaviour
     private BuyingZone[] buyingZones;
     private Quaternion defaultSpriteRotation;
     private Fish targetFish;
-    public static int tutorialPhase { get; private set; }
+    private float pointerOffset = 1.2f;
     private const string tutorialKey = "TutorialCompleted";
 
     private void OnEnable()
@@ -80,12 +81,15 @@ public class TutorialController : MonoBehaviour
         }
     }
 
+
     private void ChooseTargetForPointer(Vector3 targetPos)
     {
         Vector3 directionToTarget = targetPos - pointerSprite.transform.position;
         Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
         targetRotation *= defaultSpriteRotation;
         pointerSprite.transform.rotation = Quaternion.Slerp(pointerSprite.transform.rotation, targetRotation, 10.0f * Time.deltaTime);
+        Vector3 spriteOffset = directionToTarget.normalized * pointerOffset;
+        pointerSprite.transform.position = playerPos.position + spriteOffset;
     }
 
     private void AddFish(Fish fish)
