@@ -30,10 +30,10 @@ public class Fish : MonoBehaviour
     private Outline outline;
     private Transform mainCameraTransform;
     private Tween fillTween;
-    private ParticleSystem rippleFX;
+    [SerializeField] private ParticleSystem rippleFX;
     private void Start()
     {
-        rippleFX = GetComponentInChildren<ParticleSystem>();
+        //rippleFX = GetComponentInChildren<ParticleSystem>();
         mainCameraTransform = Camera.main.transform;
         runSpeed = idleSpeed * 3f;
         isRunFromPlayer = false;
@@ -213,7 +213,8 @@ public class Fish : MonoBehaviour
 
     public void FishCaught()
     {
-        //rippleFX.Play();
+        var particle = Instantiate(rippleFX, transform.position, Quaternion.identity);
+        particle.Play();
         EnableFishBar(false);
         transform.DOJump(playerPos.position, 1f, 1, 0.3f).OnComplete(() => PassTheFishToPlayer());
     }

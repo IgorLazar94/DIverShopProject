@@ -321,7 +321,6 @@ Transform:
   m_Children:
   - {fileID: 272629101}
   - {fileID: 2028567515095087546}
-  - {fileID: 815926080594206845}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -439,6 +438,7 @@ MonoBehaviour:
   emptyImage: {fileID: 5063242288792454865}
   fishCanvas: {fileID: 1308506091957552541}
   blockSprite: {fileID: 272629102}
+  rippleFX: {fileID: 5570655738364565364, guid: 2be78c0e232839241a1bacde6542d478, type: 3}
 --- !u!114 &1359254219029307744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -610,53 +610,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1001 &5051967392251213582
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 3977157695562510956}
-    m_Modifications:
-    - target: {fileID: 5570655738364565363, guid: 2be78c0e232839241a1bacde6542d478, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5570655738364565363, guid: 2be78c0e232839241a1bacde6542d478, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5570655738364565363, guid: 2be78c0e232839241a1bacde6542d478, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5570655738364565363, guid: 2be78c0e232839241a1bacde6542d478, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5570655738364565363, guid: 2be78c0e232839241a1bacde6542d478, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5570655738364565363, guid: 2be78c0e232839241a1bacde6542d478, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5570655738364565363, guid: 2be78c0e232839241a1bacde6542d478, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5570655738364565363, guid: 2be78c0e232839241a1bacde6542d478, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5570655738364565366, guid: 2be78c0e232839241a1bacde6542d478, type: 3}
-      propertyPath: m_Name
-      value: RippleFX
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2be78c0e232839241a1bacde6542d478, type: 3}
---- !u!4 &815926080594206845 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5570655738364565363, guid: 2be78c0e232839241a1bacde6542d478, type: 3}
-  m_PrefabInstance: {fileID: 5051967392251213582}
-  m_PrefabAsset: {fileID: 0}
