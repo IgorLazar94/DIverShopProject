@@ -6,8 +6,7 @@ using UnityEngine;
 
 public class PlayerInventoryModel : MonoBehaviour
 {
-
-
+    public static int dollarsInInventory { get; private set; }
     [SerializeField] private PlayerInventoryView view;
     private int maxFishValue;
     private int maxFishTrainingFactor = 2;
@@ -16,7 +15,6 @@ public class PlayerInventoryModel : MonoBehaviour
     private int currentFishBValue = 0;
     private int currentFishCValue = 0;
     private List<Food> foodInHandList = new List<Food>();
-    public static int dollarsInInventory { get; private set; }
     private int defaultDollarsInInventory = 200; // GameSettings
     private TutorialController tutorial;
     private bool isActiveTutorial = false;

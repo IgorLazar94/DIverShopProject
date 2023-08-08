@@ -21,6 +21,7 @@ public class Fish : MonoBehaviour
     [SerializeField] private Image emptyImage;
     [SerializeField] private GameObject fishCanvas;
     [SerializeField] private SpriteRenderer blockSprite;
+    [SerializeField] private ParticleSystem rippleFX;
     private float runSpeed;
     private Rigidbody rb;
     private Vector3 randomDirection;
@@ -30,7 +31,7 @@ public class Fish : MonoBehaviour
     private Outline outline;
     private Transform mainCameraTransform;
     private Tween fillTween;
-    [SerializeField] private ParticleSystem rippleFX;
+    private float timeToCheckFishing = 0.25f;
     private void Start()
     {
         //rippleFX = GetComponentInChildren<ParticleSystem>();
@@ -166,7 +167,7 @@ public class Fish : MonoBehaviour
         while (true && isRunFromPlayer)
         {
             UpdatePlayerLos(playerPos);
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(timeToCheckFishing);
         }
     }
 
