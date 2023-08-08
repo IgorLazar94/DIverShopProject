@@ -49,7 +49,7 @@ public class KitchenCard : MonoBehaviour
                 titleText.text = "FriedFish";
                 blockTitle.text = "FriedFish";
                 recipeIcon.sprite = foodCollection.FriedFish_Sprite;
-                ingredientOneText.text = 2.ToString();
+                ingredientOneText.text = 1.ToString();
                 ingredientOneIcon.sprite = fishCollection.FishA_Sprite;
                 priceToUnblockReceipe = 0;
                 purchasePriceText.text = priceToUnblockReceipe.ToString();
@@ -86,7 +86,7 @@ public class KitchenCard : MonoBehaviour
     {
         if (typeOfCard == TypeOfCard.FriedFish)
         {
-            if (fishA >= 2)
+            if (fishA >= 1)
             {
                 ActivateButton();
             }

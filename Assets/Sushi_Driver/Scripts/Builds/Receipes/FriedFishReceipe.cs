@@ -13,7 +13,7 @@ public struct FriedFishReceipe
 
     public int CookIngredientOne()
     {
-        int requiredFishA = 2;
+        int requiredFishA = 1;
         int resultA = FishA - requiredFishA;
         return resultA;
     }

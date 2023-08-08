@@ -2381,6 +2381,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5570655738364565364, guid: 2be78c0e232839241a1bacde6542d478, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5570655738364565366, guid: 2be78c0e232839241a1bacde6542d478, type: 3}
       propertyPath: m_Name
       value: RippleFX
@@ -4830,7 +4834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultPlayerSpeedParameter: 4
-  defaultMaxPlayerFishInventory: 8
+  defaultMaxPlayerFishInventory: 5
   defaultHarpoonParameter: 1
   defaultFOVRadiusParameter: 4
   defaultPlayerSpeedParameterFactor: 1
@@ -4846,8 +4850,8 @@ MonoBehaviour:
   priceToUnblockSandwitch: 30
   priceToUnblockFishburger: 50
   friedFishPrice: 10
-  sandwichPrice: 15
-  fishburgerPrice: 20
+  sandwichPrice: 20
+  fishburgerPrice: 30
 --- !u!4 &1071560900
 Transform:
   m_ObjectHideFlags: 0
