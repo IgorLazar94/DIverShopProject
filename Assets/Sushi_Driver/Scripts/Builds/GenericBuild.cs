@@ -50,13 +50,15 @@ public abstract class GenericBuild : MonoBehaviour
     {
         receivePoint.SetActive(true);
         productPoint.SetActive(true);
-        receivePoint.transform.DOScale(Vector3.one, 0.5f);
-        productPoint.transform.DOScale(Vector3.one, 0.5f);
+        //receivePoint.transform.DOScale(Vector3.one, 0.5f);
+        //productPoint.transform.DOScale(Vector3.one, 0.5f);
     }
 
     private void DeactivateBuild()
     {
-        receivePoint.transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => receivePoint.SetActive(false));
-        productPoint.transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => productPoint.SetActive(false));
+        //receivePoint.transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => receivePoint.SetActive(false));
+        //productPoint.transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => productPoint.SetActive(false));
+        receivePoint.SetActive(false);
+        productPoint.SetActive(false);
     }
 }

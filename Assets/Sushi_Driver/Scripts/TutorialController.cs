@@ -17,7 +17,6 @@ public class TutorialController : MonoBehaviour
     private Vector3 kitchenPosition;
     private Vector3 shopPosition;
     private List<BuyingZone> BuyingZones = new List<BuyingZone>();
-    private BuyingZone[] buyingZones;
     private Quaternion defaultSpriteRotation;
     private Fish targetFish;
     private float pointerOffset = 1.2f;
@@ -155,9 +154,8 @@ public class TutorialController : MonoBehaviour
     {
         string message = "Now buyers will buy food, and you can develop your business";
         uIController.ShowTutorialMessage(message);
-
+        EnableOtherBuyingZones();
         Invoke(nameof(MarkTutorialCompleted), 2.5f);
-        //MarkTutorialCompleted();
     }
 
     public void MarkTutorialCompleted()
@@ -179,6 +177,14 @@ public class TutorialController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             OnNextTutorialStep.Invoke();
+        }
+    }
+
+    private void EnableOtherBuyingZones()
+    {
+        foreach (var zone in BuyingZones)
+        {
+            zone.gameObject.GetComponent<BoxCollider>().enabled = true;
         }
     }
 }
