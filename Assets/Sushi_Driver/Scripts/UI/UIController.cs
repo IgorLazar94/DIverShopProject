@@ -22,6 +22,7 @@ public class UIController : MonoBehaviour
 
     [SerializeField] private GameObject debugPanel;
     [SerializeField] private GameObject trainingPanel;
+    [SerializeField] private GameObject aDSPanel;
 
     private void Start()
     {
@@ -65,7 +66,8 @@ public class UIController : MonoBehaviour
 
     public void ShowKitchenUI()
     {
-        HidePanel(HeaderPanel);
+        //HidePanel(HeaderPanel);
+        HidePanel(aDSPanel);
         HidePanel(InputPanel);
         ShowPanel(KitchenPanel);
     }
@@ -73,7 +75,8 @@ public class UIController : MonoBehaviour
     public void HideKitchenUI()
     {
         HidePanel(KitchenPanel);
-        ShowPanel(HeaderPanel);
+        //ShowPanel(HeaderPanel);
+        ShowPanel(aDSPanel);
         ShowPanel(InputPanel);
     }
 
@@ -151,6 +154,7 @@ public class UIController : MonoBehaviour
 
     public void ShowTrainingPanel()
     {
+        HidePanel(aDSPanel);
         HidePanel(InputPanel);
         ShowPanel(trainingPanel);
         CheckTrainingButtonsActive();
@@ -166,6 +170,7 @@ public class UIController : MonoBehaviour
 
     public void HideTrainingPanel()
     {
+        ShowPanel(aDSPanel);
         HidePanel(trainingPanel);
         ShowPanel(InputPanel);
     }
