@@ -13,7 +13,6 @@ namespace Player
         public static Action OnPlayerHandsFree;
         private Animator animator;
         private ParticleSystem rippleSplashFX;
-        private bool playerIsStopped = false;
 
         private void Start()
         {
@@ -80,9 +79,6 @@ namespace Player
             {
                 animator.SetTrigger(AnimParameters.Climbes);
             }
-
-            // костыль?
-            //PlayerMovementControl.onPlayerStopped.Invoke(0.1f);
         }
 
         private void StartDivesAnim()

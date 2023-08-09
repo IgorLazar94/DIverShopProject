@@ -4412,7 +4412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f3d5bd733926304b9804d3e47a1b890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerDefaultDollars: 1000
+  playerDefaultDollars: 200
   defaultPlayerSpeedParameter: 4
   defaultMaxPlayerFishInventory: 5
   defaultHarpoonParameter: 1
