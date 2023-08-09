@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -22,6 +23,12 @@ namespace UI
 
         public void OnDrag(PointerEventData ped)
         {
+            if (Input.touchCount == 2)
+            {
+                isNotHasInputDirection?.Invoke();
+                joystick.gameObject.SetActive(false);
+                return;
+            }
             Vector2 touchPosition = Vector2.zero;
 
             if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
