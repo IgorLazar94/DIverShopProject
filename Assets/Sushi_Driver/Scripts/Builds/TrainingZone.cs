@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Player;
 
 public class TrainingZone : GenericBuild
 {
@@ -14,6 +15,7 @@ public class TrainingZone : GenericBuild
     public void Enter()
     {
         uIController.ShowTrainingPanel();
+        PlayerMovementControl.onPlayerStopped.Invoke();
     }
 
     public void Exit()

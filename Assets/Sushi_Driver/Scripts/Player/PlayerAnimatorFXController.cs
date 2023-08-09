@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
 
 namespace Player
 {
@@ -12,6 +13,7 @@ namespace Player
         public static Action OnPlayerHandsFree;
         private Animator animator;
         private ParticleSystem rippleSplashFX;
+        private bool playerIsStopped = false;
 
         private void Start()
         {
@@ -49,9 +51,16 @@ namespace Player
             animator.SetBool(AnimParameters.isRun, true);
         }
 
-        private void StopRunAnimation()
+        private async void StopRunAnimation()
         {
             // stop particles
+            animator.SetBool(AnimParameters.isRun, false);
+            await PlayerReadyToMoveAsync();
+        }
+
+        private async Task PlayerReadyToMoveAsync()
+        {
+            await Task.Delay(TimeSpan.FromSeconds(0.25f));
             animator.SetBool(AnimParameters.isRun, false);
         }
 
