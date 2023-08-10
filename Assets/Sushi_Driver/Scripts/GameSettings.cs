@@ -1,10 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class GameSettings : MonoBehaviour
 {
     public static GameSettings Instance { get; private set; }
+
+    private void Awake()
+    {
+        MakeSingleton();
+        LoadGameSettings();
+    }
+
+    private void MakeSingleton()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     [Space]
     [SerializeField] private int playerDefaultDollars;
@@ -32,7 +52,7 @@ public class GameSettings : MonoBehaviour
     [SerializeField] private int parameterPriceLevel_5;
 
     [Space]
-    [Tooltip("in seconds")] [SerializeField] private float timeToVisitCustomers;
+    [Tooltip("in seconds")][SerializeField] private float timeToVisitCustomers;
 
     [Space]
     [Header("Prices to unblock receipe")]
@@ -45,26 +65,26 @@ public class GameSettings : MonoBehaviour
     [SerializeField] private ushort sandwichPrice;
     [SerializeField] private ushort fishburgerPrice;
 
+    //public void SaveGameSettings()
+    //{
+    //    SaveData saveData = new SaveData
+    //    {
+    //        playerDefaultDollars = playerDefaultDollars,
+    //        // Сохраните другие поля...
+    //    };
 
+    //    SaveLoadManager.SaveData(saveData);
+    //}
 
-
-    private void Awake()
+    public void LoadGameSettings()
     {
-        MakeSingleton();
-    }
-    private void MakeSingleton()
-    {
-        if (Instance == null)
+        SaveData saveData = SaveLoadManager.LoadData();
+        if (saveData != null)
         {
-            Instance = this;
+            playerDefaultDollars = saveData.playerDefaultDollars;
+            // Загрузите другие поля...
         }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-        DontDestroyOnLoad(this.gameObject);
     }
-
     public int GetPlayerDefaultDollars()
     {
         return playerDefaultDollars;
@@ -151,4 +171,5 @@ public class GameSettings : MonoBehaviour
     {
         return defaultFOVRadiusParameterFactor;
     }
+
 }

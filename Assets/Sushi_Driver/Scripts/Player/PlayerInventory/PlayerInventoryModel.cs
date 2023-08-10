@@ -15,7 +15,7 @@ public class PlayerInventoryModel : MonoBehaviour
     private int currentFishBValue = 0;
     private int currentFishCValue = 0;
     private List<Food> foodInHandList = new List<Food>();
-    private int defaultDollarsInInventory; // GameSettings
+    private int defaultDollarsInInventory;
     private TutorialController tutorial;
     private bool isActiveTutorial = false;
 
@@ -153,5 +153,16 @@ public class PlayerInventoryModel : MonoBehaviour
     {
         dollarsInInventory += value;
         view.UpdateDollarsCount(dollarsInInventory);
+        SaveDollars(dollarsInInventory);
+    }
+
+    private void SaveDollars(int currentDollars)
+    {
+        SaveData saveData = new SaveData
+        {
+            playerDefaultDollars = currentDollars
+        };
+
+        SaveLoadManager.SaveData(saveData);
     }
 }

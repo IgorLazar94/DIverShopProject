@@ -2443,6 +2443,10 @@ PrefabInstance:
       propertyPath: activateBuild
       value: 
       objectReference: {fileID: 756505360}
+    - target: {fileID: 6527833872987244275, guid: 011afeb5d4b37ad4e8b4c9fedc8edbdc, type: 3}
+      propertyPath: typeOfBuyingZone
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6527833873013461249, guid: 011afeb5d4b37ad4e8b4c9fedc8edbdc, type: 3}
       propertyPath: m_Layer
       value: 10
@@ -4381,6 +4385,10 @@ PrefabInstance:
       propertyPath: activateBuild
       value: 
       objectReference: {fileID: 1564476218}
+    - target: {fileID: 6527833872987244275, guid: 011afeb5d4b37ad4e8b4c9fedc8edbdc, type: 3}
+      propertyPath: typeOfBuyingZone
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 011afeb5d4b37ad4e8b4c9fedc8edbdc, type: 3}
 --- !u!1 &1071560898
