@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerInventoryModel : MonoBehaviour
+public class PlayerInventoryModel : MonoBehaviour, IDataPersistence
 {
     public static int dollarsInInventory { get; private set; }
     [SerializeField] private PlayerInventoryView view;
@@ -153,16 +153,27 @@ public class PlayerInventoryModel : MonoBehaviour
     {
         dollarsInInventory += value;
         view.UpdateDollarsCount(dollarsInInventory);
-        SaveDollars(dollarsInInventory);
+        DataPersistenceManager.Instance.SaveGame();
+        //SaveDollars(dollarsInInventory);
     }
 
-    private void SaveDollars(int currentDollars)
-    {
-        SaveData saveData = new SaveData
-        {
-            playerDefaultDollars = currentDollars
-        };
+    //private void SaveDollars(int currentDollars)
+    //{
+    //    SaveData saveData = new SaveData
+    //    {
+    //        playerDefaultDollars = currentDollars
+    //    };
 
-        SaveLoadManager.SaveData(saveData);
+    //    SaveLoadManager.SaveData(saveData);
+    //}
+
+    public void LoadData(GameData gameData)
+    {
+        dollarsInInventory = gameData.dollars;
+    }
+
+    public void SaveData(ref GameData gameData)
+    {
+        gameData.dollars = dollarsInInventory;
     }
 }

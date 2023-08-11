@@ -10,7 +10,6 @@ public class GameSettings : MonoBehaviour
     private void Awake()
     {
         MakeSingleton();
-        LoadGameSettings();
     }
 
     private void MakeSingleton()
@@ -76,15 +75,6 @@ public class GameSettings : MonoBehaviour
     //    SaveLoadManager.SaveData(saveData);
     //}
 
-    public void LoadGameSettings()
-    {
-        SaveData saveData = SaveLoadManager.LoadData();
-        if (saveData != null)
-        {
-            playerDefaultDollars = saveData.playerDefaultDollars;
-            // Загрузите другие поля...
-        }
-    }
     public int GetPlayerDefaultDollars()
     {
         return playerDefaultDollars;

@@ -10,7 +10,7 @@ public enum TypeOfBuyingZone
     Training
 }
 
-public class BuyingZone : MonoBehaviour
+public class BuyingZone : MonoBehaviour, IDataPersistence
 {
     [SerializeField] TypeOfBuyingZone typeOfBuyingZone;
     [SerializeField] private GameObject activateBuild;
@@ -87,43 +87,28 @@ public class BuyingZone : MonoBehaviour
 
     private void LoadIsBuildingComplete()
     {
-        LoadBuildStatus();
         switch (typeOfBuyingZone)
         {
             case TypeOfBuyingZone.Kitchen:
                 if (isKitchenComplete)
                 {
-                    Debug.Log("is buying zone Kitchen destroy from start");
                     FastBuildActivation();
                 }
                 break;
             case TypeOfBuyingZone.Shop:
                 if (isShopComplete)
                 {
-                    Debug.Log("is buying zone Shop destroy from start");
                     FastBuildActivation();
                 }
                 break;
             case TypeOfBuyingZone.Training:
                 if (isTrainingComplete)
                 {
-                    Debug.Log("is buying zone Training destroy from start");
                     FastBuildActivation();
                 }
                 break;
             default:
                 break;
-        }
-    }
-
-    private void LoadBuildStatus()
-    {
-        SaveData saveData = SaveLoadManager.LoadData();
-        if (saveData != null)
-        {
-            isKitchenComplete = saveData.isKitchenBuildComplete;
-            isShopComplete = saveData.isShopBuildComplete;
-            isTrainingComplete = saveData.isTrainingBuildComplete;
         }
     }
 
@@ -133,27 +118,41 @@ public class BuyingZone : MonoBehaviour
         {
             case TypeOfBuyingZone.Kitchen:
                 isKitchenComplete = true;
+                DataPersistenceManager.Instance.SaveGame();
                 break;
             case TypeOfBuyingZone.Shop:
                 isShopComplete = true;
+                DataPersistenceManager.Instance.SaveGame();
                 break;
             case TypeOfBuyingZone.Training:
                 isTrainingComplete = true;
+                DataPersistenceManager.Instance.SaveGame();
                 break;
             default:
                 break;
         }
-        SaveBuildStatus();
     }
 
-    private void SaveBuildStatus()
+    public void LoadData(GameData gameData)
     {
-        SaveData saveData = new SaveData
+        this.isKitchenComplete = gameData.isKitchenCompleteData;
+        this.isShopComplete = gameData.isShopCompleteData;
+        this.isTrainingComplete = gameData.isTrainingCompleteData;
+    }
+
+    public void SaveData(ref GameData gameData)
+    {
+        if (typeOfBuyingZone == TypeOfBuyingZone.Kitchen)
         {
-            isKitchenBuildComplete = this.isKitchenComplete,
-            isShopBuildComplete = this.isShopComplete,
-            isTrainingBuildComplete = this.isTrainingComplete,
-        };
-        SaveLoadManager.SaveData(saveData);
+            gameData.isKitchenCompleteData = this.isKitchenComplete;
+        }
+        else if (typeOfBuyingZone == TypeOfBuyingZone.Shop)
+        {
+            gameData.isShopCompleteData = this.isShopComplete;
+        }
+        else if (typeOfBuyingZone == TypeOfBuyingZone.Training)
+        {
+            gameData.isTrainingCompleteData = this.isTrainingComplete;
+        }
     }
 }

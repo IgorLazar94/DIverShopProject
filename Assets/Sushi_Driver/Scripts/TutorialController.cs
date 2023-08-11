@@ -136,8 +136,10 @@ public class TutorialController : MonoBehaviour
     {
         string message = "Buy a kitchen and cook fish";
         uIController.ShowTutorialMessage(message);
-
-        kitchenBuyingZone.GetComponent<BoxCollider>().enabled = true;
+        if (kitchenBuyingZone != null)
+        {
+            kitchenBuyingZone.GetComponent<BoxCollider>().enabled = true;
+        }
         BuyingZones.Remove(kitchenBuyingZone.GetComponent<BuyingZone>());
     }
 
@@ -145,8 +147,10 @@ public class TutorialController : MonoBehaviour
     {
         string message = "Take the fish, buy a store and sell fish";
         uIController.ShowTutorialMessage(message);
-
-        shopBuyingZone.GetComponent<BoxCollider>().enabled = true;
+        if (shopBuyingZone != null)
+        {
+            shopBuyingZone.GetComponent<BoxCollider>().enabled = true;
+        }
         BuyingZones.Remove(shopBuyingZone.GetComponent<BuyingZone>());
     }
 
