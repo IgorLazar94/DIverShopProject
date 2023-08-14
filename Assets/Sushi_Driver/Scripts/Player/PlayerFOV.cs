@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFOV : MonoBehaviour
+public class PlayerFOV : MonoBehaviour, IDataPersistence
 {
     public float currentViewRadius { get; set; }
     public float defaultViewRadius { get; private set; }
@@ -37,7 +37,11 @@ public class PlayerFOV : MonoBehaviour
     private void Start()
     {
         ConnectGameSettings();
-        currentharpoonLevel = defaultharpoonLevel;
+        if (DataPersistenceManager.isNewGame)
+        {
+            currentharpoonLevel = defaultharpoonLevel;
+            defaultViewRadius = GameSettings.Instance.GetDefaultPlayerFOV();
+        }
         viewMesh = new Mesh();
         viewMesh.name = "View Mesh";
         viewMeshFilter.mesh = viewMesh;
@@ -46,7 +50,7 @@ public class PlayerFOV : MonoBehaviour
 
     private void ConnectGameSettings()
     {
-        defaultViewRadius = GameSettings.Instance.GetDefaultPlayerFOV();
+        //defaultViewRadius = GameSettings.Instance.GetDefaultPlayerFOV();
         defaultharpoonLevel = GameSettings.Instance.GetDefaultHarpoonLevel();
         harpoonTrainingFactor = GameSettings.Instance.GetHarpoonFactor();
         viewRadiusUpgradeFactor = GameSettings.Instance.GetPlayerFOVFactor();
@@ -55,11 +59,13 @@ public class PlayerFOV : MonoBehaviour
     private void UpdateHarpoonLevel()
     {
         currentharpoonLevel += harpoonTrainingFactor;
+        DataPersistenceManager.Instance.SaveGame();
     }
 
     private void UpgradeViewRadius()
     {
         defaultViewRadius += viewRadiusUpgradeFactor;
+        DataPersistenceManager.Instance.SaveGame();
     }
 
     public void EnableView()
@@ -284,6 +290,19 @@ public class PlayerFOV : MonoBehaviour
             angleInDegrees += transform.eulerAngles.y;
         }
         return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
+    }
+
+    public void LoadData(GameData gameData)
+    {
+        currentharpoonLevel = gameData.currentHarpoonParameter;
+        defaultViewRadius = gameData.currentFOVRadiusParameter;
+
+    }
+
+    public void SaveData(ref GameData gameData)
+    {
+        gameData.currentHarpoonParameter = currentharpoonLevel;
+        gameData.currentFOVRadiusParameter = defaultViewRadius;
     }
 
     public struct ViewCastInfo

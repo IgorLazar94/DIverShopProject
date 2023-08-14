@@ -24,10 +24,10 @@ public class BuyingZone : MonoBehaviour, IDataPersistence
 
     private void Start()
     {
+        DefaultDeactivateBuild();
         LoadIsBuildingComplete();
         priceText.text = price.ToString();
         nameText.text = objectName.ToString();
-        DefaultDeactivateBuild();
     }
 
     private void DefaultDeactivateBuild()

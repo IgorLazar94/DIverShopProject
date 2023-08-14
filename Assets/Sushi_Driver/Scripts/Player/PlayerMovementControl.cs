@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerMovementControl : MonoBehaviour
+    public class PlayerMovementControl : MonoBehaviour, IDataPersistence
     {
         private float speed;
         private float trainingFactorSpeed;
@@ -17,7 +17,10 @@ namespace Player
 
         private void Start()
         {
-            speed = GameSettings.Instance.GetPlayerSpeedParameter();
+            if (DataPersistenceManager.isNewGame)
+            {
+                speed = GameSettings.Instance.GetPlayerSpeedParameter();
+            }
             trainingFactorSpeed = GameSettings.Instance.GetPlayerSpeedFactor();
             rb = GetComponent<Rigidbody>();
         }
@@ -45,6 +48,7 @@ namespace Player
         private void UpdateSpeedParameter()
         {
             speed += trainingFactorSpeed;
+            DataPersistenceManager.Instance.SaveGame();
         }
 
         private void PlayerMove(Vector3 _inputDirection)
@@ -83,6 +87,16 @@ namespace Player
         private void OffsetDiving()
         {
             transform.DOLocalMoveX(-9f, 0.5f);
+        }
+
+        public void LoadData(GameData gameData)
+        {
+            this.speed = gameData.currentPlayerSpeedParameter;
+        }
+
+        public void SaveData(ref GameData gameData)
+        {
+            gameData.currentPlayerSpeedParameter = this.speed;
         }
     }
 }

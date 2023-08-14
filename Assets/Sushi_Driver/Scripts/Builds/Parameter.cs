@@ -12,7 +12,7 @@ public enum TypeOfParameter
     Speed,
     FOV
 }
-public class Parameter : MonoBehaviour
+public class Parameter : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private TypeOfParameter typeOfParameter;
     [SerializeField] private TextMeshProUGUI levelText;
@@ -29,6 +29,11 @@ public class Parameter : MonoBehaviour
     private int price_3Level;
     private int price_4Level;
     private int price_5Level;
+
+    private int currentHarpoonLevel;
+    private int currentBackpackLevel;
+    private int currentSpeedLevel;
+    private int currentFOVLevel;
 
     private void Start()
     {
@@ -93,15 +98,23 @@ public class Parameter : MonoBehaviour
         {
             case TypeOfParameter.Harpoon:
                 TrainingZone.OnHarpoonUpdateParameter.Invoke();
+                currentHarpoonLevel = level + 1;
+                DataPersistenceManager.Instance.SaveGame();
                 break;
             case TypeOfParameter.Backpack:
                 TrainingZone.OnBackpackUpdateParameter.Invoke();
+                currentBackpackLevel = level + 1;
+                DataPersistenceManager.Instance.SaveGame();
                 break;
             case TypeOfParameter.Speed:
                 TrainingZone.OnSpeedUpdateParameter.Invoke();
+                currentSpeedLevel = level + 1;
+                DataPersistenceManager.Instance.SaveGame();
                 break;
             case TypeOfParameter.FOV:
                 TrainingZone.OnFOVUpdateParameter.Invoke();
+                currentFOVLevel = level + 1;
+                DataPersistenceManager.Instance.SaveGame();
                 break;
             default:
                 break;
@@ -162,5 +175,51 @@ public class Parameter : MonoBehaviour
     private void ActivateMaxLabel()
     {
         maxLabel.SetActive(true);
+    }
+
+    public void LoadData(GameData gameData)
+    {
+        switch (typeOfParameter)
+        {
+            case TypeOfParameter.Harpoon:
+                currentHarpoonLevel = gameData.currentLevelHarpoon;
+                level = gameData.currentLevelHarpoon;
+                break;
+            case TypeOfParameter.Backpack:
+                currentBackpackLevel = gameData.currentLevelMaxInventory;
+                level = gameData.currentLevelMaxInventory;
+                break;
+            case TypeOfParameter.Speed:
+                currentSpeedLevel = gameData.currentLevelSpeed;
+                level = gameData.currentLevelSpeed;
+                break;
+            case TypeOfParameter.FOV:
+                currentFOVLevel = gameData.currentLevelFOV;
+                level = gameData.currentLevelFOV;
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void SaveData(ref GameData gameData)
+    {
+        switch (typeOfParameter)
+        {
+            case TypeOfParameter.Harpoon:
+                gameData.currentLevelHarpoon = this.currentHarpoonLevel;
+                break;
+            case TypeOfParameter.Backpack:
+                gameData.currentLevelMaxInventory = this.currentBackpackLevel;
+                break;
+            case TypeOfParameter.Speed:
+                gameData.currentLevelSpeed = this.currentSpeedLevel;
+                break;
+            case TypeOfParameter.FOV:
+                gameData.currentLevelFOV = this.currentFOVLevel;
+                break;
+            default:
+                break;
+        }
     }
 }

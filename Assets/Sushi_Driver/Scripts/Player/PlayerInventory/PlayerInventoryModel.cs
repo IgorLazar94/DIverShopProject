@@ -22,10 +22,13 @@ public class PlayerInventoryModel : MonoBehaviour, IDataPersistence
     private void Start()
     {
         CheckTutorial();
-        defaultDollarsInInventory = GameSettings.Instance.GetPlayerDefaultDollars();
+        if (DataPersistenceManager.isNewGame)
+        {
+            defaultDollarsInInventory = GameSettings.Instance.GetPlayerDefaultDollars();
+            maxFishValue = GameSettings.Instance.GetMaxPlayerFishInventory();
+        }
         PlayerInventoryPresenter.OnCurrentDollarsChanged.Invoke(defaultDollarsInInventory);
         CalculateTotalFishQuantity();
-        maxFishValue = GameSettings.Instance.GetMaxPlayerFishInventory();
         maxFishTrainingFactor = GameSettings.Instance.GetPlayerMaxInventoryFactor();
         PlayerInventoryPresenter.OnMaxFishChanged.Invoke(maxFishValue);
     }
@@ -51,7 +54,7 @@ public class PlayerInventoryModel : MonoBehaviour, IDataPersistence
     {
         maxFishValue += maxFishTrainingFactor;
         PlayerInventoryPresenter.OnMaxFishChanged.Invoke(maxFishValue);
-
+        DataPersistenceManager.Instance.SaveGame();
     }
 
     private void CheckTutorial()
@@ -170,10 +173,12 @@ public class PlayerInventoryModel : MonoBehaviour, IDataPersistence
     public void LoadData(GameData gameData)
     {
         dollarsInInventory = gameData.dollars;
+        maxFishValue = gameData.currentMaxPlayerFishInventoryParameter;
     }
 
     public void SaveData(ref GameData gameData)
     {
         gameData.dollars = dollarsInInventory;
+        gameData.currentMaxPlayerFishInventoryParameter = maxFishValue;
     }
 }

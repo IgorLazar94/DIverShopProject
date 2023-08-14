@@ -11,7 +11,7 @@ public enum TypeOfCard
     SandWich,
     Fishburger
 }
-public class KitchenCard : MonoBehaviour
+public class KitchenCard : MonoBehaviour, IDataPersistence
 {
     [Inject] private FoodCollection foodCollection;
     [Inject] private FishCollection fishCollection;
@@ -33,11 +33,14 @@ public class KitchenCard : MonoBehaviour
     private const string tutorialKey = "TutorialCompleted";
     private bool isCompleteTutorial;
 
+    private bool isUnblockFriedFish;
+    private bool isUnblockSandwich;
+    private bool isUnblockFishburger;
 
     private void Start()
     {
         FillCard();
-        SetDefaultCardBlockState();
+        CheckDefaultCardBlockState();
         CheckTutorialComplete();
     }
 
@@ -141,26 +144,41 @@ public class KitchenCard : MonoBehaviour
         {
             PlayerInventoryPresenter.OnCurrentDollarsChanged.Invoke(-priceToUnblockReceipe);
             BlockCard(false);
+            switch (typeOfCard)
+            {
+                case TypeOfCard.FriedFish:
+                    isUnblockFriedFish = true;
+                    break;
+                case TypeOfCard.SandWich:
+                    isUnblockSandwich = true;
+                    break;
+                case TypeOfCard.Fishburger:
+                    isUnblockFishburger = true;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
     private void BlockCard(bool value)
     {
         blockPanel.SetActive(value);
+        DataPersistenceManager.Instance.SaveGame();
     }
 
-    private void SetDefaultCardBlockState()
+    private void CheckDefaultCardBlockState()
     {
         switch (typeOfCard)
         {
             case TypeOfCard.FriedFish:
-                BlockCard(false);
+                BlockCard(!isUnblockFriedFish);
                 break;
             case TypeOfCard.SandWich:
-                BlockCard(true);
+                BlockCard(!isUnblockSandwich);
                 break;
             case TypeOfCard.Fishburger:
-                BlockCard(true);
+                BlockCard(!isUnblockFishburger);
                 break;
             default:
                 break;
@@ -170,5 +188,41 @@ public class KitchenCard : MonoBehaviour
     private void CheckTutorialComplete()
     {
         isCompleteTutorial = PlayerPrefs.GetInt(tutorialKey, 0) == 1;
+    }
+
+    public void LoadData(GameData gameData)
+    {
+        switch (typeOfCard)
+        {
+            case TypeOfCard.FriedFish:
+                isUnblockFriedFish = gameData.isUnblockFriedFishReceipe;
+                break;
+            case TypeOfCard.SandWich:
+                isUnblockSandwich = gameData.isUnblockSandwichReceipe;
+                break;
+            case TypeOfCard.Fishburger:
+                isUnblockFishburger = gameData.isUnblockFishburgerReceipe;
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void SaveData(ref GameData gameData)
+    {
+        switch (typeOfCard)
+        {
+            case TypeOfCard.FriedFish:
+                gameData.isUnblockFriedFishReceipe = isUnblockFriedFish;
+                break;
+            case TypeOfCard.SandWich:
+                gameData.isUnblockSandwichReceipe = isUnblockSandwich;
+                break;
+            case TypeOfCard.Fishburger:
+                gameData.isUnblockFishburgerReceipe = isUnblockFishburger;
+                break;
+            default:
+                break;
+        }
     }
 }
