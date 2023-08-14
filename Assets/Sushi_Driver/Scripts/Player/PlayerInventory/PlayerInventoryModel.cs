@@ -27,7 +27,7 @@ public class PlayerInventoryModel : MonoBehaviour, IDataPersistence
             defaultDollarsInInventory = GameSettings.Instance.GetPlayerDefaultDollars();
             maxFishValue = GameSettings.Instance.GetMaxPlayerFishInventory();
         }
-        PlayerInventoryPresenter.OnCurrentDollarsChanged.Invoke(defaultDollarsInInventory);
+        PlayerInventoryPresenter.OnCurrentDollarsChanged.Invoke(0);
         CalculateTotalFishQuantity();
         maxFishTrainingFactor = GameSettings.Instance.GetPlayerMaxInventoryFactor();
         PlayerInventoryPresenter.OnMaxFishChanged.Invoke(maxFishValue);

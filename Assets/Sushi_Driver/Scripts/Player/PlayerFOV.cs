@@ -138,10 +138,6 @@ public class PlayerFOV : MonoBehaviour, IDataPersistence
             //    Debug.Log("run");
             //    fish.StartCoroutine(fish.StartRunFromPlayer(transform));
             //}
-
-
-
-
             Transform target = targetsInFOV[i].transform;
             Vector3 dirToTarget = (target.position - transform.position).normalized;
             if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2)

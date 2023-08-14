@@ -37,21 +37,18 @@ public class BuyingZone : MonoBehaviour, IDataPersistence
             case TypeOfBuyingZone.Kitchen:
                 if (!isKitchenComplete)
                 {
-                    Debug.Log("Default deactivate kitchen");
                     activateBuild.SetActive(false);
                 }
                 break;
             case TypeOfBuyingZone.Shop:
                 if (!isShopComplete)
                 {
-                    Debug.Log("Default deactivate shop");
                     activateBuild.SetActive(false);
                 }
                 break;
             case TypeOfBuyingZone.Training:
                 if (!isTrainingComplete)
                 {
-                    Debug.Log("Default deactivate training");
                     activateBuild.SetActive(false);
                 }
                 break;
@@ -73,7 +70,6 @@ public class BuyingZone : MonoBehaviour, IDataPersistence
     {
         activateBuild.transform.DOScale(Vector3.zero, 0.0f);
         activateBuild.SetActive(true);
-        Debug.Log("activate build" + activateBuild.gameObject.name);
         transform.DOScale(Vector3.zero, 0.25f);
         activateBuild.transform.DOScale(Vector3.one, 0.8f).SetEase(Ease.OutBack).OnComplete(() => Destroy(this.gameObject));
         SaveIsBuildingComplete();

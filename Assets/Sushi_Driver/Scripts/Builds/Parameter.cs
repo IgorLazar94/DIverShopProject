@@ -50,11 +50,6 @@ public class Parameter : MonoBehaviour, IDataPersistence
         price_5Level = GameSettings.Instance.GetParameterPriceLevelFive();
     }
 
-    //public void SetUIParentObject(UIController _uiController)
-    //{
-    //    uIController = _uiController;
-    //}
-
     private void CalculateNewLevelParameters()
     {
         switch (level)

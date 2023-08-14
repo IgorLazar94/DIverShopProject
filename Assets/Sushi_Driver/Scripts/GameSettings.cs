@@ -64,17 +64,6 @@ public class GameSettings : MonoBehaviour
     [SerializeField] private ushort sandwichPrice;
     [SerializeField] private ushort fishburgerPrice;
 
-    //public void SaveGameSettings()
-    //{
-    //    SaveData saveData = new SaveData
-    //    {
-    //        playerDefaultDollars = playerDefaultDollars,
-    //        // Сохраните другие поля...
-    //    };
-
-    //    SaveLoadManager.SaveData(saveData);
-    //}
-
     public int GetPlayerDefaultDollars()
     {
         return playerDefaultDollars;
