@@ -22,6 +22,7 @@ public class Fish : MonoBehaviour
     [SerializeField] private GameObject fishCanvas;
     [SerializeField] private SpriteRenderer blockSprite;
     [SerializeField] private ParticleSystem rippleFX;
+    [SerializeField] private Transform fishModel;
     private float runSpeed;
     private Rigidbody rb;
     private Vector3 randomDirection;
@@ -32,6 +33,7 @@ public class Fish : MonoBehaviour
     private Transform mainCameraTransform;
     private Tween fillTween;
     private float timeToCheckFishing = 0.25f;
+    private Sequence rotationSequence;
     private void Start()
     {
         //rippleFX = GetComponentInChildren<ParticleSystem>();
@@ -45,6 +47,7 @@ public class Fish : MonoBehaviour
         //childSprite.gameObject.SetActive(false);
         sequence = DOTween.Sequence();
         //FistRotation();
+        StartRotation();
         StartCoroutine(ChooseRandomDirection());
     }
 
@@ -83,7 +86,7 @@ public class Fish : MonoBehaviour
 
     protected void SwimFromPlayer()
     {
-        Vector3 targetPoint = transform.position + Quaternion.Euler(0, -270f, 0) * randomDirection;
+        Vector3 targetPoint = transform.position + Quaternion.Euler(0, 0, 0) * randomDirection;
         Vector3 direction = (transform.position - playerPos.position).normalized;
         rb.velocity = (direction * runSpeed) * Time.deltaTime;
         transform.LookAt(targetPoint);
@@ -242,6 +245,15 @@ public class Fish : MonoBehaviour
         {
             PlayerInventoryPresenter.OnCurrentFishChanged?.Invoke(1, TypeOfFish.FishC);
         }
+    }
+
+    private void StartRotation()
+    {
+        rotationSequence = DOTween.Sequence();
+        rotationSequence.Append(fishModel.DOLocalRotate(new Vector3(0f, 30f, 0f), 0.5f).SetEase(Ease.InOutQuad));
+        rotationSequence.Append(fishModel.DOLocalRotate(new Vector3(0f, -30f, 0f), 0.5f).SetEase(Ease.InOutQuad));
+        rotationSequence.SetLoops(-1);
+        rotationSequence.Play();
     }
 }
 
