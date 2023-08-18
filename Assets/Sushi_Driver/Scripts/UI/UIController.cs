@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 using System.Linq;
+using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject debugPanel;
     [SerializeField] private GameObject trainingPanel;
     [SerializeField] private GameObject aDSPanel;
+
+    [SerializeField] private Slider musicSlider, sfxSlider;
 
     private void Start()
     {
@@ -173,6 +176,16 @@ public class UIController : MonoBehaviour
         ShowPanel(aDSPanel);
         HidePanel(trainingPanel);
         ShowPanel(InputPanel);
+    }
+
+    public void ToggleMusic()
+    {
+        AudioManager.instance.ToggleMusic();
+    }
+
+    public void ToggleSFX()
+    {
+        AudioManager.instance.ToggleSFX();
     }
     
 
