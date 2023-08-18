@@ -100,6 +100,7 @@ public class Kitchen : GenericBuild
         {
             TutorialController.OnNextTutorialStep.Invoke();
         }
+        AudioManager.instance.PlaySFX(AudioCollection.Cook);
     }
 
     private GameObject ChooseFoodType()

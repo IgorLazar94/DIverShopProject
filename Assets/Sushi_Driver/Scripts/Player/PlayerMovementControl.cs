@@ -54,9 +54,12 @@ namespace Player
         private void PlayerMove(Vector3 _inputDirection)
         {
             if (!isReadyToMove) return;
-
             Vector3 playerDirection = new Vector3(_inputDirection.x, 0f, _inputDirection.y);
             rb.velocity = playerDirection * speed;
+            //if (OnTheWaterState.isInWater)
+            //{
+            //    AudioManager.instance.PlaySwimmingSound();
+            //}
             PlayerLookForward(playerDirection);
         }
 
@@ -69,6 +72,7 @@ namespace Player
         private void ResetSpeed()
         {
             rb.velocity = Vector3.zero;
+            //AudioManager.instance.PauseSwimmingSound();
         }
 
         private void EnableStopPlayer()

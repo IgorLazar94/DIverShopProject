@@ -200,9 +200,9 @@ public class Fish : MonoBehaviour
         EnableFishBar(isActivate);
         if (isActivate)
         {
-            fillTween = DOTween.To(() => emptyImage.fillAmount, 
-                                   v => emptyImage.fillAmount = v, 
-                                   1f, 
+            fillTween = DOTween.To(() => emptyImage.fillAmount,
+                                   v => emptyImage.fillAmount = v,
+                                   1f,
                                    timeToCatch)
                                    .OnComplete(() => FishCaught());
             //childSprite.FishingStartTimer(timeToCatch, this);
@@ -219,8 +219,28 @@ public class Fish : MonoBehaviour
     {
         var particle = Instantiate(rippleFX, transform.position, Quaternion.identity);
         particle.Play();
+        PlayRandomOutSplashSound();
         EnableFishBar(false);
         transform.DOJump(playerPos.position, 1f, 1, 0.3f).OnComplete(() => PassTheFishToPlayer());
+    }
+
+    private void PlayRandomOutSplashSound()
+    {
+        int random = Random.Range(0, 3);
+        switch (random)
+        {
+            case 0:
+                AudioManager.instance.PlaySFX(AudioCollection.OutSplash_1);
+                break;
+            case 1:
+                AudioManager.instance.PlaySFX(AudioCollection.OutSplash_2);
+                break;
+            case 2:
+                AudioManager.instance.PlaySFX(AudioCollection.OutSplash_3);
+                break;
+            default:
+                break;
+        }
     }
 
     private void PassTheFishToPlayer()

@@ -90,6 +90,7 @@ namespace Player
         private void PlayRippleFX()
         {
             rippleSplashFX.Play();
+            AudioManager.instance.PlaySFX(AudioCollection.InSplash_1);
         }
 
 

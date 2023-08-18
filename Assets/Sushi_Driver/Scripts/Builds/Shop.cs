@@ -226,6 +226,7 @@ public class Shop : GenericBuild
         }
         dollarsInShop.Clear();
         ResetDollarsPos();
+        AudioManager.instance.PlaySFX(AudioCollection.CashRegister);
     }
 
     private void TransitDollarToPlayer(GameObject _dollar)
