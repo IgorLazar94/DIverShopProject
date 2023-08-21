@@ -11,6 +11,10 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject HeaderPanel;
     [SerializeField] private GameObject InputPanel;
     [SerializeField] private GameObject KitchenPanel;
+    [SerializeField] private GameObject debugPanel;
+    [SerializeField] private GameObject trainingPanel;
+    [SerializeField] private GameObject sidePanel;
+    [SerializeField] private GameObject soundPanel;
 
     [SerializeField] private TextMeshProUGUI kitchenCurrentAFish;
     [SerializeField] private TextMeshProUGUI kitchenCurrentBFish;
@@ -21,9 +25,6 @@ public class UIController : MonoBehaviour
     private List<Parameter> parameters = new List<Parameter>();
     private Kitchen kitchen;
 
-    [SerializeField] private GameObject debugPanel;
-    [SerializeField] private GameObject trainingPanel;
-    [SerializeField] private GameObject aDSPanel;
 
     [SerializeField] private Slider musicSlider, sfxSlider;
 
@@ -70,7 +71,7 @@ public class UIController : MonoBehaviour
     public void ShowKitchenUI()
     {
         //HidePanel(HeaderPanel);
-        HidePanel(aDSPanel);
+        HidePanel(sidePanel);
         HidePanel(InputPanel);
         ShowPanel(KitchenPanel);
     }
@@ -79,7 +80,21 @@ public class UIController : MonoBehaviour
     {
         HidePanel(KitchenPanel);
         //ShowPanel(HeaderPanel);
-        ShowPanel(aDSPanel);
+        ShowPanel(sidePanel);
+        ShowPanel(InputPanel);
+    }
+
+    public void ShowSoundPanel()
+    {
+        HidePanel(sidePanel);
+        HidePanel(InputPanel);
+        ShowPanel(soundPanel);
+    }
+
+    public void HideSoundPanel()
+    {
+        HidePanel(soundPanel);
+        ShowPanel(sidePanel);
         ShowPanel(InputPanel);
     }
 
@@ -157,7 +172,7 @@ public class UIController : MonoBehaviour
 
     public void ShowTrainingPanel()
     {
-        HidePanel(aDSPanel);
+        HidePanel(sidePanel);
         HidePanel(InputPanel);
         ShowPanel(trainingPanel);
         CheckTrainingButtonsActive();
@@ -173,7 +188,7 @@ public class UIController : MonoBehaviour
 
     public void HideTrainingPanel()
     {
-        ShowPanel(aDSPanel);
+        ShowPanel(sidePanel);
         HidePanel(trainingPanel);
         ShowPanel(InputPanel);
     }
@@ -186,6 +201,16 @@ public class UIController : MonoBehaviour
     public void ToggleSFX()
     {
         AudioManager.instance.ToggleSFX();
+    }
+
+    public void MusicVolume()
+    {
+        AudioManager.instance.MusicVolume(musicSlider.value);
+    }
+
+    public void SFXVolume()
+    {
+        AudioManager.instance.SFXVolume(sfxSlider.value);
     }
     
 
