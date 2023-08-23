@@ -622,8 +622,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7abbe114cdb60a5458d70d895967782d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <currentViewRadius>k__BackingField: 0
-  <defaultViewRadius>k__BackingField: 0
   viewAngle: 100
   targetMask:
     serializedVersion: 2
