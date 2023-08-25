@@ -27,7 +27,6 @@ namespace Player
             {
                 buyingZone.CheckPlayerMoney();
             }
-
         }
         private void OnTriggerExit(Collider other)
         {
@@ -43,7 +42,6 @@ namespace Player
             {
                 onTriggerWater.Invoke();
             }
-
             if (collider.CompareTag(TagList.GroundTriggerZone))
             {
                 onPlayClimbAnim.Invoke();

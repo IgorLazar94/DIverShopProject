@@ -17,5 +17,4 @@ public class PlayerStateMachine
         CurrentState = newState;
         CurrentState.Enter();
     }
-
 }

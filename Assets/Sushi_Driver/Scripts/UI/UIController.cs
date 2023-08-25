@@ -15,19 +15,14 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject trainingPanel;
     [SerializeField] private GameObject sidePanel;
     [SerializeField] private GameObject soundPanel;
-
     [SerializeField] private TextMeshProUGUI kitchenCurrentAFish;
     [SerializeField] private TextMeshProUGUI kitchenCurrentBFish;
     [SerializeField] private TextMeshProUGUI kitchenCurrentCFish;
-
     [SerializeField] private TextMeshProUGUI tutorialText;
     [SerializeField] private List<KitchenCard> kitchenCards = new List<KitchenCard>();
+    [SerializeField] private Slider musicSlider, sfxSlider;
     private List<Parameter> parameters = new List<Parameter>();
     private Kitchen kitchen;
-
-
-    [SerializeField] private Slider musicSlider, sfxSlider;
-
     private void Start()
     {
         FillKitchenCardsList();
@@ -62,15 +57,10 @@ public class UIController : MonoBehaviour
     private void FillParameters()
     {
         parameters = gameObject.GetComponentsInChildren<Parameter>().ToList();
-        //foreach (var parameter in parameters)
-        //{
-        //    parameter.SetUIParentObject(this);
-        //}
     }
 
     public void ShowKitchenUI()
     {
-        //HidePanel(HeaderPanel);
         HidePanel(sidePanel);
         HidePanel(InputPanel);
         ShowPanel(KitchenPanel);
@@ -79,7 +69,6 @@ public class UIController : MonoBehaviour
     public void HideKitchenUI()
     {
         HidePanel(KitchenPanel);
-        //ShowPanel(HeaderPanel);
         ShowPanel(sidePanel);
         ShowPanel(InputPanel);
     }
@@ -147,28 +136,13 @@ public class UIController : MonoBehaviour
     {
         tutorialText.text = message;
         tutorialText.gameObject.SetActive(true);
-
         Sequence tutorialSequence = DOTween.Sequence();
-
         tutorialSequence.Append(tutorialText.rectTransform.DOScale(Vector3.one, 0.5f)).SetEase(Ease.InQuint);
         tutorialSequence.AppendInterval(2.5f);
         tutorialSequence.AppendCallback(HideTutorialText);
     }
 
 
-
-    // Debug
-    private void InDebug()
-    {
-        HidePanel(InputPanel);
-        debugPanel.SetActive(true);
-    }
-
-    private void OutDebug()
-    {
-        debugPanel.SetActive(false);
-        ShowPanel(InputPanel);
-    }
 
     public void ShowTrainingPanel()
     {
@@ -212,6 +186,17 @@ public class UIController : MonoBehaviour
     {
         AudioManager.instance.SFXVolume(sfxSlider.value);
     }
-    
 
+    // Debug
+    private void InDebug()
+    {
+        HidePanel(InputPanel);
+        debugPanel.SetActive(true);
+    }
+
+    private void OutDebug()
+    {
+        debugPanel.SetActive(false);
+        ShowPanel(InputPanel);
+    }
 }

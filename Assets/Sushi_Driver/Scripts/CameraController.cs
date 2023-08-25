@@ -14,7 +14,6 @@ public class CameraController : MonoBehaviour
     private float cameraScale;
     private bool isAndroidDevice;
 
-
     private void Start()
     {
         CheckRuntimePlatform();
@@ -58,16 +57,11 @@ public class CameraController : MonoBehaviour
         {
             Touch touchZero = Input.GetTouch(0);
             Touch touchOne = Input.GetTouch(1);
-
             Vector2 touchZeroLastPos = touchZero.position - touchZero.deltaPosition;
             Vector2 touchOneLastPos = touchOne.position - touchOne.deltaPosition;
-
             float distanceTouch = (touchZeroLastPos - touchOneLastPos).magnitude;
             float currentDistanceTouch = (touchZero.position - touchOne.position).magnitude;
-
-
             float difference = currentDistanceTouch - distanceTouch;
-
             if (difference > 0)
             {
                 cameraScale--;
@@ -89,5 +83,4 @@ public class CameraController : MonoBehaviour
         cameraScale = Mathf.Clamp(cameraScale, minScale, maxScale);
         mainCamera.fieldOfView = cameraScale;
     }
-
 }

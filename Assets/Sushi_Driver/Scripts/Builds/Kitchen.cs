@@ -7,7 +7,6 @@ using Zenject;
 
 public class Kitchen : GenericBuild
 {
-    //[Inject] private UIController ui_Controller;
     [Inject] private FoodCollection foodCollection;
     [SerializeField] private UIController ui_Controller;
     [SerializeField] private Transform spawnProductPoint;

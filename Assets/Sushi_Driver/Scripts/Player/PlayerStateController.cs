@@ -25,7 +25,6 @@ namespace Player
             onTheGroundState = new OnTheGroundState(this);
             onTheWaterState = new OnTheWaterState(this);
             playerSM.Initialize(new OnTheGroundState(this));
-
             textRectTransfrom = maxText.GetComponent<RectTransform>();
             mainCameraTransform = Camera.main.transform;
         }
@@ -57,7 +56,6 @@ namespace Player
 
         private void ChangeStateToGround()
         {
-            Debug.Log("Switch to ground");
             playerSM.ChangeState(onTheGroundState);
         }
 

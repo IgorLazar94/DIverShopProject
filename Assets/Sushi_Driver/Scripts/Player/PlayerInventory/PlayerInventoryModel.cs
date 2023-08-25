@@ -37,7 +37,6 @@ public class PlayerInventoryModel : MonoBehaviour, IDataPersistence
         PlayerInventoryPresenter.OnMaxFishChanged += SetMaxFishValue;
         PlayerInventoryPresenter.OnCurrentFishChanged += SetCurrentFishValue;
         PlayerInventoryPresenter.OnCurrentDollarsChanged += SetDollarsToInventory;
-        //PlayerInventoryPresenter.OnCurrentFishRemoved += RemoveFish;
         TrainingZone.OnBackpackUpdateParameter += TrainingNewMaxFishValue;
     }
 
@@ -46,7 +45,6 @@ public class PlayerInventoryModel : MonoBehaviour, IDataPersistence
         PlayerInventoryPresenter.OnMaxFishChanged -= SetMaxFishValue;
         PlayerInventoryPresenter.OnCurrentFishChanged -= SetCurrentFishValue;
         PlayerInventoryPresenter.OnCurrentDollarsChanged -= SetDollarsToInventory;
-        //PlayerInventoryPresenter.OnCurrentFishRemoved -= RemoveFish;
         TrainingZone.OnBackpackUpdateParameter -= TrainingNewMaxFishValue;
     }
 
@@ -88,8 +86,6 @@ public class PlayerInventoryModel : MonoBehaviour, IDataPersistence
     }
     private void SetCurrentFishValue(int value, TypeOfFish typeOfFish)
     {
-        //if (currentFishValue + value > maxFishValue) currentFishValue = maxFishValue;
-
         switch (typeOfFish)
         {
             case TypeOfFish.FishA:
@@ -157,18 +153,7 @@ public class PlayerInventoryModel : MonoBehaviour, IDataPersistence
         dollarsInInventory += value;
         view.UpdateDollarsCount(dollarsInInventory);
         DataPersistenceManager.Instance.SaveGame();
-        //SaveDollars(dollarsInInventory);
     }
-
-    //private void SaveDollars(int currentDollars)
-    //{
-    //    SaveData saveData = new SaveData
-    //    {
-    //        playerDefaultDollars = currentDollars
-    //    };
-
-    //    SaveLoadManager.SaveData(saveData);
-    //}
 
     public void LoadData(GameData gameData)
     {

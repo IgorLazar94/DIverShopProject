@@ -9,7 +9,6 @@ public class PlayerFOV : MonoBehaviour, IDataPersistence
     [Range(0, 360)] public float viewAngle;
     public LayerMask targetMask;
     public LayerMask obstacleMask;
-
     [HideInInspector]
     public List<Transform> visibleTargets = new List<Transform>();
     public float MeshResolution;
@@ -50,7 +49,6 @@ public class PlayerFOV : MonoBehaviour, IDataPersistence
 
     private void ConnectGameSettings()
     {
-        //defaultViewRadius = GameSettings.Instance.GetDefaultPlayerFOV();
         defaultharpoonLevel = GameSettings.Instance.GetDefaultHarpoonLevel();
         harpoonTrainingFactor = GameSettings.Instance.GetHarpoonFactor();
         viewRadiusUpgradeFactor = GameSettings.Instance.GetPlayerFOVFactor();
@@ -133,11 +131,6 @@ public class PlayerFOV : MonoBehaviour, IDataPersistence
 
         for (int i = 0; i < targetsInFOV.Length; i++)
         {
-            //if (targetsInFOV[i].TryGetComponent(out Fish fish) && !fish.isRunFromPlayer)
-            //{
-            //    Debug.Log("run");
-            //    fish.StartCoroutine(fish.StartRunFromPlayer(transform));
-            //}
             Transform target = targetsInFOV[i].transform;
             Vector3 dirToTarget = (target.position - transform.position).normalized;
             if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2)
@@ -192,9 +185,7 @@ public class PlayerFOV : MonoBehaviour, IDataPersistence
         for (int i = 0; i < stepCount; i++)
         {
             float angle = transform.eulerAngles.y - viewAngle / 2 + stepAngleSize * i;
-            //Debug.DrawLine(transform.position, transform.position + DirForAngle(angle, true) * viewRadius, Color.red);
             ViewCastInfo newViewCast = ViewCast(angle);
-
             if (i > 0)
             {
                 bool edgeDistanceThresholdExceted = Mathf.Abs(oldViewCast.distance - newViewCast.distance) > edgeDistanceThreshold;
@@ -211,7 +202,6 @@ public class PlayerFOV : MonoBehaviour, IDataPersistence
                     }
                 }
             }
-
             viewPoints.Add(newViewCast.point);
             oldViewCast = newViewCast;
         }
@@ -230,7 +220,6 @@ public class PlayerFOV : MonoBehaviour, IDataPersistence
                 triangles[i * 3 + 2] = i + 2;
             }
         }
-
         viewMesh.Clear();
         viewMesh.vertices = vertices;
         viewMesh.triangles = triangles;
@@ -248,7 +237,6 @@ public class PlayerFOV : MonoBehaviour, IDataPersistence
         {
             float angle = (minAngle + maxAngle) / 2;
             ViewCastInfo newViewCast = ViewCast(angle);
-
             bool edgeDistanceThresholdExceted = Mathf.Abs(minViewCast.distance - newViewCast.distance) > edgeDistanceThreshold;
             if (newViewCast.hit == minViewCast.hit && !edgeDistanceThresholdExceted)
             {
@@ -268,7 +256,6 @@ public class PlayerFOV : MonoBehaviour, IDataPersistence
     {
         Vector3 dir = DirForAngle(globalAngle, true);
         RaycastHit hit;
-
         if (Physics.Raycast(transform.position, dir, out hit, currentViewRadius, obstacleMask))
         {
             return new ViewCastInfo(true, hit.point, hit.distance, globalAngle);
@@ -292,7 +279,6 @@ public class PlayerFOV : MonoBehaviour, IDataPersistence
     {
         currentharpoonLevel = gameData.currentHarpoonParameter;
         defaultViewRadius = gameData.currentFOVRadiusParameter;
-
     }
 
     public void SaveData(ref GameData gameData)
@@ -307,7 +293,6 @@ public class PlayerFOV : MonoBehaviour, IDataPersistence
         public Vector3 point;
         public float distance;
         public float angle;
-
         public ViewCastInfo(bool _hit, Vector3 _point, float _dst, float _angle)
         {
             hit = _hit;
@@ -321,7 +306,6 @@ public class PlayerFOV : MonoBehaviour, IDataPersistence
     {
         public Vector3 PointA;
         public Vector3 PointB;
-
         public EdgeInfo(Vector3 _pointA, Vector3 _pointB)
         {
             PointA = _pointA;

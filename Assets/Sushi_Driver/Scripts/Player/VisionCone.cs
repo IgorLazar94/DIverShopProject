@@ -35,7 +35,6 @@ public class VisionCone : MonoBehaviour
         float angleIcrement = VisionAngle / (VisionConeResolution - 1);
         float Sine;
         float Cosine;
-
         for (int i = 0; i < VisionConeResolution; i++)
         {
             Sine = Mathf.Sin(Currentangle);
@@ -45,25 +44,11 @@ public class VisionCone : MonoBehaviour
             if (Physics.Raycast(transform.position, RaycastDirection, out RaycastHit hit, VisionRange, VisionObstructingLayer))
             {
                 Vertices[i + 1] = VertForward * hit.distance;
-                //if (hit.transform.TryGetComponent(out Fish fish))
-                //{
-                //    currentFish = fish;
-                    //if (!currentFish.isRunFromPlayer)
-                    //{
-                        //currentFish.StartCoroutine(currentFish.StartRunFromPlayer(transform));
-                    //}
-                //}
             }
             else
             {
-                //if (currentFish.isRunFromPlayer)
-                //{
-                //    currentFish?.StopRunFromPlayer();
-                //}
                 Vertices[i + 1] = VertForward * VisionRange;
             }
-
-
             Currentangle += angleIcrement;
         }
         for (int i = 0, j = 0; i < triangles.Length; i += 3, j++)
@@ -77,9 +62,4 @@ public class VisionCone : MonoBehaviour
         VisionConeMesh.triangles = triangles;
         MeshFilter_.mesh = VisionConeMesh;
     }
-
-
-
-
-
 }

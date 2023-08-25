@@ -8,12 +8,11 @@ namespace Player
 {
     public class PlayerMovementControl : MonoBehaviour, IDataPersistence
     {
+        public static System.Action onPlayerStopped;
         private float speed;
         private float trainingFactorSpeed;
         private Rigidbody rb;
         private bool isReadyToMove = true;
-
-        public static System.Action onPlayerStopped;
 
         private void Start()
         {
@@ -56,10 +55,6 @@ namespace Player
             if (!isReadyToMove) return;
             Vector3 playerDirection = new Vector3(_inputDirection.x, 0f, _inputDirection.y);
             rb.velocity = playerDirection * speed;
-            //if (OnTheWaterState.isInWater)
-            //{
-            //    AudioManager.instance.PlaySwimmingSound();
-            //}
             PlayerLookForward(playerDirection);
         }
 
@@ -72,7 +67,6 @@ namespace Player
         private void ResetSpeed()
         {
             rb.velocity = Vector3.zero;
-            //AudioManager.instance.PauseSwimmingSound();
         }
 
         private void EnableStopPlayer()

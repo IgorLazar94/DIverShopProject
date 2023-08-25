@@ -49,8 +49,5 @@ public class GameData
         this.isUnblockFriedFishReceipe = true;
         this.isUnblockSandwichReceipe = false;
         this.isUnblockFishburgerReceipe = false;
-
     }
-
-
 }

@@ -30,8 +30,6 @@ public class OnTheWaterState : GenericState
         isInWater = false;
     }
 
-
-
     public override void Update()
     {
         base.Update();

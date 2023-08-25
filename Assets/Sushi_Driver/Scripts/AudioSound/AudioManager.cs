@@ -10,7 +10,6 @@ public class AudioManager : MonoBehaviour
     public Sound[] musicSounds, sfxSounds;
     public AudioSource musicSource, sfxSource, swimmingSource;
     private bool isSFXPlaying = false;
-    private bool isSwimmingSFXPlay = false;
 
     private void Awake()
     {
@@ -66,26 +65,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    //public void PlaySwimmingSound()
-    //{
-    //    if (!isSwimmingSFXPlay)
-    //    {
-    //        swimmingSource.Play();
-    //        isSwimmingSFXPlay = true;
-    //        Debug.Log("play swimming");
-    //    }
-    //}
-
-    //public void PauseSwimmingSound()
-    //{
-    //    if (isSwimmingSFXPlay)
-    //    {
-    //        swimmingSource.Pause();
-    //        isSwimmingSFXPlay = false;
-    //        Debug.Log("stop swimming");
-    //    }
-    //}
-
     private IEnumerator ResetSFXPlayingStatus(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -112,5 +91,4 @@ public class AudioManager : MonoBehaviour
         sfxSource.volume = volume;
     }
 
-    // метод для паузы?
 }

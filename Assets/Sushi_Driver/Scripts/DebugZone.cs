@@ -16,27 +16,9 @@ public class DebugZone : MonoBehaviour
         }
     }
 
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.TryGetComponent(out PlayerTrigger playerTrigger))
-    //    {
-    //        OnExitDebug.Invoke();
-    //    }
-    //}
-
     public void ClearPlayerPrefs()
     {
         PlayerPrefs.DeleteAll();
-    }
-
-    public void Save()
-    {
-
-    }
-
-    public void Load()
-    {
-
     }
 
     public void Exit()

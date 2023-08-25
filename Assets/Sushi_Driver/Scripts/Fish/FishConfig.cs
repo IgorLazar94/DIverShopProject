@@ -12,15 +12,4 @@ public class FishConfig : ScriptableObject
     public GameObject fishPrefab => this._fishPrefab;
     public float price => this._price;
     public byte availableLevel => this._availableLevel;
-
-
-
-
-
-
-
-
-
-
-
 }

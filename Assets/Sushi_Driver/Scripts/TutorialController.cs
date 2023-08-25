@@ -93,15 +93,7 @@ public class TutorialController : MonoBehaviour
 
     private void AddFish(Fish fish)
     {
-        //Debug.Log("1");
-        //if (targetFish != null)
-        //{
-        //    Debug.Log("2");
         targetFish = fish;
-        //} else
-        //{
-        //    return;
-        //}
     }
 
     private void CheckTutorialPhase()

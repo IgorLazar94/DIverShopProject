@@ -6,22 +6,17 @@ using System;
 
 public class PlayerInventoryPresenter : MonoBehaviour
 {
-
-    private TypeOfFish typeOfFish;
-    private PlayerInventoryModel model;
-    private PlayerInventoryView view;
-
     public static Action<int> OnMaxFishChanged;
     public static Action<int, TypeOfFish> OnCurrentFishChanged;
     public static Action<int> OnCurrentFoodChanged;
     public static Action<int> OnCurrentDollarsChanged;
-    //public static Action OnCurrentFishRemoved;
+    private PlayerInventoryView view;
+    private PlayerInventoryModel model;
     public void CreateInventory()
     {
         model = new PlayerInventoryModel();
         view = new PlayerInventoryView();
 
         model.SetView(view);
-        //view.SetModel(model);
     }
 }

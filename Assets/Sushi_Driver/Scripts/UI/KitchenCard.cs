@@ -25,14 +25,12 @@ public class KitchenCard : MonoBehaviour, IDataPersistence
     [SerializeField] private TextMeshProUGUI ingredientTwoText;
     [SerializeField] private Image ingredientTwoIcon;
     [SerializeField] private Image cookButtonImage;
-
     [SerializeField] private TextMeshProUGUI blockTitle;
     [SerializeField] private GameObject blockPanel;
     [SerializeField] private TextMeshProUGUI purchasePriceText;
     private int priceToUnblockReceipe;
     private const string tutorialKey = "TutorialCompleted";
     private bool isCompleteTutorial;
-
     private bool isUnblockFriedFish;
     private bool isUnblockSandwich;
     private bool isUnblockFishburger;
@@ -124,7 +122,6 @@ public class KitchenCard : MonoBehaviour, IDataPersistence
 
     private void ActivateButton()
     {
-
         isReadyToCook = true;
         cookButtonImage.color = Color.green;
         cookButtonImage.gameObject.GetComponent<Button>().enabled = true;

@@ -21,7 +21,7 @@ public class FishSpawner : MonoBehaviour
     private bool isReadyToSpawn = true;
     private bool isSpawning = true;
     private Vector3 spawnPoint;
-    private float timeToSpawnNewFishes = 1f; // GameSettings
+    private float timeToSpawnNewFishes = 1f;
 
     private void Start()
     {
@@ -84,8 +84,6 @@ public class FishSpawner : MonoBehaviour
 
     private void CalculateNextTypeOfFish()
     {
-        //int nextType = ((int)spawnTypeOfFish + 1) % System.Enum.GetNames(typeof(TypeOfFish)).Length;
-        //spawnTypeOfFish = (TypeOfFish)nextType;
         if (currentAFish < maxAFish)
         {
             spawnTypeOfFish = TypeOfFish.FishA;

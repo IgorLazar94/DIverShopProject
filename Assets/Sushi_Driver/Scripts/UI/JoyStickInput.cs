@@ -8,12 +8,11 @@ namespace UI
 {
     public class JoyStickInput : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
     {
+        public static Action isNotHasInputDirection;
+        public static Action<Vector3> isHasInputDirection;
         [SerializeField] private Image joystick;
         [SerializeField] private Image knob;
         private Vector3 inputDirection;
-
-        public static Action<Vector3> isHasInputDirection;
-        public static Action isNotHasInputDirection;
 
         void Start()
         {
@@ -57,7 +56,6 @@ namespace UI
                ped.pressEventCamera,
                out touchPosition))
                 joystick.rectTransform.anchoredPosition = touchPosition;
-
             OnDrag(ped);
         }
 
@@ -66,7 +64,6 @@ namespace UI
             inputDirection = Vector3.zero;
             isNotHasInputDirection?.Invoke();
             joystick.gameObject.SetActive(false);
-
             joystick.rectTransform.anchoredPosition = Vector3.zero;
             knob.rectTransform.anchoredPosition = Vector3.zero;
         }

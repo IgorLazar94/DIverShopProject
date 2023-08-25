@@ -139,7 +139,6 @@ public class Parameter : MonoBehaviour, IDataPersistence
         UpdateParameter();
         level++;
         CalculateNewLevelParameters();
-        //CheckReadyUpdateButton();
     }
 
     public void CheckReadyUpdateButton()

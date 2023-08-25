@@ -46,13 +46,11 @@ namespace Player
 
         private void StartRunAnimation(Vector3 direction)
         {
-            // start particles in direction
             animator.SetBool(AnimParameters.isRun, true);
         }
 
         private async void StopRunAnimation()
         {
-            // stop particles
             animator.SetBool(AnimParameters.isRun, false);
             await PlayerReadyToMoveAsync();
         }

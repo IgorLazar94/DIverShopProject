@@ -14,7 +14,6 @@ public class Fish : MonoBehaviour
 {
     public bool isRunFromPlayer { get; private set; }
     [field: SerializeField] public TypeOfFish typeOfFish { get; set; }
-    //[SerializeField] private FishSpriteController childSprite;
     [SerializeField] private float idleSpeed;
     [SerializeField] private float timeToCatch;
     [SerializeField] private float availabilityLevel;
@@ -36,7 +35,6 @@ public class Fish : MonoBehaviour
     private Sequence rotationSequence;
     private void Start()
     {
-        //rippleFX = GetComponentInChildren<ParticleSystem>();
         mainCameraTransform = Camera.main.transform;
         runSpeed = idleSpeed * 3f;
         isRunFromPlayer = false;
@@ -44,9 +42,7 @@ public class Fish : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         ActivateOutline(false);
         EnableFishBar(false);
-        //childSprite.gameObject.SetActive(false);
         sequence = DOTween.Sequence();
-        //FistRotation();
         StartRotation();
         StartCoroutine(ChooseRandomDirection());
     }
@@ -195,7 +191,6 @@ public class Fish : MonoBehaviour
     }
     private void EnableFishing(bool isActivate)
     {
-        //childSprite.gameObject.SetActive(isActivate);
         ActivateOutline(isActivate);
         EnableFishBar(isActivate);
         if (isActivate)
@@ -205,13 +200,11 @@ public class Fish : MonoBehaviour
                                    1f,
                                    timeToCatch)
                                    .OnComplete(() => FishCaught());
-            //childSprite.FishingStartTimer(timeToCatch, this);
         }
         else
         {
             emptyImage.fillAmount = 0;
             fillTween?.Kill();
-            //childSprite.FishingStopTimer();
         }
     }
 
@@ -248,23 +241,6 @@ public class Fish : MonoBehaviour
         PlayerInventoryPresenter.OnCurrentFishChanged?.Invoke(1, typeOfFish);
         fishSpawner.RemoveFish(this);
         Destroy(gameObject);
-    }
-
-    private void Update()
-    {
-        // Debugging
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            PlayerInventoryPresenter.OnCurrentFishChanged?.Invoke(1, TypeOfFish.FishA);
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            PlayerInventoryPresenter.OnCurrentFishChanged?.Invoke(1, TypeOfFish.FishB);
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            PlayerInventoryPresenter.OnCurrentFishChanged?.Invoke(1, TypeOfFish.FishC);
-        }
     }
 
     private void StartRotation()
